@@ -1,0 +1,366 @@
+<HTML>
+<HEAD>
+<TITLE>TFBS::DB::JASPAR2 - interface to MySQL relational database of pattern matrices</TITLE>
+<LINK REV="made" HREF="mailto:bhcompile@stripples.devel.redhat.com">
+</HEAD>
+
+<BODY>
+
+<A NAME="__index__"></A>
+<!-- INDEX BEGIN -->
+
+<UL>
+
+	<LI><A HREF="#name">NAME</A></LI>
+	<LI><A HREF="#synopsis">SYNOPSIS</A></LI>
+	<LI><A HREF="#description">DESCRIPTION</A></LI>
+	<LI><A HREF="#jaspar2 data model">JASPAR2 DATA MODEL</A></LI>
+	<LI><A HREF="#feedback">FEEDBACK</A></LI>
+	<LI><A HREF="#author  boris lenhard">AUTHOR - Boris Lenhard</A></LI>
+	<LI><A HREF="#appendix">APPENDIX</A></LI>
+	<UL>
+
+		<LI><A HREF="#new">new</A></LI>
+		<LI><A HREF="#connect">connect</A></LI>
+		<LI><A HREF="#create">create</A></LI>
+		<LI><A HREF="#dbh">dbh</A></LI>
+		<LI><A HREF="#get_matrix_by_id">get_Matrix_by_ID</A></LI>
+		<LI><A HREF="#get_matrix_by_name">get_Matrix_by_name</A></LI>
+		<LI><A HREF="#get_matrixset">get_MatrixSet</A></LI>
+		<LI><A HREF="#store_matrix">store_Matrix</A></LI>
+		<LI><A HREF="#store_matrixset">store_MatrixSet</A></LI>
+		<LI><A HREF="#delete_matrix_having_id">delete_Matrix_having_ID</A></LI>
+	</UL>
+
+</UL>
+<!-- INDEX END -->
+
+<HR>
+<P>
+<H1><A NAME="name">NAME</A></H1>
+<P>TFBS::DB::JASPAR2 - interface to MySQL relational database of pattern matrices</P>
+<P>
+<HR>
+<H1><A NAME="synopsis">SYNOPSIS</A></H1>
+<UL>
+<LI><STRONG><A NAME="item_creating_a_database_object_by_connecting_to_the_ex">creating a database object by connecting to the existing JASPAR2-type database</A></STRONG><BR>
+
+<PRE>
+    my $db = TFBS::DB::JASPAR2-&gt;connect(&quot;dbi:mysql:JASPAR2:myhost&quot;,
+                                        &quot;myusername&quot;,
+                                        &quot;mypassword&quot;);</PRE>
+<LI><STRONG><A NAME="item_retrieving_a_TFBS%3A%3AMatrix%3A%3A%2A_object_from">retrieving a TFBS::Matrix::* object from the database</A></STRONG><BR>
+
+<PRE>
+    # retrieving a PFM by ID
+    my $pfm = $db-&gt;get_Matrix_by_ID('M0079','PFM');
+</PRE>
+<PRE>
+
+    #retrieving a PWM by name
+    my $pwm = $db-&gt;get_Matrix_by_name('NF-kappaB', 'PWM');</PRE>
+<LI><STRONG><A NAME="item_retrieving_a_set_of_matrices_as_a_TFBS%3A%3AMatrix">retrieving a set of matrices as a TFBS::MatrixSet object according to various criteria</A></STRONG><BR>
+
+<PRE>
+
+    # retrieving a set of PWMs from a list of IDs:
+    my @IDlist = ('M0019', 'M0045', 'M0073', 'M0101');
+    my $matrixset = $db-&gt;get_MatrixSet(-IDs =&gt; \@IDlist,
+                                       -matrixtype =&gt; &quot;PWM&quot;);</PRE>
+<PRE>
+
+    # retrieving a set of ICMs from a list of names:
+    my @namelist = ('p50', 'p53', 'HNF-1'. 'GATA-1', 'GATA-2', 'GATA-3');
+    my $matrixset = $db-&gt;get_MatrixSet(-names =&gt; \@namelist,
+                                       -matrixtype =&gt; &quot;ICM&quot;);</PRE>
+<PRE>
+
+    # retrieving a set of all PFMs in the database
+    # derived from human genes:
+    my $matrixset = $db-&gt;get_MatrixSet(-species =&gt; ['Homo sapiens'],
+                                       -matrixtype =&gt; &quot;PFM&quot;);</PRE>
+<LI><STRONG><A NAME="item_creating_a_new_JASPAR2%2Dtype_database_named_MYJAS">creating a new JASPAR2-type database named MYJASPAR2:</A></STRONG><BR>
+
+<PRE>
+
+    my $db = TFBS::DB::JASPAR2-&gt;create(&quot;dbi:mysql:MYJASPAR2:myhost&quot;,
+                                       &quot;myusername&quot;,
+                                       &quot;mypassword&quot;);</PRE>
+<LI><STRONG><A NAME="item_database">storing a matrix in the database (currently only PFMs):</A></STRONG><BR>
+
+<PRE>
+    #let $pfm is a TFBS::Matrix::PFM object
+    $db-&gt;store_Matrix($pfm);</PRE>
+</UL>
+<P>
+<HR>
+<H1><A NAME="description">DESCRIPTION</A></H1>
+<P>TFBS::DB::JASPAR2 is a read/write database interface module that
+retrieves and stores TFBS::Matrix::* and TFBS::MatrixSet
+objects in a relational database.</P>
+<P>
+<HR>
+<H1><A NAME="jaspar2 data model">JASPAR2 DATA MODEL</A></H1>
+<P>JASPAR2 is working name for a relational database model used
+for storing transcriptional factor pattern matrices in a MySQL database.
+It was initially designed to store matrices for the JASPAR database of
+high quality eukaryotic transcription factor specificity profiles by
+Albin Sandelin and Wyeth W. Wasserman. Besides the profile matrix itself,
+this data model stores profile ID (unique), name, structural class,
+basic taxonomic and bibliographic information
+as well as some additional optional tags.</P>
+<P>Due to its data model, which precedeed the design of the 
+module, TFBS::DB::JASPAR2 cannot store arbitrary tags for a matrix.</P>
+<P>The supported tags are
+    'acc'      # (accession number; 
+	       # originally for transcription factor protein seq)
+    'seqdb'    # sequence database where 'acc' comes from
+    'medline'  # PubMed ID
+    'species'  # Species name
+    'sysgroup'
+    'total_ic' # total information content - redundant, present 
+               # for historical
+``medline'' =&gt; ($self-&gt;<CODE>_get_medline($ID)</CODE> or  ``''),
+		          ``species'' =&gt; ($self-&gt;<CODE>_get_species($ID)</CODE> or ``''),
+		          ``sysgroup''=&gt; ($self-&gt;<CODE>_get_sysgroup($ID)</CODE> or ``''),
+		          ``type''    =&gt; ($self-&gt;<CODE>_get_type($ID)</CODE> or ``''),
+		          ``seqdb''   =&gt; ($self-&gt;<CODE>_get_seqdb($ID)</CODE> or ``''),
+		          ``acc''     =&gt; ($self-&gt;<CODE>_get_acc($ID)</CODE> or ``''),
+		          ``total_ic''=</P>
+<P>-----------------------  ADVANCED  ---------------------------------</P>
+<P>For the developers and the curious, here is the JASPAR2 data model:</P>
+<PRE>
+       CREATE TABLE matrix_data (
+         ID varchar(16) DEFAULT '' NOT NULL,
+         pos_ID varchar(24) DEFAULT '' NOT NULL,
+         base enum('A','C','G','T'),
+         position tinyint(3) unsigned,
+         raw int(3) unsigned,
+         info float(7,5) unsigned, -- calculated
+         pwm float(7,5) unsigned,  -- calculated
+         normalized float(7,5) unsigned,
+         PRIMARY KEY (pos_ID),
+         KEY id_index (ID)
+       );</PRE>
+<PRE>
+       CREATE TABLE matrix_info (
+         ID varchar(16) DEFAULT '' NOT NULL,
+         name varchar(15) DEFAULT '' NOT NULL,
+         type varchar(8) DEFAULT '' NOT NULL,
+         class varchar(20),
+         phylum varchar (32),          -- maps to 'sysgroup' tag
+         litt varchar(40),             -- not used by this module
+         medline int(12),
+         information varchar(20),      -- not used by this module
+         iterations varchar(6),
+         width int(2),                 -- calculated
+         consensus varchar(25),        -- calculated
+         IC float(6,4),                -- maps to 'total_ic' tag
+         sites int(3) unsigned,        -- not used by this module
+         PRIMARY KEY (ID)
+       )</PRE>
+<PRE>
+       CREATE TABLE matrix_seqs (
+         ID varchar(16) DEFAULT '' NOT NULL,
+         internal varchar(8) DEFAULT '' NOT NULL,
+         seq_db varchar(15) NOT NULL,
+         seq varchar(10) NOT NULL,
+         PRIMARY KEY (ID, seq_db, seq)
+       )</PRE>
+<PRE>
+       CREATE TABLE matrix_species (
+         ID varchar(16) DEFAULT '' NOT NULL,
+         internal varchar(8) DEFAULT '' NOT NULL,
+         species varchar(24) NOT NULL,
+         PRIMARY KEY (ID, species)
+       )</PRE>
+<P>It is our best intention to hide the details of this data model, which we 
+are using on a daily basis in our work, from most TFBS users, simply 
+because for historical reasons some table column names are confusing 
+at best. Most users should only know the methods to store the data and 
+which tags are supported.</P>
+<P>-------------------------------------------------------------------------</P>
+<P>
+<HR>
+<H1><A NAME="feedback">FEEDBACK</A></H1>
+<P>Please send bug reports and other comments to the author.</P>
+<P>
+<HR>
+<H1><A NAME="author  boris lenhard">AUTHOR - Boris Lenhard</A></H1>
+<P>Boris Lenhard &lt;<A HREF="mailto:Boris.Lenhard@cgb.ki.se">Boris.Lenhard@cgb.ki.se</A>&gt;</P>
+<P>
+<HR>
+<H1><A NAME="appendix">APPENDIX</A></H1>
+<P>The rest of the documentation details each of the object
+methods. Internal methods are preceded with an underscore.</P>
+<P>
+<H2><A NAME="new">new</A></H2>
+<PRE>
+ Title   : new
+ Usage   : DEPRECATED - for backward compatibility only
+           Use connect() or create() instead</PRE>
+<P>
+<H2><A NAME="connect">connect</A></H2>
+<PRE>
+ Title   : connect
+ Usage   : my $db =
+            TFBS::DB::JASPAR2-&gt;connect(&quot;dbi:mysql:DATABASENAME:HOSTNAME&quot;,
+                                        &quot;USERNAME&quot;,
+                                        &quot;PASSWORD&quot;);
+ Function: connects to the existing JASPAR2-type database and
+           returns a database object that interfaces the database
+ Returns : a TFBS::DB::JASPAR2 object
+ Args    : a standard database connection triplet
+           (&quot;dbi:mysql:DATABASENAME:HOSTNAME&quot;,  &quot;USERNAME&quot;, &quot;PASSWORD&quot;)
+           In place of DATABASENAME, HOSTNAME, USERNAME and PASSWORD,
+           use the actual values. PASSWORD and USERNAME might be
+           optional, depending on the user's acces permissions for
+           the database server.</PRE>
+<P>
+<H2><A NAME="create">create</A></H2>
+<PRE>
+ Title   : create
+ Usage   : my $newdb =
+            TFBS::DB::JASPAR2-&gt;create(&quot;dbi:mysql:NEWDATABASENAME:HOSTNAME&quot;,
+                                      &quot;USERNAME&quot;,
+                                      &quot;PASSWORD&quot;);
+ Function: connects to the database server, creates a new JASPAR2-type database and returns a database
+           object that interfaces the database
+ Returns : a TFBS::DB::JASPAR2 object
+ Args    : a standard database connection triplet
+            (&quot;dbi:mysql:NEWDATABASENAME:HOSTNAME&quot;,  &quot;USERNAME&quot;, &quot;PASSWORD&quot;)
+           In place of NEWDATABASENAME, HOSTNAME, USERNAME and
+           PASSWORD use the actual values. PASSWORD and USERNAME
+           might be optional, depending on the user's acces permissions
+           for the database server.</PRE>
+<P>
+<H2><A NAME="dbh">dbh</A></H2>
+<PRE>
+ Title   : dbh
+ Usage   : my $dbh = $db-&gt;dbh();
+           $dbh-&gt;do(&quot;UPDATE matrix_data SET name='ADD1' WHERE NAME='SREBP2'&quot;);
+ Function: returns the DBI database handle of the MySQL database
+           interfaced by $db; THIS IS USED FOR WRITING NEW METHODS
+           FOR DIRECT RELATIONAL DATABASE MANIPULATION - if you
+           have write access AND do not know what you are doing,
+           you can severely  corrupt the data
+           For documentation about database handle methods, see L&lt;DBI&gt;
+ Returns : the database (DBI) handle of the MySQL JASPAR2-type
+           relational database associated with the TFBS::DB::JASPAR2
+           object
+ Args    : none</PRE>
+<P>
+<H2><A NAME="get_matrix_by_id">get_Matrix_by_ID</A></H2>
+<PRE>
+ Title   : get_Matrix_by_ID
+ Usage   : my $pfm = $db-&gt;get_Matrix_by_ID('M00034', 'PFM');
+ Function: fetches matrix data under the given ID from the
+           database and returns a TFBS::Matrix::* object
+ Returns : a TFBS::Matrix::* object; the exact type of the
+           object depending on the second argument (allowed
+           values are 'PFM', 'ICM', and 'PWM'); returns undef if
+           matrix with the given ID is not found
+ Args    : (Matrix_ID, Matrix_type)
+           Matrix_ID is a string; Matrix_type is one of the
+           following: 'PFM' (raw position frequency matrix),
+           'ICM' (information content matrix) or 'PWM' (position
+           weight matrix)
+           If Matrix_type is omitted, a PWM is retrieved by default.</PRE>
+<P>
+<H2><A NAME="get_matrix_by_name">get_Matrix_by_name</A></H2>
+<PRE>
+ Title   : get_Matrix_by_name
+ Usage   : my $pfm = $db-&gt;get_Matrix_by_name('HNF-1', 'PWM');
+ Function: fetches matrix data under the given name from the
+           database and returns a TFBS::Matrix::* object
+ Returns : a TFBS::Matrix::* object; the exact type of the object
+           depending on the second argument (allowed values are
+           'PFM', 'ICM', and 'PWM')
+ Args    : (Matrix_name, Matrix_type)
+           Matrix_name is a string; Matrix_type is one of the
+           following:
+           'PFM' (raw position frequency matrix),
+           'ICM' (information content matrix) or
+           'PWM' (position weight matrix)
+           If Matrix_type is omitted, a PWM is retrieved by default.
+ Warning : According to the current JASPAR2 data model, name is
+           not necessarily a unique identifier. In the case where
+           there are several matrices with the same name in the
+           database, the function fetches the first one and prints
+           a warning on STDERR. You've been warned.</PRE>
+<P>
+<H2><A NAME="get_matrixset">get_MatrixSet</A></H2>
+<PRE>
+ Title   : get_MatrixSet
+ Usage   : my $matrixset = $db-&gt;get_MatrixSet(%args);
+ Function: fetches matrix data under for all matrices in the database
+           matching criteria defined by the named arguments
+           and returns a TFBS::MatrixSet object
+ Returns : a TFBS::MatrixSet object
+ Args    : This method accepts named arguments:
+           -IDs        # a reference to an array of IDs (strings)
+           -names      # a reference to an array of
+                       #  transcription factor names (string)
+           -classes    # a reference to an array of
+                       #  structural class names (strings)
+           -species    # a reference to an array of
+                       #   Latin species names (strings)
+           -sysgroups  # a reference to an array of
+                       #  higher taxonomic categories (strings)</PRE>
+<PRE>
+           -matrixtype # a string, 'PFM', 'ICM' or 'PWM'
+           -min_ic     # float, minimum total information content
+                       #   of the matrix</PRE>
+<P>The five arguments that expect list references are used in database
+query formulation: elements within lists are combined with 'OR'
+operators, and the lists of different types with 'AND'. For example,</P>
+<PRE>
+    my $matrixset = $db-&gt;(-classes =&gt; ['TRP_CLUSTER', 'FORKHEAD'],
+                          -species =&gt; ['Homo sapiens', 'Mus musculus'],
+                          -matrixtype =&gt; 'PWM');</PRE>
+<P>gives a set of PWMs whose (structural clas is 'TRP_CLUSTER' OR
+'FORKHEAD') AND (the species they are derived from is 'Homo sapiens'
+OR 'Mus musculus').</P>
+<P>The -min_ic filter is applied after the query in the sense that the
+matrices profiles with total infromation content less than specified
+are not included in the set.</P>
+<P>
+<H2><A NAME="store_matrix">store_Matrix</A></H2>
+<PRE>
+ Title   : store_Matrix
+ Usage   : $db-&gt;store_Matrix($pfm);
+ Function: Stores the contents of a TFBS::Matrix::DB object in the database
+ Returns : 0 on success; $@ contents on failure
+           (this is too C-like and may change in future versions)
+ Args    : (PFM_object)
+           A TFBS::Matrix::PFM object
+ Comment : this is an experimental method that is not 100% bulletproof;
+           use at your own risk</PRE>
+<P>
+<H2><A NAME="store_matrixset">store_MatrixSet</A></H2>
+<PRE>
+ Title   : store_MatrixSet
+ Usage   : $db-&gt;store_Matrix($matrixset);
+ Function: Stores the TFBS::DB::PFM object that are part of a
+           TFBS::MatrixSet object into the database
+ Returns : 0 on success; $@ contents on failure
+           (this is too C-like and may change in future versions)
+ Args    : (MatrixSet_object)
+           A TFBS::MatrixSet object
+ Comment : THIS METHOD IS NOT YET IMPLEMENTED</PRE>
+<P>
+<H2><A NAME="delete_matrix_having_id">delete_Matrix_having_ID</A></H2>
+<PRE>
+ Title   : delete_Matrix_having_ID
+ Usage   : $db-&gt;delete_Matrix_with_ID('M00045');
+ Function: Deletes the matrix having the given ID from the database
+ Returns : 0 on success; $@ contents on failure
+           (this is too C-like and may change in future versions)
+ Args    : (ID)
+           A string
+ Comment : Yeah, yeah, 'delete_Matrix_having_ID' is a stupid name
+           for a method, but at least it should be obviuos what it does.</PRE>
+
+</BODY>
+
+</HTML>

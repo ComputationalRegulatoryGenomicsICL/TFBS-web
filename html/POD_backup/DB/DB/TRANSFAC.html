@@ -1,0 +1,131 @@
+<HTML>
+<HEAD>
+<TITLE>TFBS::DB::TRANSFAC - interface to database of TRANSFAC public
+position frequency matrices at TESS</TITLE>
+<LINK REV="made" HREF="mailto:bhcompile@stripples.devel.redhat.com">
+</HEAD>
+
+<BODY>
+
+<A NAME="__index__"></A>
+<!-- INDEX BEGIN -->
+
+<UL>
+
+	<LI><A HREF="#name">NAME</A></LI>
+	<LI><A HREF="#synopsis">SYNOPSIS</A></LI>
+	<LI><A HREF="#description">DESCRIPTION</A></LI>
+	<UL>
+
+		<LI><A HREF="#connect">connect</A></LI>
+		<LI><A HREF="#new">new</A></LI>
+		<LI><A HREF="#get_matrix_by_id">get_Matrix_by_ID</A></LI>
+		<LI><A HREF="#get_matrix_by_acc">get_Matrix_by_acc</A></LI>
+	</UL>
+
+</UL>
+<!-- INDEX END -->
+
+<HR>
+<P>
+<H1><A NAME="name">NAME</A></H1>
+<P>TFBS::DB::TRANSFAC - interface to database of TRANSFAC public
+position frequency matrices at TESS (http://www.cbil.upenn.edu/tess)</P>
+<PRE>
+ -------------------------------- NOTICE ----------------------------------
+  The TRANSFAC database is free for non-commercial use.  For commercial use
+  the TRANSFAC databases and programs have to be licensed. Please read 
+  the DISCLAIMER at <A HREF="http://transfac.gbf.de/TRANSFAC/disclaimer.htm">http://transfac.gbf.de/TRANSFAC/disclaimer.htm</A>.
+ -------------------------------------------------------------------------</PRE>
+<P>
+<HR>
+<H1><A NAME="synopsis">SYNOPSIS</A></H1>
+<UL>
+<LI><STRONG><A NAME="item_creating_a_database_object_by_connecting_to_TRANSF">creating a database object by connecting to TRANSFAC data</A></STRONG><BR>
+
+<PRE>
+    my $db = TFBS::DB::TRANSFAC-&gt;connect();</PRE>
+<LI><STRONG><A NAME="item_retrieving_a_TFBS%3A%3AMatrix%3A%3A%2A_object_from">retrieving a TFBS::Matrix::* object from the database</A></STRONG><BR>
+
+<PRE>
+    # retrieving a PFM by ID
+    my $pfm = $db-&gt;get_Matrix_by_ID('V$CEBPA_01','PFM');
+</PRE>
+<PRE>
+
+    #retrieving a PWM by TRANSFAC accession number
+    my $pwm = $db-&gt;get_Matrix_by_acc('M00116', 'PWM');</PRE>
+</UL>
+<P>
+<HR>
+<H1><A NAME="description">DESCRIPTION</A></H1>
+<P>TFBS::DB::TRANSFAC is a read only database interface that fetches
+TRANSFAC matrix data from TESS web interface
+(http://www.cbil.upen.edu/TESS) and returns TFBS::Matrix::* objects.</P>
+<P>
+<H2><A NAME="connect">connect</A></H2>
+<PRE>
+ Title   : connect
+ Usage   : my $db = TFBS::DB::TRANSFAC-&gt;connect(%args);
+ Function: Creates a TRANSFAC database connection object, which can be used
+           to retrieve matrices from public TRANSFAC databases via the web
+ Returns : a TFBS::DB::TRANSFAC object
+ Args    : -proxy # OPTIONAL: a http proxy server name, 
+                  # usually required for accessing TRANSFAC from behind 
+                  # a firewall
+           -accept_conditions # OPTIONAL: by setting this to a true 
+                              # value, you confirm that you
+                              # have read and accepted the terms 
+                              # of use of TRANSFAC at
+                              # <A HREF="http://transfac.gbf.de/TRANSFAC/disclaimer.htm">http://transfac.gbf.de/TRANSFAC/disclaimer.htm</A>;
+                              # this also supresses the annoying
+                              # message that is printed to STDERR
+                              # upon invoking the method</PRE>
+<P>
+<H2><A NAME="new">new</A></H2>
+<PRE>
+ Title   : connect
+ Usage   : my $db = TFBS::DB::TRANSFAC-&gt;connect(%args);
+ Function: Here, I&lt;new&gt; is just a synonim for I&lt;connect&gt;
+           (to make the interface consistent with other
+            bioperl's read-obly Bio::DB::* objects)
+ Returns : a TFBS::DB::TRANSFAC object
+ Args    : -accept_conditions # see explanation at I&lt;new&gt;</PRE>
+<P>
+<H2><A NAME="get_matrix_by_id">get_Matrix_by_ID</A></H2>
+<PRE>
+ Title   : get_Matrix_by_ID
+ Usage   : my $pfm = $db-&gt;get_Matrix_by_ID('V$CREB_01', 'PFM');
+ Function: fetches matrix data under the given TRANSFAC ID from the
+           database and returns a TFBS::Matrix::* object
+ Returns : a TFBS::Matrix::* object; the exact type of the
+           object depending on the second argument (allowed
+           values are 'PFM', 'ICM', and 'PWM'); returns undef if
+           matrix with the given ID is not found
+ Args    : (Matrix_ID, Matrix_type)
+           Matrix_ID is a string; Matrix_type is one of the
+           following: 'PFM' (raw position frequency matrix),
+           'ICM' (information content matrix) or 'PWM' (position
+           weight matrix)
+           If Matrix_type is omitted, a PFM is retrieved by default.</PRE>
+<P>
+<H2><A NAME="get_matrix_by_acc">get_Matrix_by_acc</A></H2>
+<PRE>
+ Title   : get_Matrix_by_acc
+ Usage   : my $pfm = $db-&gt;get_Matrix_by_acc('V$CREB_01', 'PFM');
+ Function: fetches matrix data under the given TRANSFAC aaccession number
+           from database and returns a TFBS::Matrix::* object
+ Returns : a TFBS::Matrix::* object; the exact type of the
+           object depending on the second argument (allowed
+           values are 'PFM', 'ICM', and 'PWM'); returns undef if
+           matrix with the given ID is not found
+ Args    : (Matrix_ID, Matrix_type)
+           Matrix_ID is a string; Matrix_type is one of the
+           following: 'PFM' (raw position frequency matrix),
+           'ICM' (information content matrix) or 'PWM' (position
+           weight matrix)
+           If Matrix_type is omitted, a PFM is retrieved by default.</PRE>
+
+</BODY>
+
+</HTML>

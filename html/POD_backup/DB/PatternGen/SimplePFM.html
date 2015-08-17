@@ -1,0 +1,83 @@
+<HTML>
+<HEAD>
+<TITLE>TFBS::PatternGen::SimplePFM - a simple position frequency matrix factory</TITLE>
+<LINK REV="made" HREF="mailto:bhcompile@stripples.devel.redhat.com">
+</HEAD>
+
+<BODY>
+
+<A NAME="__index__"></A>
+<!-- INDEX BEGIN -->
+
+<UL>
+
+	<LI><A HREF="#name">NAME</A></LI>
+	<LI><A HREF="#synopsis">SYNOPSIS</A></LI>
+	<LI><A HREF="#description">DESCRIPTION</A></LI>
+	<UL>
+
+		<LI><A HREF="#new">new</A></LI>
+		<LI><A HREF="#pattern">pattern</A></LI>
+		<LI><A HREF="#all_patterns">all_patterns</A></LI>
+		<LI><A HREF="#patternset">patternSet</A></LI>
+	</UL>
+
+</UL>
+<!-- INDEX END -->
+
+<HR>
+<P>
+<H1><A NAME="name">NAME</A></H1>
+<P>TFBS::PatternGen::SimplePFM - a simple position frequency matrix factory</P>
+<P>
+<HR>
+<H1><A NAME="synopsis">SYNOPSIS</A></H1>
+<PRE>
+
+    my @sequences = qw( AAGCCT AGGCAT AAGCCT
+                        AAGCCT AGGCAT AGGCCT
+                        AGGCAT AGGTTT AGGCAT
+                        AGGCCT AGGCCT );
+    my $patterngen =
+            TFBS::PatternGen::SimplePFM-&gt;new(-seq_list=&gt;\@sequences);</PRE>
+<PRE>
+
+    my $pfm = $patterngen-&gt;pattern(); # $pfm is now a TFBS::Matrix::PFM object</PRE>
+<P>
+<HR>
+<H1><A NAME="description">DESCRIPTION</A></H1>
+<P>TFBS::PatternGen::SimplePFM generates a position frequency matrix from a set
+of nucleotide sequences of equal length, The sequences can be passed either
+as strings, as Bio::Seq objects or as a fasta file.</P>
+<P>This pattern generator always creates only one pattern from a given set
+of sequences.</P>
+<P>
+<H2><A NAME="new">new</A></H2>
+<PRE>
+ Title   : new
+ Usage   : my $db = TFBS::PatternGen::SimplePFM-&gt;new(%args);
+ Function: the constructor for the TFBS::PatternGen::SimplePFM
+            object
+ Returns : a TFBS::PatternGen::SimplePFM obkect
+ Args    : This method takes named arguments;
+            you must specify one of the following
+            -seq_list     # a reference to an array of strings
+                          # and/or Bio::Seq objects
+              # or
+            -seq_stream   # A Bio::SeqIO object
+              # or
+            -seq_file     # the name of the fasta file containing
+                          # all the sequences</PRE>
+<P>
+<H2><A NAME="pattern">pattern</A></H2>
+<P>
+<H2><A NAME="all_patterns">all_patterns</A></H2>
+<P>
+<H2><A NAME="patternset">patternSet</A></H2>
+<P>The three above methods are used fro the retrieval of patterns,
+and are common to all TFBS::PatternGen::* classes. Please
+see <A HREF="/TFBS/PatternGen.html">the TFBS::PatternGen manpage</A> for details.</P>
+
+</BODY>
+
+</HTML>

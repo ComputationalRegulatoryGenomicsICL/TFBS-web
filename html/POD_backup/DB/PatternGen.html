@@ -1,0 +1,73 @@
+<HTML>
+<HEAD>
+<TITLE>TFBS::PatternGen - a base class for pattern generators</TITLE>
+<LINK REV="made" HREF="mailto:bhcompile@stripples.devel.redhat.com">
+</HEAD>
+
+<BODY>
+
+<A NAME="__index__"></A>
+<!-- INDEX BEGIN -->
+
+<UL>
+
+	<LI><A HREF="#name">NAME</A></LI>
+	<LI><A HREF="#description">DESCRIPTION</A></LI>
+	<UL>
+
+		<LI><A HREF="#pattern">pattern</A></LI>
+		<LI><A HREF="#patternset">patternSet</A></LI>
+		<LI><A HREF="#all_patterns">all_patterns</A></LI>
+	</UL>
+
+</UL>
+<!-- INDEX END -->
+
+<HR>
+<P>
+<H1><A NAME="name">NAME</A></H1>
+<P>TFBS::PatternGen - a base class for pattern generators</P>
+<P>
+<HR>
+<H1><A NAME="description">DESCRIPTION</A></H1>
+<P>TFBS::PatternGen is a base classs providing methods common to all pattern generating
+modules. It is meant to be inherited by a concrete pattern generator, which must have its own
+constructor.</P>
+<P>
+<H2><A NAME="pattern">pattern</A></H2>
+<PRE>
+ Title   : pattern
+ Usage   : my $pattern_obj = $patterngen-&gt;pattern()
+ Function: retrieves a pattern object produced by the pattern generator
+ Returns : a pattern object (currently available pattern generators
+           return a TFBS::Matrix::PFM object)
+ Args    : none
+ Warning : If a pattern generator produces more than one pattern,
+           this method call returns only the first one and prints
+           a warning on STDERR, In those cases you should use
+           I&lt;all_patterns&gt; or I&lt;patternSet&gt; methods.</PRE>
+<P>
+<H2><A NAME="patternset">patternSet</A></H2>
+<PRE>
+ Title   : patternSet
+ Usage   : my $patternSet = $patterngen-&gt;patternSet()
+ Function: retrieves a pattern set object containing all the patterns
+           produced by the pattern generator
+ Returns : a pattern set object (currently available pattern generators
+           return a TFBS::MatrixSet object)
+ Args    : none</PRE>
+<P>
+<H2><A NAME="all_patterns">all_patterns</A></H2>
+<PRE>
+ Title   : all_patterns
+ Usage   : my @patterns = $patterngen-&gt;all_patterns()
+ Function: retrieves an array of pattern objects
+           produced by the pattern generator
+ Returns : an array of pattern set objects (currently available 
+           pattern generators return an array of
+           TFBS::Matrix::PFM objects)
+ Args    : none</PRE>
+
+</BODY>
+
+</HTML>

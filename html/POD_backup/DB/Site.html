@@ -1,0 +1,215 @@
+<HTML>
+<HEAD>
+<TITLE>TFBS::Site - a nucleotide sequence feature object representing transcription factor binding site.</TITLE>
+<LINK REV="made" HREF="mailto:bhcompile@stripples.devel.redhat.com">
+</HEAD>
+
+<BODY>
+
+<A NAME="__index__"></A>
+<!-- INDEX BEGIN -->
+
+<UL>
+
+	<LI><A HREF="#name">NAME</A></LI>
+	<LI><A HREF="#synopsis">SYNOPSIS</A></LI>
+	<LI><A HREF="#description">DESCRIPTION</A></LI>
+	<LI><A HREF="#feedback">FEEDBACK</A></LI>
+	<LI><A HREF="#author  boris lenhard">AUTHOR - Boris Lenhard</A></LI>
+	<LI><A HREF="#appendix">APPENDIX</A></LI>
+	<UL>
+
+		<LI><A HREF="#new">new</A></LI>
+		<LI><A HREF="#pattern">pattern</A></LI>
+		<LI><A HREF="#rel_score">rel_score</A></LI>
+		<LI><A HREF="#gff">GFF</A></LI>
+		<LI><A HREF="#location">location</A></LI>
+		<LI><A HREF="#start">start</A></LI>
+		<LI><A HREF="#end">end</A></LI>
+		<LI><A HREF="#length">length</A></LI>
+		<LI><A HREF="#score">score</A></LI>
+		<LI><A HREF="#frame">frame</A></LI>
+		<LI><A HREF="#sub_seqfeature">sub_SeqFeature</A></LI>
+		<LI><A HREF="#add_sub_seqfeature">add_sub_SeqFeature</A></LI>
+		<LI><A HREF="#flush_sub_seqfeature">flush_sub_SeqFeature</A></LI>
+		<LI><A HREF="#primary_tag">primary_tag</A></LI>
+		<LI><A HREF="#source_tag">source_tag</A></LI>
+		<LI><A HREF="#has_tag">has_tag</A></LI>
+		<LI><A HREF="#add_tag_value">add_tag_value</A></LI>
+		<LI><A HREF="#each_tag_value">each_tag_value</A></LI>
+		<LI><A HREF="#all_tags">all_tags</A></LI>
+		<LI><A HREF="#remove_tag">remove_tag</A></LI>
+		<LI><A HREF="#attach_seq">attach_seq</A></LI>
+		<LI><A HREF="#seq">seq</A></LI>
+		<LI><A HREF="#entire_seq">entire_seq</A></LI>
+		<LI><A HREF="#seqname">seqname</A></LI>
+		<LI><A HREF="#annotation">annotation</A></LI>
+		<LI><A HREF="#gff_format">gff_format</A></LI>
+		<LI><A HREF="#gff_string">gff_string</A></LI>
+	</UL>
+
+</UL>
+<!-- INDEX END -->
+
+<HR>
+<P>
+<H1><A NAME="name">NAME</A></H1>
+<P>TFBS::Site - a nucleotide sequence feature object representing (possibly putative) transcription factor binding site.</P>
+<P>
+<HR>
+<H1><A NAME="synopsis">SYNOPSIS</A></H1>
+<PRE>
+    # manual creation of site object; 
+    # for details, see documentation of Bio::SeqFeature::Generic;</PRE>
+<PRE>
+    my $site = TFBS::Site
+                  (-start =&gt; $start_pos,     # integer
+                   -end   =&gt; $end_pos,       # integer
+                   -score =&gt; $score,         # float
+                   -source =&gt; &quot;TFBS&quot;,        # string
+                   -primary =&gt; &quot;TF binding site&quot;,  # primary tag
+                   -strand =&gt; $strand,       # -1, 0 or 1
+                   -seqobj =&gt; $seqobj,       # a Bio::Seq object whose sequence
+                                             #            contains the site
+                   -pattern =&gt; $pattern_obj  # usu. TFBS::Matrix:PWM obj.
+                   -);</PRE>
+<PRE>
+    # Searching sequence with a pattern (PWM) and retrieving individual sites:
+    #
+    #   The following objects should be defined for this example:
+    #       $pwm    -   a TFBS::Matrix::PWM object
+    #       $seqobj -   a Bio::Seq object
+    #   Consult the documentation for the above modules if you do not know
+    #   how to create them.
+</PRE>
+<PRE>
+
+    #   Scanning sequence with $pwm returns a TFBS::SiteSet object:</PRE>
+<PRE>
+
+    my $site_set = $pwm-&gt;search_seq(-seqobj =&gt; $seqobj,
+                                    -threshold =&gt; &quot;80%&quot;);</PRE>
+<PRE>
+    #   To retrieve individual sites from $site_set, create an iterator obj:
+</PRE>
+<PRE>
+
+    my $site_iterator = $site_set-&gt;Iterator(-sort_by =&gt; &quot;score&quot;);</PRE>
+<PRE>
+    while (my $site = $site_iterator-&gt;next())  {
+        # do something with $site
+    }</PRE>
+<P>
+<HR>
+<H1><A NAME="description">DESCRIPTION</A></H1>
+<P>TFBS::Site object holds data for a (possibly predicted) transcription factor binding site on a nucleotide sequence (start, end, strand, score, tags, as well as references to the corresponding sequence and pattern objects). TFBS::Site is a subclass of Bio::SeqFeature::Generic and has acces to all of its method. Additionally, it contains the <CODE>pattern()</CODE> method, an accessor for pattern object associated with the site object.</P>
+<P>
+<HR>
+<H1><A NAME="feedback">FEEDBACK</A></H1>
+<P>Please send bug reports and other comments to the author.</P>
+<P>
+<HR>
+<H1><A NAME="author  boris lenhard">AUTHOR - Boris Lenhard</A></H1>
+<P>Boris Lenhard &lt;<A HREF="mailto:Boris.Lenhard@cgb.ki.se">Boris.Lenhard@cgb.ki.se</A>&gt;</P>
+<P>
+<HR>
+<H1><A NAME="appendix">APPENDIX</A></H1>
+<P>The rest of the documentation details each of the object
+methods. Internal methods are preceded with an underscore.</P>
+<P>TFBS::Site is a class that extends Bio::SeqFeature::Generic. Please consult Bio::SeqFeature::Generic documentation for other available methods.</P>
+<P>
+<H2><A NAME="new">new</A></H2>
+<PRE>
+ Title   : new
+ Usage   : my $site = TFBS::Site-&gt;new(%args)
+ Function: constructor for the TFBS::Site object
+ Returns : TFBS::Site object
+ Args    : -start,       # integer
+           -end,         # integer
+           -strand,      # -1, 0 or 1
+           -score,       # float
+           -source,      # string (method used to detect it)
+           -primary,     # string (primary tag)
+           -seqobj,      # a Bio::Seq object
+           -pattern      # a pattern object, usu. TFBS::Matrix::PWM</PRE>
+<P>
+<H2><A NAME="pattern">pattern</A></H2>
+<PRE>
+ Title   : pattern
+ Usage   : my $pattern = $site-&gt;pattern();  # gets the pattern
+           $site-&gt;pattern($pwm);            # sets the pattern to $pwm
+ Function: gets/sets the pattern object associated with the site
+ Returns : pattern object, here TFBS::Matrix::PWM object
+ Args    : pattern object (optional, for setting the pattern only)</PRE>
+<P>
+<H2><A NAME="rel_score">rel_score</A></H2>
+<PRE>
+ Title   : rel_score
+ Usage   : my $percent_score = $site-&gt;rel_score() * 100;  # gets the pattern
+ Function: gets relative score (between 0.0 to 1.0) with respect of the score
+           range of the associated pattern (matrix)
+ Returns : floating point number between 0 and 1, 
+           or undef if pattern not defined
+ Args    : none</PRE>
+<P>
+<H2><A NAME="gff">GFF</A></H2>
+<PRE>
+ Title   : GFF
+ Usage   : print $site-&gt;GFF();
+         : print $site-&gt;GFF($gff_formatter)
+ Function: returns a &quot;standard&quot; GFF string - the &quot;generic&quot; gff_string 
+           method is left untouched for possible customizations 
+ Returns : a string (NOT newline terminated! )
+ Args    : a $gff_formatter function reference (optional)</PRE>
+<P>
+<H2><A NAME="location">location</A></H2>
+<P>
+<H2><A NAME="start">start</A></H2>
+<P>
+<H2><A NAME="end">end</A></H2>
+<P>
+<H2><A NAME="length">length</A></H2>
+<P>
+<H2><A NAME="score">score</A></H2>
+<P>
+<H2><A NAME="frame">frame</A></H2>
+<P>
+<H2><A NAME="sub_seqfeature">sub_SeqFeature</A></H2>
+<P>
+<H2><A NAME="add_sub_seqfeature">add_sub_SeqFeature</A></H2>
+<P>
+<H2><A NAME="flush_sub_seqfeature">flush_sub_SeqFeature</A></H2>
+<P>
+<H2><A NAME="primary_tag">primary_tag</A></H2>
+<P>
+<H2><A NAME="source_tag">source_tag</A></H2>
+<P>
+<H2><A NAME="has_tag">has_tag</A></H2>
+<P>
+<H2><A NAME="add_tag_value">add_tag_value</A></H2>
+<P>
+<H2><A NAME="each_tag_value">each_tag_value</A></H2>
+<P>
+<H2><A NAME="all_tags">all_tags</A></H2>
+<P>
+<H2><A NAME="remove_tag">remove_tag</A></H2>
+<P>
+<H2><A NAME="attach_seq">attach_seq</A></H2>
+<P>
+<H2><A NAME="seq">seq</A></H2>
+<P>
+<H2><A NAME="entire_seq">entire_seq</A></H2>
+<P>
+<H2><A NAME="seqname">seqname</A></H2>
+<P>
+<H2><A NAME="annotation">annotation</A></H2>
+<P>
+<H2><A NAME="gff_format">gff_format</A></H2>
+<P>
+<H2><A NAME="gff_string">gff_string</A></H2>
+<P>The above methods are inherited from Bio::SeqFeature::Generic.
+Please see <A HREF="/Bio/SeqFeature/Generic.html">the Bio::SeqFeature::Generic manpage</A> for details on their usage.</P>
+
+</BODY>
+
+</HTML>

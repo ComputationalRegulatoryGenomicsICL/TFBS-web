@@ -1,0 +1,108 @@
+package TFBS::Matrix::PFM;
+
+use vars '@ISA';
+use PDL;
+use strict;
+use Bio::Root::RootI;
+use Bio::SeqIO;
+use TFBS::Matrix;
+use TFBS::Matrix::ICM;
+use TFBS::Matrix::PWM;
+use File::Temp qw/:POSIX/;
+@ISA = qw(TFBS::Matrix Bio::Root::RootI);
+
+sub new  {
+    my ($class, %args) = @_;
+    my $matrix = TFBS::Matrix->new(%args, -matrixtype=>"PFM");
+    my $self = bless $matrix, ref($class) || $class;
+    $self->_check_column_sums();
+    return $self;
+}
+
+sub column_sum {
+    my ($self) = @_;
+    return $self->{matrix}->slice(0)->sum;
+    
+}
+
+sub to_PWM  {
+    my ($self) = @_;
+    my $log2 = sub { log($_[0]) / log(2) };
+    my $nseqs = $self->{'matrix'}->sum / $self->length;
+       #     q = (counts[5*pos + nt] + 0.25 * sqrt(nseqs) ) /
+       #         ( nseqs + sqrt(nseqs) );
+       #     pwm[5*pos + nt] = log( q/0.25 ) / log(2);
+    my $q_pdl = ($self->{'matrix'} +0.25*sqrt($nseqs))
+		 / 
+		($nseqs + sqrt($nseqs));
+    my $pwm_pdl = $log2->(4*$q_pdl);
+
+    my $PWM = TFBS::Matrix::PWM->new
+	( (map {("-$_", $self->{$_}) } keys %$self),
+	  -matrix    => $pwm_pdl
+	);
+    return $PWM;
+    
+}
+
+sub to_ICM  {
+    my ($self) = @_;
+    my $log2 = sub { log($_[0]) / log(2) };
+    my $p_pdl = $self->{'matrix'} / $self->{'matrix'}->xchg(0,1)->sumover;
+    my $plog_pdl = $p_pdl*$log2->($p_pdl);
+    $plog_pdl->inplace->badmask(0);
+    my $D_pdl = 2 + $plog_pdl->xchg(0,1)->sumover;
+    my $ic_pdl = $p_pdl * $D_pdl;
+
+    my $ICM = TFBS::Matrix::ICM->new
+	( (map {("-$_" => $self->{$_})} keys %$self),
+	  -matrix    => $ic_pdl
+	);
+    return $ICM;
+
+}
+
+sub draw_logo {
+    my ($self, %args) = @_;
+    $self->to_ICM->draw_logo(%args);
+}
+
+sub _check_column_sums  {
+    my ($self) = @_;
+    my $pdl = $self->{matrix}->sever();
+    my $rowsums = $pdl->xchg(0,1)->sumover();
+    if ($rowsums->where($rowsums != $rowsums->slice(0))->getdim(0) > 0)  {
+	$self->warn("PFM for ".$self->{ID}." has unequal column sums");
+    }
+}
+
+
+sub DESTROY  {
+    # nothing
+}
+
+
+1;
+
+
+
+
+
+
+
+
+
+ing
+}
+
+
+1;
+
+
+
+
+
+
+
+
+

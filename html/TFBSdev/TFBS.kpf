@@ -1,0 +1,38 @@
+<project name="TFBS.kpf">
+<files>
+ <file url="TFBS/_Iterator.pm">
+ </file>
+ <file url="TFBS/Matrix.pm">
+ </file>
+ <file url="TFBS/Matrix/PFM.pm">
+ </file>
+ <file url="TFBS/Site.pm">
+ </file>
+ <file url="TFBS/SiteSet.pm">
+ </file>
+ <file url="TFBS/DB.pm">
+ </file>
+ <file url="TFBS/DB/JASPAR2.pm">
+ </file>
+ <file url="TFBS/Matrix/PWM.pm">
+ </file>
+ <file url="TFBS/Matrix/_Alignment.pm">
+ </file>
+ <file url="TFBS/Matrix/ICM.pm">
+ </file>
+ <file url="TFBS/DB/FlatFileDir.pm">
+ </file>
+ <file url="MANIFEST">
+ </file>
+ <file url="TFBS/DB/TRANSFAC.pm">
+ </file>
+ <file url="TFBS/PatternGen/SimplePFM.pm">
+ </file>
+ <file url="TFBS/PatternGen/Gibbs.pm">
+ </file>
+ <file url="TFBS/PatternGen/_Motif_.pm">
+ </file>
+ <file url="TFBS/PatternGen.pm">
+ </file>
+</files>
+</project>

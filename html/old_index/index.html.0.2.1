@@ -1,0 +1,154 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>TFBS: Perl modules for transcription factor detection and analysis</title>
+        
+  <meta name="author" content="Boris Lenhard">
+</head>
+<body text="#000000" bgcolor="#ffffff" link="#000099" vlink="#663366" alink="#000099">
+<div> 
+  <h3><font face="Verdana, Arial, Helvetica, sans-serif"><img src="TFBS.png" width="600" height="250"></font></h3>
+</div>
+<div align="Center"> 
+  <h4 align="left"><font face="Verdana, Arial, Helvetica, sans-serif">Boris Lenhard</font></h4>
+</div>
+<h5 align="left"><font face="Verdana, Arial, Helvetica, sans-serif"><a href="http://www.cgb.ki.se">Center 
+  for Genomics and Bioinformatics</a>, Karolinska Institutet, Stockholm, Sweden</font></h5>
+<h5 align="left"><font face="Verdana, Arial, Helvetica, sans-serif"><a href="mailto:Boris.Lenhard@cgb.ki.se">Boris.Lenhard@cgb.ki.se</a><br>
+  <br>
+  </font></h5>
+<div align="Left"><font face="Verdana, Arial, Helvetica, sans-serif" size="-1">TFBS 
+  Perl OO modules implement classes for the representation of objects encountered 
+  in analysis of protein-binding sites in DNA sequences.The objects defined by 
+  TFBS classes include:<br>
+  </font> 
+  <ul>
+    <li><font face="Verdana, Arial, Helvetica, sans-serif" size="-1">pattern definition 
+      objects, currently position specific score matrices (raw frequency, information 
+      content and position weight matrices)with methods for interconversion between 
+      matrix types, sequence searching with a matrix profile, sequence 'logo' 
+      drawing and matrix manipulation;</font></li>
+    <li><font face="Verdana, Arial, Helvetica, sans-serif" size="-1">a composite 
+      object representing a set of position specific score matrices, with methods 
+      for the identification of motifs within DNA sequences with the set of profiles 
+      from its member matrices;</font></li>
+    <li><font face="Verdana, Arial, Helvetica, sans-serif" size="-1">methods for 
+      searching pairwise alignments for patterns conserved in both sequences (phylogenetic 
+      footprinting) defined for both matrix profile and composite (matrix set) 
+      objects;</font></li>
+    <li><font face="Verdana, Arial, Helvetica, sans-serif" size="-1">an object 
+      representing DNA binding site sequence, and an object representing sets 
+      of DNA binding sequences, with methods and helper classes to facilitate 
+      scanning, filtering and statistical analyses;</font></li>
+    <li><font face="Verdana, Arial, Helvetica, sans-serif" size="-1">an object 
+      representing a pair of DNA binding site sequences, and an object representing 
+      a set of such pairs, for storage, manipulation and analysis of phylogenetic 
+      footprinting searches;</font></li>
+    <li><font face="Verdana, Arial, Helvetica, sans-serif" size="-1">database 
+      interfaces to relational, flat file and WWW database of position-specifc 
+      score matrices, with methods for searching existing databases, as well as 
+      creating new ones containing user-defined matrices.</font></li>
+    <li><font face="Verdana, Arial, Helvetica, sans-serif" size="-1">interfaces 
+      to matrix pattern generating programs</font></li>
+  </ul>
+  <div align="left"><font face="Verdana, Arial, Helvetica, sans-serif" size="-1">The 
+    modules within the TFBS set are fully integrated and compatible with <a href="http://www.bioperl.org">Bioperl</a>.<br>
+    </font><font face="Verdana, Arial, Helvetica, sans-serif"><br>
+    <b><font size="+1"><i>Download</i><br>
+    </font> </b> </font></div>
+  <div align="left"> 
+    <p><font face="Verdana, Arial, Helvetica, sans-serif"><br>
+      <font size="-1">The current release of TFBS is 0.2.1 (January 03 2001). 
+      It has been tested on Linux 2.4 (i686) and Tru64 Unix 4.0G & 5.0 (Compaq Alpha). 
+      The tarball is here: <a href="TFBS-0.2.1.tar.gz">TFBS-0.2.1.tar.gz</a>.<br>
+      <br>
+      </font><font size="+1"><b><i>Installation</i></b></font><br>
+      </font></p>
+    <p><font face="Verdana, Arial, Helvetica, sans-serif" size="-1">The installation 
+      procedure is fairly standard:<br>
+      </font><font face="Verdana, Arial, Helvetica, sans-serif"> </font></p>
+  </div>
+  <pre>	$ tar xvfz TFBS-0.2.1.tar.gz</pre>
+  <pre>	$ cd TFBS-0.2.1</pre>
+  <pre>	$ perl Makefile.PL
+</pre>
+  <font face="Verdana, Arial, Helvetica, sans-serif" size="-1">At this point you 
+  will be asked for MySQL server acces information, which is needed for testing 
+  the TFBS::DB::JASPAR2 module. If you do not have write access to a MySQL server, 
+  just answer 'no' to the first question. </font> 
+  <pre>	$ make</pre>
+  TFBS contains a perlxs extension which is a (at present quick and dirty) adaptation 
+  of a short C program <b>pwm_search</b> by James Fickett and Wyeth Wasserman, used for searching a DNA sequence 
+  against a position weight matrix. It is included for performance reasons. (For developers: there is also
+  a currently undocumented way to make TFBS::Matrix::PWM's search methods work without the extension. For
+  details, contact the author (or wait for the more extensive documentation of TFBS guts to appear. 
+  The latter is not recommended :) )  
+  <pre>	$ make test</pre>
+  The test suite is not omnipotent. For access to TRANSFAC, the TFBS::DB::TRANSFAC 
+  assumes that Internet connection is present and no proxy is required. Test of TFBS::PatternGen::Gibbs 
+  is skipped if Gibbs executable is not found in the PATH. 
+  <pre>	$ su</pre>
+  <pre>	# make install</pre>
+  <div align="left"><font face="Verdana, Arial, Helvetica, sans-serif"><br>
+    <font size="-1"><a href="mailto:Boris.Lenhard@cgb.ki.se">Any questions?</a><br>
+    </font><br>
+    </font> <font face="Verdana, Arial, Helvetica, sans-serif"><b><font size="+1"><i>Requirements</i></font><br>
+    </b> </font><font face="Verdana, Arial, Helvetica, sans-serif"><br>
+    </font></div>
+  <div align="Left"><font face="Verdana, Arial, Helvetica, sans-serif" size="-1"><a href="http://www.perl.com"> 
+    Perl</a> 5.005_03 or later<br>
+    </font></div>
+  <div align="Left"><font face="Verdana, Arial, Helvetica, sans-serif" size="-1"><a href="http://bio.perl.org">bioperl</a> 
+    0.7.0 or later<br>
+    </font></div>
+  <div align="Left">
+    <p><font face="Verdana, Arial, Helvetica, sans-serif" size="-1"><a href="http://pdl.perl.org">PDL</a> 
+      1.1 or later<br>
+      <a href="http://stein.cshl.org/WWW/software/GD/"> GD</a> 1.3 or later (only 
+      required by TFBS::Matrix::ICM for drawing sequence logos)</font></p>
+    <p><font face="Verdana, Arial, Helvetica, sans-serif" size="-1">All of the 
+      above are also available from <a href="http://cpan.perl.org">CPAN</a>.<br>
+      </font><font face="Verdana, Arial, Helvetica, sans-serif"> </font></p>
+  </div>
+  <div align="left"><font face="Verdana, Arial, Helvetica, sans-serif"><br>
+    </font> 
+
+
+<font face="Verdana, Arial, Helvetica, sans-serif"><b><font size="+1"><i>Example scripts</i></font></b><br>
+    </font><font face="Verdana, Arial, Helvetica, sans-serif"><br>
+    <p><font size="-1">Here are a few very simple code snippets that demonstrate some of the TFBS functionality.
+    </font>
+    </p>
+    <p><font size="-1"><a href="examples/script1.pl">Script1</a>: a script that retrieves a sequence from GenBank using BioPerl, a C/EBP positi on weight profile from TRANSFAC, scans the sequence with the matrix and outputs the detected sites in GFF format.
+    </font>
+    <p><font size="-1"><a href="examples/script2.pl">Script2</a>: a script that identifies new patterns from a set of DNA sequences stored in the file  sequences.fa  and stores them in a simple flat -file database.
+    </font>
+    </p>
+
+
+<font face="Verdana, Arial, Helvetica, sans-serif"><b><font size="+1"><i>Documentation 
+    (POD)</i></font></b><br>
+    </font><font face="Verdana, Arial, Helvetica, sans-serif"><br>
+    <font size="-1">From here you can access&nbsp; POD&nbsp; documentation for 
+    the modules. It is still neither comprehensive nor pedagogically sound, but 
+    I think it is enough for start. (Internal modules and internal methods are 
+    not yet documented.)<br>
+    <br>
+    <a href="POD/Matrix.html">TFBS::Matrix</a><br>
+    <a href="POD/Matrix/PFM.html">TFBS::Matrix::PFM</a><br>
+    <a href="POD/Matrix/ICM.html">TFBS::Matrix::ICM</a><br>
+    <a href="POD/Matrix/PWM.html">TFBS::Matrix::PWM</a><br>
+    <a href="POD/Site.html">TFBS::Site</a><br>
+    <a href="POD/SiteSet.html">TFBS::SiteSet</a><br>
+    <a href="POD/SitePair.html">TFBS::SitePair</a><br>
+    <a href="POD/SitePairSet.html">TFBS::SitePairSet</a><br>
+    <a href="POD/DB/FlatFileDir.html">TFBS::DB::FlatFileDir</a><br>
+    <a href="POD/DB/TRANSFAC.html">TFBS::DB::TRANSFAC</a><br>
+    <a href="POD/DB/JASPAR2.html">TFBS::DB::JASPAR2</a><br>
+    <a href="POD/PatternGen.html">TFBS::PatternGen</a><br>
+    <a href="POD/PatternGen/SimplePFM.html">TFBS::PatternGen::SimplePFM</a><br>
+    <a href="POD/PatternGen/Gibbs.html">TFBS::PatternGen::Gibbs</a><br>
+    </font> </font></div>
+</div>
+                        </body>
+                        </html>

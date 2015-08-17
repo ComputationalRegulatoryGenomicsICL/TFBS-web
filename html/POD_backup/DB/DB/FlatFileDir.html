@@ -1,0 +1,204 @@
+<HTML>
+<HEAD>
+<TITLE>TFBS::DB::FlatFileDir - interface to a database of pattern matrices
+stored as a collection of flat files in a dedicated directory</TITLE>
+<LINK REV="made" HREF="mailto:bhcompile@stripples.devel.redhat.com">
+</HEAD>
+
+<BODY>
+
+<A NAME="__index__"></A>
+<!-- INDEX BEGIN -->
+
+<UL>
+
+	<LI><A HREF="#name">NAME</A></LI>
+	<LI><A HREF="#synopsis">SYNOPSIS</A></LI>
+	<LI><A HREF="#description">DESCRIPTION</A></LI>
+	<LI><A HREF="#feedback">FEEDBACK</A></LI>
+	<LI><A HREF="#author  boris lenhard">AUTHOR - Boris Lenhard</A></LI>
+	<LI><A HREF="#appendix">APPENDIX</A></LI>
+	<UL>
+
+		<LI><A HREF="#new">new</A></LI>
+		<LI><A HREF="#connect">connect</A></LI>
+		<LI><A HREF="#create">create</A></LI>
+		<LI><A HREF="#get_matrix_by_id">get_Matrix_by_ID</A></LI>
+		<LI><A HREF="#get_matrix_by_name">get_Matrix_by_name</A></LI>
+		<LI><A HREF="#store_matrix">store_Matrix</A></LI>
+		<LI><A HREF="#delete_matrix_having_id">delete_Matrix_having_ID</A></LI>
+	</UL>
+
+</UL>
+<!-- INDEX END -->
+
+<HR>
+<P>
+<H1><A NAME="name">NAME</A></H1>
+<P>TFBS::DB::FlatFileDir - interface to a database of pattern matrices
+stored as a collection of flat files in a dedicated directory</P>
+<P>
+<HR>
+<H1><A NAME="synopsis">SYNOPSIS</A></H1>
+<UL>
+<LI><STRONG><A NAME="item_creating_a_database_object_by_connecting_to_the_ex">creating a database object by connecting to the existing directory</A></STRONG><BR>
+
+<PRE>
+    my $db = TFBS::DB::FlatFileDir-&gt;connect(&quot;/home/boris/MatrixDir&quot;);</PRE>
+<LI><STRONG><A NAME="item_retrieving_a_TFBS%3A%3AMatrix%3A%3A%2A_object_from">retrieving a TFBS::Matrix::* object from the database</A></STRONG><BR>
+
+<PRE>
+    # retrieving a PFM by ID
+    my $pfm = $db-&gt;get_Matrix_by_ID('M00079','PFM');
+</PRE>
+<PRE>
+
+    #retrieving a PWM by name
+    my $pwm = $db-&gt;get_Matrix_by_name('NF-kappaB', 'PWM');</PRE>
+<LI><STRONG><A NAME="item_retrieving_a_set_of_matrices_as_a_TFBS%3A%3AMatrix">retrieving a set of matrices as a TFBS::MatrixSet object according to various criteria</A></STRONG><BR>
+
+<PRE>
+
+    # retrieving a set of PWMs from a list of IDs:
+    my @IDlist = ('M0019', 'M0045', 'M0073', 'M0101');
+    my $matrixset = $db-&gt;get_MatrixSet(-IDs =&gt; \@IDlist,
+                                       -matrixtype =&gt; &quot;PWM&quot;);</PRE>
+<PRE>
+
+    # retrieving a set of ICMs from a list of names:
+    my @namelist = ('p50', 'p53', 'HNF-1'. 'GATA-1', 'GATA-2', 'GATA-3');
+    my $matrixset = $db-&gt;get_MatrixSet(-names =&gt; \@namelist,
+                                       -matrixtype =&gt; &quot;ICM&quot;);</PRE>
+<PRE>
+
+    # retrieving a set of all PFMs in the database
+    my $matrixset = $db-&gt;get_MatrixSet(-matrixtype =&gt; &quot;PFM&quot;);</PRE>
+<LI><STRONG><A NAME="item_creating_a_new_FlatFileDir_database_in_a_new_direc">creating a new FlatFileDir database in a new directory:</A></STRONG><BR>
+
+<PRE>
+
+    my $db = TFBS::DB::JASPAR2-&gt;create(&quot;/home/boris/NewMatrixDir&quot;);</PRE>
+<LI><STRONG><A NAME="item_storing_a_matrix_in_the_database%3A">storing a matrix in the database:</A></STRONG><BR>
+
+<PRE>
+    #let $pfm is a TFBS::Matrix::PFM object
+    $db-&gt;store_Matrix($pfm);</PRE>
+</UL>
+<P>
+<HR>
+<H1><A NAME="description">DESCRIPTION</A></H1>
+<P>TFBS::DB::FlatFileDir is a read/write database interface module that
+retrieves and stores TFBS::Matrix::* and TFBS::MatrixSet
+objects in a set of flat files in a dedicated directory. It has a
+very simple structure and can be easily set up manually if desired.</P>
+<P>
+<HR>
+<H1><A NAME="feedback">FEEDBACK</A></H1>
+<P>Please send bug reports and other comments to the author.</P>
+<P>
+<HR>
+<H1><A NAME="author  boris lenhard">AUTHOR - Boris Lenhard</A></H1>
+<P>Boris Lenhard &lt;<A HREF="mailto:Boris.Lenhard@cgb.ki.se">Boris.Lenhard@cgb.ki.se</A>&gt;</P>
+<P>
+<HR>
+<H1><A NAME="appendix">APPENDIX</A></H1>
+<P>The rest of the documentation details each of the object
+methods. Internal methods are preceded with an underscore.</P>
+<P>
+<H2><A NAME="new">new</A></H2>
+<PRE>
+ Title   : new
+ Usage   : my $db = TFBS::DB::FlatFileDir-&gt;new(%args);
+ Function: the formal constructor for the TFBS::DB::FlatFileDir object;
+           most users will not use it - they will use specialized
+           I&lt;connect&gt; or I&lt;create&gt; constructors to create a
+           database object
+ Returns : a TFBS::DB::FlatFileDir object
+ Args    : -dir       # the directory containing flat files</PRE>
+<P>
+<H2><A NAME="connect">connect</A></H2>
+<PRE>
+ Title   : connect
+ Usage   : my $db = TFBS::DB::FlatFileDir-&gt;connect($directory);
+ Function: Creates a database object that retrieves TFBS::Matrix::*
+           object data from or stores it in an existing directory
+ Returns : a TFBS::DB::FlatFileDir object
+ Args    : ($directory)
+            The name of the directory (possibly with fully qualified
+            path).</PRE>
+<P>
+<H2><A NAME="create">create</A></H2>
+<PRE>
+ Title   : create
+ Usage   : my $newdb = TFBS::DB::FlatFileDir-&gt;create($new_directory);
+ Function: connects to the database server, creates a new directory,
+           sets up a FlatFileDir database and returns a database
+           object that interfaces the database
+ Returns : a TFBS::DB::FlatFileDir object
+ Args    : ($new_directory)
+            The name of the directory to create
+            (possibly with fully qualified path).</PRE>
+<P>
+<H2><A NAME="get_matrix_by_id">get_Matrix_by_ID</A></H2>
+<PRE>
+ Title   : get_Matrix_by_ID
+ Usage   : my $pfm = $db-&gt;get_Matrix_by_ID('M00034', 'PFM');
+ Function: fetches matrix data under the given ID from the
+           database and returns a TFBS::Matrix::* object
+ Returns : a TFBS::Matrix::* object; the exact type of the
+           object depending on the second argument (allowed
+           values are 'PFM', 'ICM', and 'PWM'); returns undef if
+           matrix with the given ID is not found
+ Args    : (Matrix_ID, Matrix_type)
+           Matrix_ID is a string; Matrix_type is one of the
+           following: 'PFM' (raw position frequency matrix),
+           'ICM' (information content matrix) or 'PWM' (position
+           weight matrix)
+           If Matrix_type is omitted, a PWM is retrieved by default.</PRE>
+<P>
+<H2><A NAME="get_matrix_by_name">get_Matrix_by_name</A></H2>
+<PRE>
+ Title   : get_Matrix_by_name
+ Usage   : my $pfm = $db-&gt;get_Matrix_by_name('HNF-1', 'PWM');
+ Function: fetches matrix data under the given name from the
+           database and returns a TFBS::Matrix::* object
+ Returns : a TFBS::Matrix::* object; the exact type of the object
+           depending on the second argument (allowed values are
+           'PFM', 'ICM', and 'PWM')
+ Args    : (Matrix_name, Matrix_type)
+           Matrix_name is a string; Matrix_type is one of the
+           following:
+           'PFM' (raw position frequency matrix),
+           'ICM' (information content matrix) or
+           'PWM' (position weight matrix)
+           If Matrix_type is omitted, a PWM is retrieved by default.
+ Warning : According to the current JASPAR2 data model, name is
+           not necessarily a unique identifier. In the case where
+           there are several matrices with the same name in the
+           database, the function fetches the first one and prints
+           a warning on STDERR. You have been warned.</PRE>
+<P>
+<H2><A NAME="store_matrix">store_Matrix</A></H2>
+<PRE>
+ Title   : store_Matrix
+ Usage   : $db-&gt;store_Matrix($matrixobj);
+ Function: Stores the contents of a TFBS::Matrix::DB object in the database
+ Returns : 0 on success; $@ contents on failure
+           (this is too C-like and may change in future versions)
+ Args    : ($matrixobj) # a TFBS::Matrix::* object</PRE>
+<P>
+<H2><A NAME="delete_matrix_having_id">delete_Matrix_having_ID</A></H2>
+<PRE>
+ Title   : delete_Matrix_having_ID
+ Usage   : $db-&gt;delete_Matrix_with_ID('M00045');
+ Function: Deletes the matrix having the given ID from the database
+ Returns : 0 on success; $@ contents on failure
+           (this is too C-like and may change in future versions)
+ Args    : (ID)
+           A string
+ Comment : Yeah, yeah, 'delete_Matrix_having_ID' is a stupid name
+           for a method, but at least it should be obviuos what it does.</PRE>
+
+</BODY>
+
+</HTML>

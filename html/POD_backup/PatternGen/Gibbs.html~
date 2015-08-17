@@ -1,0 +1,95 @@
+<HTML>
+<HEAD>
+<TITLE>TFBS::PatternGen::Gibbs - a pattern factory that uses Chip Lawrence's Gibbs program</TITLE>
+<LINK REV="made" HREF="mailto:prospector@porky.devel.redhat.com">
+</HEAD>
+
+<BODY>
+
+<A NAME="__index__"></A>
+<!-- INDEX BEGIN -->
+
+<UL>
+
+	<LI><A HREF="#name">NAME</A></LI>
+	<LI><A HREF="#synopsis">SYNOPSIS</A></LI>
+	<LI><A HREF="#description">DESCRIPTION</A></LI>
+	<UL>
+
+		<LI><A HREF="#new">new</A></LI>
+		<LI><A HREF="#pattern">pattern</A></LI>
+		<LI><A HREF="#all_patterns">all_patterns</A></LI>
+		<LI><A HREF="#patternset">patternSet</A></LI>
+	</UL>
+
+</UL>
+<!-- INDEX END -->
+
+<HR>
+<P>
+<H1><A NAME="name">NAME</A></H1>
+<P>TFBS::PatternGen::Gibbs - a pattern factory that uses Chip Lawrence's Gibbs program</P>
+<P>
+<HR>
+<H1><A NAME="synopsis">SYNOPSIS</A></H1>
+<PRE>
+
+    my $patterngen =
+            TFBS::PatternGen::Gibbs-&gt;new(-seq_file=&gt;'sequences.fa',
+                                         -binary =&gt; '/Programs/Gibbs-1.0/bin/Gibbs'
+                                         -nr_hits =&gt; 24,
+                                         -motif_length =&gt; [8, 9, 10],
+                                         -additional_params =&gt; '-x -e');</PRE>
+<PRE>
+
+    my $pfm = $patterngen-&gt;pattern(); # $pfm is now a TFBS::Matrix::PFM object</PRE>
+<P>
+<HR>
+<H1><A NAME="description">DESCRIPTION</A></H1>
+<P>TFBS::PatternGen::Gibbs builds position frequency matrices
+using an advanced Gibbs sampling algorithm implemented in external
+<EM>Gibbs</EM> program by Chip Lawrence. The algorithm can produce
+multiple patterns from a single set of sequences.</P>
+<P>
+<H2><A NAME="new">new</A></H2>
+<PRE>
+ Title   : new
+ Usage   : my $db = TFBS::PatternGen::Gibbs-&gt;new(%args);
+ Function: the constructor for the TFBS::PatternGen::Gibbs object
+ Returns : a TFBS::PatternGen::Gibbs object
+ Args    : This method takes named arguments;
+            you must specify one of the following three
+            -seq_list     # a reference to an array of strings
+                          #   and/or Bio::Seq objects
+              # or
+            -seq_stream   # A Bio::SeqIO object
+              # or
+            -seq_file     # the name of the fasta file containing
+                          #   all the sequences
+           Other arguments are:
+            -binary       # a fully qualified path to Gibbs executable
+                          #  OPTIONAL: default 'Gibbs'
+            -nr_hits      # a presumed number of pattern occurences in the
+                          #   sequence set: it can be a single integer, e.g.
+                          #   -nr_hits =&gt; 24 , or a reference to an array of
+                          #   integers, e.g -nr_hits =&gt; [12, 24, 36]
+            -motif_length # an expected length of motif in nucleotides:
+                          #   it can be a single integer, e.g.
+                          #   -motif_length =&gt; 8 , or a reference to an 
+                          #   array ofintegers, e.g -motif_length =&gt; [8..12]
+            -additional_params  # a string containing additional
+                                #   command-line switches for the
+                                #   Gibbs program</PRE>
+<P>
+<H2><A NAME="pattern">pattern</A></H2>
+<P>
+<H2><A NAME="all_patterns">all_patterns</A></H2>
+<P>
+<H2><A NAME="patternset">patternSet</A></H2>
+<P>The three methods listed above are used for the retrieval of patterns,
+and are common to all TFBS::PatternGen::* classes. Please
+see <A HREF="POD/TFBS/PatternGen.html">the TFBS::PatternGen manpage</A> for details.</P>
+
+</BODY>
+
+</HTML>

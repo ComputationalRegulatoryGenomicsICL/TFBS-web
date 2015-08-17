@@ -1,0 +1,256 @@
+<HTML>
+<HEAD>
+<TITLE>TFBS::Matrix::PFM - class for raw position frequency matrix patterns</TITLE>
+<LINK REV="made" HREF="mailto:bhcompile@stripples.devel.redhat.com">
+</HEAD>
+
+<BODY>
+
+<A NAME="__index__"></A>
+<!-- INDEX BEGIN -->
+
+<UL>
+
+	<LI><A HREF="#name">NAME</A></LI>
+	<LI><A HREF="#synopsis">SYNOPSIS</A></LI>
+	<LI><A HREF="#description">DESCRIPTION</A></LI>
+	<LI><A HREF="#feedback">FEEDBACK</A></LI>
+	<LI><A HREF="#author  boris lenhard">AUTHOR - Boris Lenhard</A></LI>
+	<LI><A HREF="#appendix">APPENDIX</A></LI>
+	<UL>
+
+		<LI><A HREF="#new">new</A></LI>
+		<LI><A HREF="#column_sum">column_sum</A></LI>
+		<LI><A HREF="#to_pwm">to_PWM</A></LI>
+		<LI><A HREF="#to_icm">to_ICM</A></LI>
+		<LI><A HREF="#draw_logo">draw_logo</A></LI>
+		<LI><A HREF="#add_pfm">add_PFM</A></LI>
+		<LI><A HREF="#name">name</A></LI>
+		<LI><A HREF="#id">ID</A></LI>
+		<LI><A HREF="#class">class</A></LI>
+		<LI><A HREF="#matrix">matrix</A></LI>
+		<LI><A HREF="#length">length</A></LI>
+		<LI><A HREF="#revcom">revcom</A></LI>
+		<LI><A HREF="#rawprint">rawprint</A></LI>
+		<LI><A HREF="#prettyprint">prettyprint</A></LI>
+	</UL>
+
+</UL>
+<!-- INDEX END -->
+
+<HR>
+<P>
+<H1><A NAME="name">NAME</A></H1>
+<P>TFBS::Matrix::PFM - class for raw position frequency matrix patterns</P>
+<P>
+<HR>
+<H1><A NAME="synopsis">SYNOPSIS</A></H1>
+<UL>
+<LI><STRONG><A NAME="item_creating_a_TFBS%3A%3AMatrix%3A%3APFM_object_manual">creating a TFBS::Matrix::PFM object manually:</A></STRONG><BR>
+
+<PRE>
+    my $matrixref = [ [ 12,  3,  0,  0,  4,  0 ],
+                      [  0,  0,  0, 11,  7,  0 ],
+                      [  0,  9, 12,  0,  0,  0 ],
+                      [  0,  0,  0,  1,  1, 12 ]
+                    ];  
+    my $pfm = TFBS::Matrix::PFM-&gt;new(-matrix =&gt; $matrixref,
+                                     -name   =&gt; &quot;MyProfile&quot;,
+                                     -ID     =&gt; &quot;M0001&quot;
+                                    );
+    # or
+</PRE>
+<PRE>
+
+    my $matrixstring =
+        &quot;12 3 0 0 4 0\n0 0 0 11 7 0\n0 9 12 0 0 0\n0 0 0 1 1 12&quot;;</PRE>
+<PRE>
+
+    my $pfm = TFBS::Matrix::PFM-&gt;new(-matrixstring =&gt; $matrixstring,
+                                     -name         =&gt; &quot;MyProfile&quot;,
+                                     -ID           =&gt; &quot;M0001&quot;
+                                    );</PRE>
+<PRE>
+
+=item * retrieving a TFBS::Matix::PFM object from a database:</PRE>
+<P>(See documentation of individual TFBS::DB::* modules to learn
+how to connect to different types of pattern databases and 
+retrieve TFBS::Matrix::* objects from them.)
+</P>
+<PRE>
+
+    my $db_obj = TFBS::DB::JASPAR2-&gt;new
+                    (-connect =&gt; [&quot;dbi:mysql:JASPAR2:myhost&quot;,
+                                  &quot;myusername&quot;, &quot;mypassword&quot;]);
+    my $pfm = $db_obj-&gt;get_Matrix_by_ID(&quot;M0001&quot;, &quot;PFM&quot;);
+    # or
+    my $pfm = $db_obj-&gt;get_Matrix_by_name(&quot;MyProfile&quot;, &quot;PFM&quot;);</PRE>
+<LI><STRONG><A NAME="item_retrieving_list_of_individual_TFBS%3A%3AMatrix%3A%">retrieving list of individual TFBS::Matrix::PFM objects
+from a TFBS::MatrixSet object</A></STRONG><BR>
+
+(See the <A HREF="/TFBS/MatrixSet.html">the TFBS::MatrixSet manpage</A> to learn how to create 
+objects for storage and manipulation of multiple matrices.)
+<PRE>
+    my @pfm_list = $matrixset-&gt;all_patterns(-sort_by=&gt;&quot;name&quot;);</PRE>
+<P></P>
+<LI><STRONG><A NAME="item_convert_a_raw_frequency_matrix_to_other_matrix_typ">convert a raw frequency matrix to other matrix types:</A></STRONG><BR>
+
+<PRE>
+    my $pwm = $pfm-&gt;to_PWM(); # convert to position weight matrix
+    my $icm = $icm-&gt;to_ICM(); # convert to information con</PRE>
+</UL>
+<P>
+<HR>
+<H1><A NAME="description">DESCRIPTION</A></H1>
+<P>TFBS::Matrix::PFM is a class whose instances are objects representing
+raw position frequency matrices (PFMs). A PFM is derived from N
+nucleotide patterns of fixed size, e.g. the set of sequences</P>
+<PRE>
+    AGGCCT
+    AAGCCT
+    AGGCAT
+    AAGCCT
+    AAGCCT
+    AGGCAT
+    AGGCCT
+    AGGCAT
+    AGGTTT
+    AGGCAT
+    AGGCCT
+    AGGCCT</PRE>
+<P>will give the matrix:</P>
+<PRE>
+    A:[ 12  3  0  0  4  0 ]
+    C:[  0  0  0 11  7  0 ]
+    G:[  0  9 12  0  0  0 ]
+    T:[  0  0  0  1  1 12 ]</PRE>
+<P>which contains the count of each nucleotide at each position in the
+sequence. (If you have a set of sequences as above and want to
+create a TFBS::Matrix::PFM object out of them, have a look at
+TFBS::PatternGen::SimplePFM module.)</P>
+<P>PFMs are easily converted to other types of matrices, namely
+information content matrices and position weight matrices. A
+TFBS::Matrix::PFM object has the methods to_ICM and to_PWM which
+do just that, returning a TFBS::Matrix::ICM and TFBS::Matrix::PWM
+objects, respectively.</P>
+<P>
+<HR>
+<H1><A NAME="feedback">FEEDBACK</A></H1>
+<P>Please send bug reports and other comments to the author.</P>
+<P>
+<HR>
+<H1><A NAME="author  boris lenhard">AUTHOR - Boris Lenhard</A></H1>
+<P>Boris Lenhard &lt;<A HREF="mailto:Boris.Lenhard@cgb.ki.se">Boris.Lenhard@cgb.ki.se</A>&gt;</P>
+<P>
+<HR>
+<H1><A NAME="appendix">APPENDIX</A></H1>
+<P>The rest of the documentation details each of the object
+methods. Internal methods are preceded with an underscore.</P>
+<P>
+<H2><A NAME="new">new</A></H2>
+<PRE>
+ Title   : new
+ Usage   : my $pfm = TFBS::Matrix::PFM-&gt;new(%args)
+ Function: constructor for the TFBS::Matrix::PFM object
+ Returns : a new TFBS::Matrix::PFM object
+ Args    : # you must specify either one of the following three:
+</PRE>
+<PRE>
+
+           -matrix,      # reference to an array of arrays of integers
+              #or
+           -matrixstring,# a string containing four lines
+                         # of tab- or space-delimited integers
+              #or
+           -matrixfile,  # the name of a file containing four lines
+                         # of tab- or space-delimited integers
+           #######</PRE>
+<PRE>
+
+           -name,        # string, OPTIONAL
+           -ID,          # string, OPTIONAL
+           -class,       # string, OPTIONAL
+           -tags         # an array reference, OPTIONAL
+Warnings  : Warns if the matrix provided has columns with different
+            sums. Columns with different sums contradict the usual
+            origin of matrix data and, unless you are absolutely sure
+            that column sums _should_ be different, it would be wise to
+            check your matrices.</PRE>
+<P>
+<H2><A NAME="column_sum">column_sum</A></H2>
+<PRE>
+ Title   : column_sum
+ Usage   : my $nr_sequences = $pfm-&gt;column_sum()
+ Function: calculates the sum of elements of one column
+           (the first one by default) which normally equals the
+           number of sequences used to derive the PFM. 
+ Returns : the sum of elements of one column (an integer)
+ Args    : columnn number (starting from 1), OPTIONAL - you DO NOT
+           need to specify it unless you are dealing with a matrix</PRE>
+<P>
+<H2><A NAME="to_pwm">to_PWM</A></H2>
+<PRE>
+ Title   : to_PWM
+ Usage   : my $pwm = $pfm-&gt;to_PWM()
+ Function: converts a raw frequency matrix (a TFBS::Matrix::PFM object)
+           to position weight matrix. At present it assumes uniform
+           background distribution of nucleotide frequencies.
+ Returns : a new TFBS::Matrix::PWM object
+ Args    : none; in the future releases, it should be able to accept
+           a user defined background probability of the four
+           nucleotides</PRE>
+<P>
+<H2><A NAME="to_icm">to_ICM</A></H2>
+<PRE>
+ Title   : to_ICM
+ Usage   : my $icm = $pfm-&gt;to_ICM()
+ Function: converts a raw frequency matrix (a TFBS::Matrix::PFM object)
+           to information content matrix. At present it assumes uniform
+           background distribution of nucleotide frequencies.
+ Returns : a new TFBS::Matrix::ICM object
+ Args    : none; in the future releases, it should be able to accept
+           a user defined background probability of the four
+           nucleotides</PRE>
+<P>
+<H2><A NAME="draw_logo">draw_logo</A></H2>
+<PRE>
+ Title   : draw_logo
+ Usage   : my $gd_image = $pfm-&gt;draw_logo()
+ Function: draws a sequence logo; this is a shorcut function
+           that internally converis $pfm to an information
+           content matrix (TFBS::Matrix::ICM) object, and calls its
+           draw_logo function; for details how to use this method,
+           see draw_logo entry in TFBS::Matrix::ICM documentation
+ Returns : a GD image object (see documentation of GD module)
+ Args    : many;
+           see draw_logo entry in TFBS::Matrix::ICM documentation</PRE>
+<P>
+<H2><A NAME="add_pfm">add_PFM</A></H2>
+<PRE>
+ Title   : add_PFM
+ Usage   : $pfm-&gt;add_PFM($another_pfm)
+ Function: adds the values of $pnother_pfm matrix to $pfm
+ Returns : reference to the updated $pfm object
+ Args    : a TFBS::Matrix::PFM object</PRE>
+<P>
+<H2><A NAME="name">name</A></H2>
+<P>
+<H2><A NAME="id">ID</A></H2>
+<P>
+<H2><A NAME="class">class</A></H2>
+<P>
+<H2><A NAME="matrix">matrix</A></H2>
+<P>
+<H2><A NAME="length">length</A></H2>
+<P>
+<H2><A NAME="revcom">revcom</A></H2>
+<P>
+<H2><A NAME="rawprint">rawprint</A></H2>
+<P>
+<H2><A NAME="prettyprint">prettyprint</A></H2>
+<P>The above methods are common to all matrix objects. Please consult
+<A HREF="/TFBS/Matrix.html">the TFBS::Matrix manpage</A> to find out how to use them.</P>
+
+</BODY>
+
+</HTML>

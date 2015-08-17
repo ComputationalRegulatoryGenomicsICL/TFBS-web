@@ -1,0 +1,286 @@
+package TFBS::Matrix::PWM;
+
+use vars '@ISA';
+use PDL;
+use strict;
+use Bio::Root::RootI;
+use Bio::SeqIO;
+use TFBS::Matrix;
+use TFBS::SiteSet;
+use TFBS::Matrix::_Alignment;
+use File::Temp qw/:POSIX/;
+@ISA = qw(TFBS::Matrix Bio::Root::RootI);
+
+
+#################################################################
+# PUBLIC METHODS
+#################################################################
+
+
+sub new  {
+    my ($class, %args) = @_;
+    my $matrix = TFBS::Matrix->new(%args, -matrixtype=>"PWM");
+    my $self = bless $matrix, ref($class) || $class;
+    $self->_set_min_max_score();
+    return $self;
+}
+
+
+sub search_seq  {
+    my ($self, %args) = @_;
+    $self->_search(%args);
+}
+
+
+sub search_aln  {
+    my ($self, %args) = @_;
+    unless ($args{-alignstring} or $args{-alignobj} or $args{-alignfile}) {
+	$self->throw
+	    ("No alignment file, string or object passed to search_aln.");
+    }
+    $args{-pattern_set} = $self;
+    my $aln = TFBS::Matrix::_Alignment->new(%args);
+    return $aln->site_pair_set;
+
+}
+
+
+#################################################################
+# PRIVATE METHODS
+#################################################################
+
+
+sub _set_min_max_score  {
+    my ($self) = @_;
+    my $transpose = $self->{matrix}->xchg(0,1);
+    $self->{min_score} = sum(minimum $transpose);
+    $self->{max_score} = sum(maximum $transpose);
+}
+
+sub _search { 
+    # this method runs the pwmsearch C extension and parses the data
+    # very similar to _csearch, which will eventually be discontinued
+    my ($self, %args)  = @_; 
+    my $seqobj = $self->_to_seqobj(%args);
+    return pwmsearch($self, $seqobj, ($args{-threshold} or 0));
+} 
+
+
+sub _csearch  { 
+
+    # this is a wrapper around Wyeth Wasserman's's pwm_searchPFF program
+    # until we do a proper extension
+    
+    my ($self) = shift; #the rest of @_ goes to _to_seqob;
+    my %args = @_;
+    my $PWM_SEARCH = $args{'-binary'} 
+                     || "pwm_searchPFF";
+
+    # dump the sequence into a tempfile
+
+    my $seqobj = $self->_to_seqobj(@_);
+    my ($fastaFH, $fastafile);
+    if (defined $seqobj->{_fastaFH} and defined $seqobj->{_fastafile})  {
+	($fastaFH, $fastafile) = ($seqobj->{_fastaFH}, $seqobj->{_fastafile});
+    }
+    else {
+	($fastaFH, $fastafile) = tmpnam();
+	my $seqFH = Bio::SeqIO->newFh(-fh =>$fastaFH, -format=>"Fasta");
+	print $seqFH $seqobj;
+     }
+    # we need $fastafile below
+
+
+    # calculate threshold
+
+    my $threshold;
+    if ($args{-threshold})  {
+	if ($args{-threshold} =~ /(.+)%/)  { 
+	    # percentage
+	    $threshold = $self->{min_score} +
+		($self->{max_score} - $self->{min_score})* $1/100;
+	}
+	else  {
+	    # absolute value
+	    $threshold = $args{-threshold};
+	}
+    }
+    else {
+	# no threshold given
+	$threshold = $self->{min_score} -1;
+    }
+    
+
+    # convert piddle to text (there MUST be a better way)
+    
+    my $pwmstring = sprintf ( $self->{matrix} );
+    $pwmstring =~ s/\[|\]//g;                # lose []
+    $pwmstring =~ s/\n /\n/g;                # lose leading spaces
+    my @pwmlines = split("\n", $pwmstring); # f
+    $pwmstring = join ("\n", @pwmlines[2..5])."\n";
+    
+    # dump pwm into a tempfile
+    
+    my ($pwmFH, $pwmfile) = tmpnam();  # we need $pwmfile below
+    print $pwmFH $pwmstring;
+    close $pwmFH;
+    
+    # run pwmsearch
+    my $hitlist = TFBS::SiteSet->new();
+    my ($TFname, $TFclass) = ($self->{name}, $self->{class});
+    
+    my @search_result_lines = 
+	`$PWM_SEARCH $pwmfile $fastafile $threshold -n $TFname -c $TFclass`;
+    foreach (@search_result_lines)  {
+	chomp;
+	my ($seq_id, $factor, $class, $strand, $score, $pos, $siteseq) =
+	    (split)[0, 2, 3, 4, 5, 7, 9];
+	my $correct_strand = ($strand eq "+")? "-1" : "1";
+	my $site = TFBS::Site->new ( -seqname => $seqobj->display_id()."",
+				     -seqobj  => $seqobj,
+				     -strand  => $correct_strand."",
+				     -pattern => $self,
+				     -siteseq => $siteseq."",
+				     -score   => $score."",
+				     -start   => $pos,
+				     -end     => $pos + length($siteseq) -1
+				     );
+	$hitlist->add_site($site);
+    }
+
+    
+    # cleanup
+    unlink $fastafile unless $seqobj->{_fastafile};
+    unlink $pwmfile;
+    return $hitlist;
+}    
+
+
+
+sub _bsearch  {  
+
+    # this is Perl/PDL only search routine. For experimental purposes only
+
+    my ($self,%args) = @_; #the rest of @_ goes to _to_seqob;
+    my @PWMs;
+
+    # prepare the sequence
+
+    my $seqobj = $self->_to_seqobj(%args);
+    my $seqmatrix = (defined $seqobj->{_pdl_matrix}) 
+	              ? $seqobj->{_pdl_matrix}
+                      : _seq_to_pdlmatrix($seqobj);    
+    
+    # calculate threshold
+	
+    my $threshold;
+    if ($args{-threshold})  {
+	if ($args{-threshold} =~ /(.+)%/)  { 
+	    # percentage
+	    $threshold = $self->{min_score} +
+		($self->{max_score} - $self->{min_score})* $1/100;
+	}
+	else  {
+	    # absolute value
+	    $threshold = $args{-threshold};
+	}
+    }
+    else {
+	# no threshold given
+	$threshold = $self->{min_score} -1;
+    }
+
+    # do the analysis
+   
+    my $hitlist = TFBS::SiteSet->new();
+    foreach my $pwm ($self, $self->revcom())  {
+	my $TFlength = $pwm->{matrix}->getdim(0);
+	my $position_score_pdl = zeroes($seqmatrix->getdim(0) - $TFlength + 1);
+	my $position_index_pdl = sequence($seqmatrix->getdim(0) - $TFlength + 1)+1;
+
+	foreach my $i (0..($TFlength-1)) {
+	    my $columnproduct = $seqmatrix * $pwm->{matrix}->slice("$i,:");
+	    $position_score_pdl += 
+	      $columnproduct->xchg(0,1)->sumover->slice($i.":".($i-$TFlength));
+	}
+	my @hitpositions = 
+	    list $position_index_pdl->where($position_score_pdl >= $threshold);
+	my @hitscores    = 
+	    list $position_score_pdl->where($position_score_pdl >= $threshold);
+	
+	for my $i(0..$#hitpositions) {
+	    my($pos,$score) = ($hitpositions[$i], $hitscores[$i]);
+	    my $siteseq = scalar($seqobj->subseq($pos, $pos+$TFlength-1));
+	    my $site = TFBS::Site->new ( -seqname => $seqobj->display_id(),
+					 -seqobj  => $seqobj,
+					 -strand  => $pwm->{strand},
+					 -Matrix  => $pwm,
+					 -siteseq => $siteseq,
+					 -score   => $score,
+					 -start   => $pos);
+	    $hitlist->add_site($site);
+	}
+    }
+    return $hitlist;
+}
+
+
+sub _to_seqobj {
+    my ($self, %args) = @_;
+
+    my $seq;
+    if ($args{-file})  {    # not a Bio::Seq
+	return Bio::SeqIO->new(-file => $args{-file},
+			     -format => 'fasta',
+			     -moltype => 'dna')->next_seq();
+    }
+    elsif ($args{-seqstring} 
+	   or $args{-seq}) 
+    {   # I guess it's a string then
+	return Bio::SeqIO->new(-seq  => ($args{-seqstring} or $args{-seq}),
+			     -format => 'fasta',
+			     -moltype => 'dna')->next_seq();
+    }
+    elsif ($args{'-seqobj'} and ref($args{'-seqobj'}) =~ /Bio\:\:Seq/) {
+	# do nothing (maybe check later)
+	return $args{'-seqobj'};
+    }
+    #elsif (ref($format) =~ /Bio\:\:Seq/ and !defined $seq)  {
+	# if only one parameter passed and it's a Bio::Seq
+	#return $format;
+    #}
+    else  {
+	$self->throw ("Wrong parametes passed to search method: ".%args);
+    }
+
+}
+
+sub _seq_to_pdlmatrix  {
+    # called from ?search
+
+    # not OO - help function for search
+
+    my $seqobj = shift;
+    my $seqstring = uc($seqobj->seq());
+
+    my @perlarray;
+    foreach (qw(A C G T))  {
+	my $seqtobits = $seqstring;
+	eval "\$seqtobits =~ tr/$_/1/";  # curr. letter $_ to 1
+	eval "\$seqtobits =~ tr/1/0/c";  # non-1s to 0
+	push @perlarray, [split("", $seqtobits)];
+    }
+    return byte (\@perlarray);
+}
+
+
+sub DESTROY  {
+    # nothing
+}
+
+
+1;
+
+
+
+

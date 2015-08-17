@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>TFBS: Perl modules for transcription factor detection and analysis</title>
+        
+  <meta name="author" content="Boris Lenhard">
+</head>
+<body text="#000000" bgcolor="#ffffff" link="#000099" vlink="#663366" alink="#000099">
+<div> 
+  <h3>&nbsp;</h3>
+</div>
+<div align="Center"> 
+  <h4 align="left"><font face="Verdana, Arial, Helvetica, sans-serif">A figure 
+    to accompany the paper describing TFBS (Bioinformatics, in press)</font></h4>
+</div>
+<h5 align="left"><font face="Verdana, Arial, Helvetica, sans-serif"></font><font face="Verdana, Arial, Helvetica, sans-serif"><img src="matrixfigure.png" width="1032" height="456"><br>
+  </font></h5>
+<div align="Left">
+  <p><font face="Verdana, Arial, Helvetica, sans-serif" size="-1">The types of 
+    matrix patterns and part of the TFBS functionality associated with them: </font><b><font face="Verdana, Arial, Helvetica, sans-serif" size="-1">(a)</font></b><font face="Verdana, Arial, Helvetica, sans-serif" size="-1"> 
+    Position frequency matrix is represented by <font face="Courier New, Courier, mono">TFBS::Matrix::PFM</font>, 
+    and is usually derived from a set of fixed-size transcription factor binding 
+    sites <b>(b)</b> by counting the number of occurrences of each nucleotide 
+    at each position. In TFBS this is performed with <font face="Courier New, Courier, mono">TFBS::PatternGen::SimplePFM</font>, 
+    a class used to extract the pattern from a set of sequences. <b>(c)</b> An 
+    information content matrix (<font face="Courier New, Courier, mono">TFBS::Matrix::ICM 
+    object</font>) can be obtained by calling <font face="Courier New, Courier, mono">to_ICM()</font> 
+    on a <font face="Courier New, Courier, mono">TFBS::Matrix::PFM</font> object, 
+    and is used e.g. for calculating the total information content of a matrix, 
+    which is a measure of specificity of the pattern. It can also be directly 
+    visualized as a sequence logo <b>(d)</b>, which is drawn by calling the <font face="Courier New, Courier, mono">draw_logo()</font> 
+    method; <b>(e)</b> A position weight matrix can also be derived from a frequency 
+    matrix; it is the matrix preferentially used for the analysis of nucleotide 
+    sequences (<font face="Courier New, Courier, mono">search_seq()</font> method) 
+    or pairwise alignments with conservation filtering (<font face="Courier New, Courier, mono">search_aln()</font>). 
+    The result of scanning a sequence by <font face="Courier New, Courier, mono">search_seq()</font> 
+    is a <font face="Courier New, Courier, mono">TFBS::SiteSet</font> object <b>(f)</b>, 
+    an aggregate of <font face="Courier New, Courier, mono">TFBS::Site</font> 
+    objects representing the actual binding sites. The set can be analyzed as 
+    a whole, or its component sites can be manipulated individually. It can also 
+    be output e.g. as a list of sequence features in GFF format <b>(g)</b>.</font></p>
+  <p>&nbsp;</p>
+  <p><font face="Verdana, Arial, Helvetica, sans-serif"><font size="-1"> </font> 
+    </font></p>
+  </div>
+                        </body>
+                        </html>

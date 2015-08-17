@@ -1,0 +1,233 @@
+<HTML>
+<HEAD>
+<TITLE>TFBS::Matrix::ICM - class for information content matrices of nucleotide
+patterns</TITLE>
+<LINK REV="made" HREF="mailto:bhcompile@stripples.devel.redhat.com">
+</HEAD>
+
+<BODY>
+
+<A NAME="__index__"></A>
+<!-- INDEX BEGIN -->
+
+<UL>
+
+	<LI><A HREF="#name">NAME</A></LI>
+	<LI><A HREF="#synopsis">SYNOPSIS</A></LI>
+	<LI><A HREF="#description">DESCRIPTION</A></LI>
+	<LI><A HREF="#feedback">FEEDBACK</A></LI>
+	<LI><A HREF="#author  boris lenhard">AUTHOR - Boris Lenhard</A></LI>
+	<LI><A HREF="#appendix">APPENDIX</A></LI>
+	<UL>
+
+		<LI><A HREF="#new">new</A></LI>
+		<LI><A HREF="#to_pwm">to_PWM</A></LI>
+		<LI><A HREF="#draw_logo">draw_logo</A></LI>
+		<LI><A HREF="#name">name</A></LI>
+		<LI><A HREF="#id">ID</A></LI>
+		<LI><A HREF="#class">class</A></LI>
+		<LI><A HREF="#matrix">matrix</A></LI>
+		<LI><A HREF="#length">length</A></LI>
+		<LI><A HREF="#revcom">revcom</A></LI>
+		<LI><A HREF="#rawprint">rawprint</A></LI>
+		<LI><A HREF="#prettyprint">prettyprint</A></LI>
+	</UL>
+
+</UL>
+<!-- INDEX END -->
+
+<HR>
+<P>
+<H1><A NAME="name">NAME</A></H1>
+<P>TFBS::Matrix::ICM - class for information content matrices of nucleotide
+patterns</P>
+<P>
+<HR>
+<H1><A NAME="synopsis">SYNOPSIS</A></H1>
+<UL>
+<LI><STRONG><A NAME="item_creating_a_TFBS%3A%3AMatrix%3A%3AICM_object_manual">creating a TFBS::Matrix::ICM object manually:</A></STRONG><BR>
+
+<PRE>
+    my $matrixref = [ [ 0.00, 0.30, 0.00, 0.00, 0.24, 0.00 ],
+                      [ 0.00, 0.00, 0.00, 1.45, 0.42, 0.00 ],
+                      [ 0.00, 0.89, 2.00, 0.00, 0.00, 0.00 ],
+                      [ 0.00, 0.00, 0.00, 0.13, 0.06, 2.00 ]
+                    ];  
+    my $icm = TFBS::Matrix::ICM-&gt;new(-matrix =&gt; $matrixref,
+                                     -name   =&gt; &quot;MyProfile&quot;,
+                                     -ID     =&gt; &quot;M0001&quot;
+                                    );
+</PRE>
+<PRE>
+
+    # or</PRE>
+<PRE>
+
+    my $matrixstring = &lt;&lt;ENDMATRIX
+    2.00   0.30   0.00   0.00   0.24   0.00
+    0.00   0.00   0.00   1.45   0.42   0.00
+    0.00   0.89   2.00   0.00   0.00   0.00
+    0.00   0.00   0.00   0.13   0.06   2.00
+    ENDMATRIX
+    ;
+    my $icm = TFBS::Matrix::ICM-&gt;new(-matrixstring =&gt; $matrixstring,
+                                     -name         =&gt; &quot;MyProfile&quot;,
+                                     -ID           =&gt; &quot;M0001&quot;
+                                    );</PRE>
+<LI><STRONG><A NAME="item_retrieving_a_TFBS%3A%3AMatix%3A%3AICM_object_from_">retrieving a TFBS::Matix::ICM object from a database:</A></STRONG><BR>
+
+(See documentation of individual TFBS::DB::* modules to learn
+how to connect to different types of pattern databases and retrieve
+TFBS::Matrix::* objects from them.)
+
+<PRE>
+
+    my $db_obj = TFBS::DB::JASPAR2-&gt;new
+                    (-connect =&gt; [&quot;dbi:mysql:JASPAR2:myhost&quot;,
+                                  &quot;myusername&quot;, &quot;mypassword&quot;]);
+    my $pfm = $db_obj-&gt;get_Matrix_by_ID(&quot;M0001&quot;, &quot;ICM&quot;);
+    # or
+    my $pfm = $db_obj-&gt;get_Matrix_by_name(&quot;MyProfile&quot;, &quot;ICM&quot;);</PRE>
+<P></P>
+<LI><STRONG><A NAME="item_retrieving_list_of_individual_TFBS%3A%3AMatrix%3A%">retrieving list of individual TFBS::Matrix::ICM objects
+from a TFBS::MatrixSet object</A></STRONG><BR>
+
+(see decumentation of TFBS::MatrixSet to learn how to create 
+objects for storage and manipulation of multiple matrices)
+<PRE>
+    my @icm_list = $matrixset-&gt;all_patterns(-sort_by=&gt;&quot;name&quot;);</PRE>
+<P>* drawing a sequence logo
+</P>
+<PRE>
+
+    $icm-&gt;draw_logo(-file=&gt;&quot;logo.png&quot;, 
+                    -full_scale =&gt;2.25,
+                    -xsize=&gt;500,
+                    -ysize =&gt;250, 
+                    -graph_title=&gt;&quot;C/EBPalpha binding site logo&quot;, 
+                    -x_title=&gt;&quot;position&quot;, 
+                    -y_title=&gt;&quot;bits&quot;);</PRE>
+<P></P></UL>
+<P>
+<HR>
+<H1><A NAME="description">DESCRIPTION</A></H1>
+<P>TFBS::Matrix::ICM is a class whose instances are objects representing
+position weight matrices (PFMs). An ICM is normally calculated from a
+raw position frequency matrix (see <A HREF="/TFBS/Matrix/PFM.html">the TFBS::Matrix::PFM manpage</A>
+for the explanation of position frequency matrices). For example, given
+the following position frequency matrix,</P>
+<PRE>
+    A:[ 12     3     0     0     4     0  ]
+    C:[  0     0     0    11     7     0  ]
+    G:[  0     9    12     0     0     0  ]
+    T:[  0     0     0     1     1    12  ]</PRE>
+<P>the standard computational procedure is applied to convert it into the
+following information content matrix:</P>
+<PRE>
+    A:[2.00  0.30  0.00  0.00  0.24  0.00]
+    C:[0.00  0.00  0.00  1.45  0.42  0.00]
+    G:[0.00  0.89  2.00  0.00  0.00  0.00]
+    T:[0.00  0.00  0.00  0.13  0.06  2.00]</PRE>
+<P>which contains the ``weights'' associated with the occurence of each
+nucleotide at the given position in a pattern.</P>
+<P>A TFBS::Matrix::PWM object is equipped with methods to search nucleotide
+sequences and pairwise alignments of nucleotide sequences with the
+pattern they represent, and return a set of sites in nucleotide
+sequence (a TFBS::SiteSet object for single sequence search, and a
+TFBS::SitePairSet for the alignment search).</P>
+<P>
+<HR>
+<H1><A NAME="feedback">FEEDBACK</A></H1>
+<P>Please send bug reports and other comments to the author.</P>
+<P>
+<HR>
+<H1><A NAME="author  boris lenhard">AUTHOR - Boris Lenhard</A></H1>
+<P>Boris Lenhard &lt;<A HREF="mailto:Boris.Lenhard@cgb.ki.se">Boris.Lenhard@cgb.ki.se</A>&gt;</P>
+<P>
+<HR>
+<H1><A NAME="appendix">APPENDIX</A></H1>
+<P>The rest of the documentation details each of the object
+methods. Internal methods are preceded with an underscore.</P>
+<P>
+<H2><A NAME="new">new</A></H2>
+<PRE>
+ Title   : new
+ Usage   : my $icm = TFBS::Matrix::ICM-&gt;new(%args)
+ Function: constructor for the TFBS::Matrix::ICM object
+ Returns : a new TFBS::Matrix::ICM object
+ Args    : # you must specify either one of the following three:
+</PRE>
+<PRE>
+
+           -matrix,      # reference to an array of arrays of integers
+              #or
+           -matrixstring,# a string containing four lines
+                         # of tab- or space-delimited integers
+              #or
+           -matrixfile,  # the name of a file containing four lines
+                         # of tab- or space-delimited integers
+           #######</PRE>
+<PRE>
+
+           -name,        # string, OPTIONAL
+           -ID,          # string, OPTIONAL
+           -class,       # string, OPTIONAL
+           -tags         # an array reference, OPTIONAL</PRE>
+<P>
+<H2><A NAME="to_pwm">to_PWM</A></H2>
+<PRE>
+ Title   : to_PWM
+ Usage   : my $pwm = $icm-&gt;to_PWM()
+ Function: converts an  information content matrix (a TFBS::Matrix::ICM object)
+           to position weight matrix. At present it assumes uniform
+           background distribution of nucleotide frequencies.
+ Returns : a new TFBS::Matrix::PWM object
+ Args    : none; in the future releases, it should be able to accept
+           a user defined background probability of the four
+           nucleotides</PRE>
+<P>
+<H2><A NAME="draw_logo">draw_logo</A></H2>
+<PRE>
+ Title   : draw_logo
+ Usage   : my $gdImageObj = $icm-&gt;draw_logo(%args)
+ Function: Draws a &quot;sequence logo&quot;, a graphical representation
+           of a possibly degenerate fixed-width nucleotide
+           sequence pattern, from the information content matrix
+ Returns : a GD::Image object;
+           if you only need the image file you can ignore it
+ Args    : -file,       # the name of the output PNG image file
+                        # OPTIONAL: default none
+           -xsize       # width of the image in pixels
+                        # OPTIONAL: default 600
+           -ysize       # height of the image in pixels
+                        # OPTIONAL: default 5/8 of -x_size
+           -margin      # size of image margins in pixels
+                        # OPTIONAL: default 15% of -y_size
+           -full_scale  # the maximum value on the y-axis, in bits
+                        # OPTIONAL: default 2.25
+           -graph_title,# the graph title
+                        # OPTIONAL: default none
+           -x_title,    # x-axis title; OPTIONAL: default none
+           -y_title     # y-axis title; OPTIONAL: default none</PRE>
+<P>
+<H2><A NAME="name">name</A></H2>
+<P>
+<H2><A NAME="id">ID</A></H2>
+<P>
+<H2><A NAME="class">class</A></H2>
+<P>
+<H2><A NAME="matrix">matrix</A></H2>
+<P>
+<H2><A NAME="length">length</A></H2>
+<P>
+<H2><A NAME="revcom">revcom</A></H2>
+<P>
+<H2><A NAME="rawprint">rawprint</A></H2>
+<P>
+<H2><A NAME="prettyprint">prettyprint</A></H2>
+<P>The above methods are common to all matrix objects. Please consult
+<A HREF="/TFBS/Matrix.html">the TFBS::Matrix manpage</A> to find out how to use them.</P>
+
+</BODY>
+
+</HTML>

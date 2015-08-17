@@ -1,0 +1,438 @@
+package TFBS::DB::JASPAR2;
+use vars qw(@ISA $AUTOLOAD);
+
+use TFBS::Matrix::PWM;
+use TFBS::Matrix::PFM;
+use TFBS::Matrix;
+use TFBS::MatrixSet;
+use Bio::Root::RootI;
+use DBI;
+
+use strict;
+
+@ISA = qw(TFBS::DB Bio::Root::RootI);
+
+#########################################################################
+# CONSTANTS
+#########################################################################
+
+use constant DEFAULT_CONNECTSTRING => "dbi:mysql:JASPAR_DEMO"; # on localhost
+use constant DEFAULT_USER          => "";
+use constant DEFAULT_PASSWORD      => "";
+
+sub new  {
+    my ($caller, %args)  = @_;
+    my $class = ref $caller || $caller;
+    my $self = bless {}, $class;
+
+    my ($connectstring, $user, $password);
+ 
+    if ($args{'-connect'} and (ref($args{'-connect'}) eq "ARRAY"))  {
+	($connectstring, $user, $password) = @{$args{'-connect'}};
+    }
+    else  {
+	($connectstring, $user, $password) = 
+	    (DEFAULT_CONNECTSTRING, DEFAULT_USER, DEFAULT_PASSWORD);
+    }
+
+    $self->dbh( DBI->connect($connectstring, $user, $password) );
+    
+    return $self;
+}
+
+sub connect  {
+    # a synonim for new
+    my ($caller, %args) = @_;
+    $caller->new(%args);
+}
+
+sub create {
+    my ($caller, %args) = @_;
+    if ($args{-connect} 
+	and ref($args{-connect}) eq "ARRAY"
+	and $args{-connect}->[0] =~ /dbi:mysql:(\w+)(.*)/)  
+    {
+	# connect to the server;
+	my $dbh=DBI->connect("dbi:mysql:mysql".$2,
+			     $args{-connect}->[1],$args{-connect}->[2])
+	    or die("Error connecting to the database"); 
+
+	# create database and open it
+	$dbh->do("create database $1") 
+	    or die("Error creating database.");
+	$dbh->do("use $1"); 
+	
+	# create tables
+	_create_tables($dbh);
+
+	$dbh->disconnect;
+	# run "new" with new database
+
+	return new($caller, %args);
+    }
+    else  {
+	die("Missing or malformed connect string for ".
+		     "TFBS::DB::JASPAR2 connection."); 
+    }
+}
+
+sub dbh  {
+    my ($self, $dbh) = @_;
+    $self->{'dbh'} = $dbh if $dbh;
+    return $self->{'dbh'};
+}
+
+sub get_Matrix_by_ID {
+
+    my ($self, $ID, $mt) = @_;
+    $mt = (uc($mt) or "PWM");
+
+    unless (defined $ID) {
+	$self->throw("No ID passed to get_Matrix_by_ID");
+    }
+    my $matrixobj;
+    {
+	no strict 'refs';
+	my $ucmt = uc $mt;
+	my $matrixstring = $self->_get_matrixstring($ID, $mt);
+	
+	eval("\$matrixobj= TFBS::Matrix::$ucmt->new".' 
+	    ( -ID    => $ID,
+	      -name  => $self->_get_name($ID)."",
+	      -class => $self->_get_class($ID)."",
+              -tags  => { "medline" => $self->_get_medline($ID)."",
+		          "species" => $self->_get_species($ID)."",
+		          "sysgroup"=> $self->_get_sysgroup($ID)."",
+		          "type"    => $self->_get_type($ID)."",
+		          "seqdb"   => $self->_get_seqdb($ID)."",
+		          "acc"     => $self->_get_acc($ID)."",
+		          "total_ic"=> $self->_get_total_ic($ID).""
+                        },
+	      -matrix=> $matrixstring   # FIXME - temporary
+	      );');
+	if ($@) {$self->throw($@); }
+    }
+
+    return $matrixobj;
+}
+
+sub get_Matrix_by_name {
+    my ($self, $name, $mt) = @_;
+    unless(defined $name) { 
+	$self->throw("No name passed to get_Matrix_by_name."); }
+
+    my @IDlist = $self->_get_IDlist_by_query(-names=>[$name]);
+    my $ID= ($IDlist[0] 
+	    or $self->warn("No matrix with name $name found."));
+    if ((my $L= scalar @IDlist) > 1)  {
+	$self->warn("There are $L matrices with name '$name'");
+    }
+    return $self->get_Matrix_by_ID($ID, $mt);
+}
+
+
+sub _get_IDlist_by_query  {
+
+    # called by get_matrixset
+    my ($self, %args) = @_;
+    my ($TABLES, %arrayref);
+     $args{-names}     and  $arrayref{name}   = $args{-names}    ;
+    $args{-classes}   and  $arrayref{class}  = $args{-classes}  ;
+    $args{-sysgroups} and  $arrayref{phylum} = $args{-sysgroups};
+    $args{-IDs}       and  $arrayref{ID}     = $args{-IDs};
+    my @andconditions;
+    if ($args{-species})  {
+	$TABLES = ' matrix_info, matrix_species ';
+	push @andconditions, 
+	'matrix_info.ID = matrix_species.ID',
+	" (".
+	    join(" OR ", 
+	         (map {"matrix_species.species=".
+			   $self->dbh->quote($_)
+			   } 
+		  @{$args{-species}}
+		  )).
+		      ") ";
+    }
+    else  {
+	$TABLES = 'matrix_info ';
+    }
+    
+    foreach my $key (keys %arrayref)  {
+	push @andconditions,
+	"(".
+	join(" OR ",
+	     (map {"matrix_info.$key=".
+		       $self->dbh->quote($_)
+		  } 
+	      @{$arrayref{$key}}
+	     )).
+	")";
+    }
+
+    my $WHERE = ((scalar @andconditions) == 0) ? "" : " WHERE ";
+
+    my $query = 
+	    "SELECT DISTINCTROW matrix_info.id FROM $TABLES $WHERE".
+	    join(" AND ", @andconditions);
+    
+    my $sth = $self->dbh->prepare($query);
+    $sth->execute() or $self->throw("Query failed:\n$query\n");
+    
+    # collect IDs and return
+
+    my @IDlist = ();
+    while (my ($id) = $sth->fetchrow_array())  {
+	push @IDlist, $id;
+    }
+
+    $sth->finish;
+    return @IDlist;
+}
+
+
+sub get_MatrixSet  {
+    my ($self, %args) = @_;
+    my @IDlist = $self->_get_IDlist_by_query(%args);
+    my $mt = ($args{-matrixtype} or "PWM");
+    my $matrixset = TFBS::MatrixSet->new();
+    foreach (@IDlist)  {
+	print STDERR "MIN_IC ".$args{-min_ic}." ".
+	    $self->_get_total_ic($_)."\n";
+	next if ($args{-min_ic} 
+		 and $self->_get_total_ic($_) < $args{-min_ic});
+	$matrixset->add_Matrix($self->get_Matrix_by_ID($_, $mt));
+    }
+    return $matrixset;
+}
+
+
+sub store_Matrix {
+    my ($self, @PFMs) = @_;
+    foreach my $pfm (@PFMs)  {
+	$self->_store_matrix_data($pfm);
+	$self->_store_matrix_info($pfm);
+	$self->_store_matrix_seqs($pfm);
+	$self->_store_matrix_species($pfm);
+    }
+}
+
+sub store_MatrixSet {
+
+}
+
+sub _get_matrixstring  {
+    my ($self, $ID, $mt) = @_;
+    my %dbname = (PWM => 'pwm', PFM => 'raw', ICM => 'info');
+    unless (defined $dbname{$mt})  {
+	$self->throw("Unsupported matrix type: ".$mt);
+    }
+    my $sth;
+    my $qID = $self->dbh->quote($ID);
+    my $matrixstring = "";
+    foreach my $base (qw(A C G T)) {
+	$sth=$self->dbh->prepare
+	    ("SELECT $dbname{$mt} FROM matrix_data 
+              WHERE ID=$qID AND base='$base' ORDER BY position");
+	$sth->execute;
+	$matrixstring .=
+	    join (" ", (map {$_->[0]} @{$sth->fetchall_arrayref()}))."\n";
+    }
+    $sth->finish;
+    return undef if $matrixstring eq "\n"x4;
+
+    return $matrixstring;
+}
+
+sub AUTOLOAD  {
+    my ($self, $ID) = @_;
+    no strict 'refs';
+    my $TABLE;
+    my %dbname_of = (ID       => 'ID',
+		     name     => 'name',
+		     class    => 'class', 
+		     species  => 'species', 
+		     sysgroup => 'phylum',
+		     type     => 'type',
+		     seqdb    => 'seq_db',
+		     acc      => 'seq',
+		     total_ic => 'information',
+		     medline  => 'medline'
+		     ); 
+    my ($where_column, $where_value);
+    if ($AUTOLOAD =~ /.*::_get_(\w+)_list/) {
+	defined $dbname_of{$1} or $self->throw("$AUTOLOAD: no such method!");
+	($where_column, $where_value) = (1,1);
+	
+    }
+    elsif ($AUTOLOAD =~ /.*::_get_(\w+)/) {
+	defined $dbname_of{$1} or $self->throw("$AUTOLOAD: no such method!");
+	defined $ID or $self->throw("No ID provided for $AUTOLOAD");
+	($where_column, $where_value) = ('ID', $ID);
+    }
+    else  {
+	$self->throw("$AUTOLOAD: no such method!");
+    }
+    defined $dbname_of{$1} or $self->throw("$AUTOLOAD: no such method!");
+    if    ($1 eq 'species')  { $TABLE = 'matrix_species'; }
+    elsif ($1 eq 'seqdb' or $1 eq 'acc') { $TABLE = 'matrix_seqs', }
+    else  { $TABLE = 'matrix_info' ; }
+    my @results = $self->_simple_query ($TABLE, $dbname_of{$1}, 
+					$where_column => $where_value);
+    wantarray ? return @results : return $results[0];
+}
+
+sub _simple_query  {
+    my ($self, $table, $retr_field, $search_field, $search_value) = @_;
+    my $q_value = $self->dbh->quote($search_value);
+    my $sth = $self->dbh->prepare
+	("SELECT DISTINCT $retr_field from $table WHERE $search_field = $q_value and $retr_field <> \"\" ORDER BY $retr_field");
+    $sth->execute;
+    return (map {$_->[0]} @{$sth->fetchall_arrayref});
+}
+
+sub _store_matrix_data  {
+    my ($self, $pfm, $ACTION) = @_;
+    my @base = qw(A C G T);
+    my $pfmatrix = $pfm->matrix();
+    my $icmatrix = $pfm->to_ICM()->matrix();
+    my $pwmatrix = $pfm->to_PWM->matrix();
+    my $sth = $self->dbh->prepare 
+	(q! INSERT INTO matrix_data VALUES(?,?,?,?,?,?,?,?) !);
+				 
+    for my $i (0..3)  {
+	for my $j (0..($pfm->length-1)) {
+	    $sth->execute( $pfm->ID,
+			   $pfm->ID.".".$base[$i].".".($j+1),
+			   $base[$i],
+			   $j+1,
+			   $pfmatrix->[$i][$j],
+			   $icmatrix->[$i][$j],
+			   $pwmatrix->[$i][$j],
+			   $pfmatrix->[$i][$j] / $pfm->column_sum())
+		or $self->throw("Error executing query.");
+	}
+    }
+    
+}
+
+sub _store_matrix_info  {
+    my ($self, $pfm, $ACTION) = @_;
+    my $sth = $self->dbh->prepare 
+	(q! INSERT INTO matrix_info
+	    (ID, name, type, class, phylum, width, IC, sites) 
+	    VALUES(?,?,?,?,?,?,?,?) !);
+    $sth->execute($pfm->ID,
+		  ($pfm->name or $pfm->ID),
+		  ($pfm->{'tags'}->{'type'} or ""),
+		  ($pfm->class() or undef),
+		  ($pfm->{'tags'}->{'sysgroup'} or undef),
+		  $pfm->length(),
+		  $pfm->to_ICM->total_ic(),
+		  $pfm->column_sum()
+		  )
+	or $self->throw("Error executing query");
+}
+
+sub _store_matrix_seqs  {
+    my ($self, $pfm, $ACTION) = @_;
+    return unless ($pfm->{'tags'}->{'seqdb'} or $pfm->{'tags'}->{'acc'});
+    my $sth = $self->dbh->prepare
+	(q! INSERT INTO matrix_seqs
+	    (ID, seq_db, seq) 
+	    VALUES(?,?,?) !);
+    $sth->execute($pfm->ID,
+		  ($pfm->{'tags'}->{'seqdb'} or ""),
+		  ($pfm->{'tags'}->{'acc'} or "")
+		 )
+	or $self->throw("Error executing query");
+    
+}
+
+sub _store_matrix_species  {
+    my ($self, $pfm, $ACTION) = @_;
+    return unless $pfm->{'tags'}->{'species'};
+    my $sp = $pfm->{'tags'}->{'species'};
+    my @splist = (ref($sp) ? @$sp : $sp);
+    foreach my $species (@splist)  {
+	my $sth = $self->dbh->prepare
+	    (q! INSERT INTO matrix_species
+	     (ID, species) 
+	     VALUES(?,?) !);
+	$sth->execute($pfm->ID,
+		      $species
+		      )
+	    or $self->throw("Error executing query");
+    }
+}
+
+sub _create_tables {
+    # utility function
+    my $dbh = shift;
+    my @queries = 
+	(
+       q!
+       CREATE TABLE matrix_data (
+         ID varchar(16) DEFAULT '' NOT NULL,
+         pos_ID varchar(24) DEFAULT '' NOT NULL,
+         base enum('A','C','G','T'),
+         position tinyint(3) unsigned,
+         raw int(3) unsigned,
+         info float(7,5) unsigned,
+         pwm float(7,5) unsigned,
+         normalized float(7,5) unsigned,
+         PRIMARY KEY (pos_ID),
+         KEY id_index (ID)
+       )
+       !,
+
+       q!
+       CREATE TABLE matrix_info (
+         ID varchar(16) DEFAULT '' NOT NULL,
+         name varchar(15) DEFAULT '' NOT NULL,
+         type varchar(8) DEFAULT '' NOT NULL,
+         class varchar(20),
+         phylum enum('vertebrate','insect','plant'),
+         litt varchar(40),
+         medline int(12),
+         information varchar(20),
+         iterations varchar(6),
+         width int(2),
+         consensus varchar(25),
+         IC float(6,4),
+         sites int(3) unsigned,
+         PRIMARY KEY (ID)
+       )
+       !,
+
+       q!
+       CREATE TABLE matrix_seqs (
+         ID varchar(16) DEFAULT '' NOT NULL,
+         internal varchar(8) DEFAULT '' NOT NULL,
+         seq_db varchar(15) NOT NULL,
+         seq varchar(10) NOT NULL,
+         PRIMARY KEY (ID, seq_db, seq)
+       )
+       !,
+
+       q!
+       CREATE TABLE matrix_species (
+         ID varchar(16) DEFAULT '' NOT NULL,
+         internal varchar(8) DEFAULT '' NOT NULL,
+         species varchar(24) NOT NULL,
+         PRIMARY KEY (ID, species)
+       )
+	 !);
+    foreach my $query (@queries)  {
+	$dbh->do($query) 
+	    or die("Error executing the query: $query\n");
+    }
+}
+
+
+sub DESTROY  {
+    $_[0]->dbh->disconnect();
+}
+
+
+1;

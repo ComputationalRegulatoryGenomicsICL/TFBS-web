@@ -1,0 +1,149 @@
+<HTML>
+<HEAD>
+<TITLE>TFBS::SitePairSet - a set of TFBS::SitePair objects</TITLE>
+<LINK REV="made" HREF="mailto:bhcompile@stripples.devel.redhat.com">
+</HEAD>
+
+<BODY>
+
+<A NAME="__index__"></A>
+<!-- INDEX BEGIN -->
+
+<UL>
+
+	<LI><A HREF="#name">NAME</A></LI>
+	<LI><A HREF="#synopsis">SYNOPSIS</A></LI>
+	<LI><A HREF="#description">DESCRIPTION</A></LI>
+	<LI><A HREF="#feedback">FEEDBACK</A></LI>
+	<LI><A HREF="#author  boris lenhard">AUTHOR - Boris Lenhard</A></LI>
+	<LI><A HREF="#appendix">APPENDIX</A></LI>
+	<UL>
+
+		<LI><A HREF="#size">size</A></LI>
+		<LI><A HREF="#add_site_pair">add_site_pair</A></LI>
+		<LI><A HREF="#add_site_pair_set">add_site_pair_set</A></LI>
+		<LI><A HREF="#iterator">Iterator</A></LI>
+		<LI><A HREF="#set1">set1</A></LI>
+		<LI><A HREF="#set2">set2</A></LI>
+		<LI><A HREF="#gff">GFF</A></LI>
+	</UL>
+
+</UL>
+<!-- INDEX END -->
+
+<HR>
+<P>
+<H1><A NAME="name">NAME</A></H1>
+<P>TFBS::SitePairSet - a set of TFBS::SitePair objects</P>
+<P>
+<HR>
+<H1><A NAME="synopsis">SYNOPSIS</A></H1>
+<PRE>
+    my $site_pair_set = TFBS::SitePairSet-&gt;new(@list_of_site_pair_objects);</PRE>
+<PRE>
+    # add a TFBS::SitePair object to set:
+</PRE>
+<PRE>
+
+    $site_pair_set-&gt;add_site_pair($site_pair_obj);</PRE>
+<PRE>
+    # append another TFBS::SitePairSet contents:</PRE>
+<PRE>
+    $site_pair_set-&gt;add_site_pair_set($site_pair_obj);</PRE>
+<PRE>
+    # create an iterator:</PRE>
+<PRE>
+    my $it = $site_pair_set-&gt;Iterator(-sort_by =&gt; 'start');</PRE>
+<P>
+<HR>
+<H1><A NAME="description">DESCRIPTION</A></H1>
+<P>TFBS::SitePairSet is an aggregate class that contains a collection
+of TFBS::SitePair objects. It can be created anew and filled with 
+TFBS::Site::Pair object. It is also returned by <CODE>search_aln()</CODE> method call 
+of TFBS::PatternI subclasses (e.g. TFBS::Matrix::PWM).</P>
+<P>
+<HR>
+<H1><A NAME="feedback">FEEDBACK</A></H1>
+<P>Please send bug reports and other comments to the author.</P>
+<P>
+<HR>
+<H1><A NAME="author  boris lenhard">AUTHOR - Boris Lenhard</A></H1>
+<P>Boris Lenhard &lt;<A HREF="mailto:Boris.Lenhard@cgb.ki.se">Boris.Lenhard@cgb.ki.se</A>&gt;</P>
+<P>
+<HR>
+<H1><A NAME="appendix">APPENDIX</A></H1>
+<P>The rest of the documentation details each of the object
+methods. Internal methods are preceded with an underscore.</P>
+<P>
+<H2><A NAME="size">size</A></H2>
+<PRE>
+ Title   : size
+ Usage   : my $size = $sitepairset-&gt;size()
+ Function: returns a number of TFBS::SitePair objects contained in the set
+ Returns : a scalar (integer) 
+ Args    : none</PRE>
+<P>
+<H2><A NAME="add_site_pair">add_site_pair</A></H2>
+<PRE>
+ Title   : add_site_pair
+ Usage   : $sitepairset-&gt;add_site_pair($site_pair_object)
+           $sitepairset-&gt;add_site_pair(@list_of_site_pair_objects)
+ Function: adds TFBS::SitePair objects to an existing TFBS::SitePairSet object
+ Returns : $sitepairset object (usually ignored)
+ Args    : A list of TFBS::SitePair objects to add</PRE>
+<P>
+<H2><A NAME="add_site_pair_set">add_site_pair_set</A></H2>
+<PRE>
+ Title   : add_site_pair_set
+ Usage   : $sitepairset-&gt;add_site_pair_set($site_pair_set_object)
+           $sitepairset-&gt;add_site_pair(@list_of_site_pair_set_objects)
+ Function: adds the contents of other TFBS::SitePairSet objects 
+           to an existing TFBS::SitePairSet object
+ Returns : $sitepairset object (usually ignored)
+ Args    : A list of TFBS::SitePairSet objects whose contents should be 
+           added to $sitepairset</PRE>
+<P>
+<H2><A NAME="iterator">Iterator</A></H2>
+<PRE>
+  Title   : Iterator
+  Usage   : my $it = $sitepairset-&gt;Iterator(-sort_by=&gt;'start');
+            while (my $site_pair = $it-&gt;next()) { #... 
+  Function: Returns an iterator object, used to iterate thorugh elements 
+            (TFBS::SitePair objects)
+  Returns : a TFBS::_Iterator object
+  Args    : -sort_by # optional - currently it accepts 
+                    #   (default sort order in parenthetse)
+                    #    'name' (pattern name, alphabetically)
+                    #    'ID' (pattern/matrix ID, alphabetically)
+                    #    'start' (site start in sequence, 
+                    #             numerically,increasing order)
+                    #    'end' (site end in sequence, 
+                    #           numerically, increasing order)
+                    #    'score' (1st site in pair,
+                    #             numerically, decreasing order)
+            -reverse # optional - reverses the default sorting order if true</PRE>
+<P>
+<H2><A NAME="set1">set1</A></H2>
+<P>
+<H2><A NAME="set2">set2</A></H2>
+<PRE>
+  Title   : set1
+            set2
+  Usage   : my $siteset1 = $sitepairset-&gt;set1();
+          : my $siteset2 = $sitepairset-&gt;set2()
+  Function: Returns individual TFBS::SiteSet objects, from the site set pair
+  Returns : A TFBS::SiteSet object
+  Args    : none</PRE>
+<P>
+<H2><A NAME="gff">GFF</A></H2>
+<PRE>
+ Title   : GFF
+ Usage   : print $site-&gt;GFF();
+         : print $site-&gt;GFF($gff_formatter)
+ Function: returns a &quot;standard&quot; multiline GFF string 
+ Returns : a string (multiline, newline terminated)
+ Args    : a $gff_formatter function reference (optional)</PRE>
+
+</BODY>
+
+</HTML>

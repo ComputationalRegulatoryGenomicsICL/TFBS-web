@@ -1,0 +1,79 @@
+<HTML>
+<HEAD>
+<TITLE>TFBS::Matrix::Set - an agregate class representing a set of matrix patterns, containing methods for manipulating the set as a whole</TITLE>
+<LINK REV="made" HREF="mailto:bhcompile@stripples.devel.redhat.com">
+</HEAD>
+
+<BODY>
+
+<A NAME="__index__"></A>
+<!-- INDEX BEGIN -->
+
+<UL>
+
+	<LI><A HREF="#name">NAME</A></LI>
+	<LI><A HREF="#synopsis">SYNOPSIS</A></LI>
+	<LI><A HREF="#description">DESCRIPTION</A></LI>
+	<LI><A HREF="#feedback">FEEDBACK</A></LI>
+	<LI><A HREF="#author  boris lenhard">AUTHOR - Boris Lenhard</A></LI>
+	<LI><A HREF="#appendix">APPENDIX</A></LI>
+	<UL>
+
+		<LI><A HREF="#new">new</A></LI>
+	</UL>
+
+</UL>
+<!-- INDEX END -->
+
+<HR>
+<P>
+<H1><A NAME="name">NAME</A></H1>
+<P>TFBS::Matrix::Set - an agregate class representing a set of matrix patterns, containing methods for manipulating the set as a whole</P>
+<P>
+<HR>
+<H1><A NAME="synopsis">SYNOPSIS</A></H1>
+<PRE>
+    # creation of a TFBS::MatrixSet object
+    # let @list_of_matrix_objects be a list of TFBS::Matrix::* objects
+</PRE>
+<PRE>
+
+    ###################################
+    # Create a TFBS::MatrixSet object:</PRE>
+<PRE>
+
+    my $matrixset = TFBS::MatrixSet-&gt;new(); # creates an empty set
+    $matrixset-&gt;add_Matrix(@list_of_matrix_objects); #add matrix objects to set
+    $matrixset-&gt;add_Matrix($matrixobj); # adds a single matrix object to set</PRE>
+<PRE>
+    # or, same as above:
+</PRE>
+<PRE>
+
+    my $matrixset = TFBS::MatrixSet-&gt;new(@list_of_matrix_objects, $matrixobj);</PRE>
+<PRE>
+    ###################################
+    #</PRE>
+<P>
+<HR>
+<H1><A NAME="description">DESCRIPTION</A></H1>
+<P>TFBS::MatrixSet is an aggregate class storing a set of TFBS::Matrix::* subclass objects, and providing methods form manipulating those sets as a whole. TFBS::MatrixSet objects are created &lt;I&gt;de novo&lt;I&gt; or returned by some database (TFBS::DB::*) retrieval methods.</P>
+<P>
+<HR>
+<H1><A NAME="feedback">FEEDBACK</A></H1>
+<P>Please send bug reports and other comments to the author.</P>
+<P>
+<HR>
+<H1><A NAME="author  boris lenhard">AUTHOR - Boris Lenhard</A></H1>
+<P>Boris Lenhard &lt;<A HREF="mailto:Boris.Lenhard@cgb.ki.se">Boris.Lenhard@cgb.ki.se</A>&gt;</P>
+<P>
+<HR>
+<H1><A NAME="appendix">APPENDIX</A></H1>
+<P>The rest of the documentation details each of the object
+methods. Internal methods are preceded with an underscore.</P>
+<P>
+<H2><A NAME="new">new</A></H2>
+
+</BODY>
+
+</HTML>

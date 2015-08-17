@@ -1,0 +1,256 @@
+<HTML>
+<HEAD>
+<TITLE>TFBS::Matrix::PWM - class for position weight matrices of nucleotide
+patterns</TITLE>
+<LINK REV="made" HREF="mailto:prospector@porky.devel.redhat.com">
+</HEAD>
+
+<BODY>
+
+<A NAME="__index__"></A>
+<!-- INDEX BEGIN -->
+
+<UL>
+
+	<LI><A HREF="#name">NAME</A></LI>
+	<LI><A HREF="#synopsis">SYNOPSIS</A></LI>
+	<LI><A HREF="#description">DESCRIPTION</A></LI>
+	<LI><A HREF="#feedback">FEEDBACK</A></LI>
+	<LI><A HREF="#author  boris lenhard">AUTHOR - Boris Lenhard</A></LI>
+	<LI><A HREF="#appendix">APPENDIX</A></LI>
+	<UL>
+
+		<LI><A HREF="#new">new</A></LI>
+		<LI><A HREF="#search_seq">search_seq</A></LI>
+		<LI><A HREF="#search_aln">search_aln</A></LI>
+		<LI><A HREF="#name">name</A></LI>
+		<LI><A HREF="#id">ID</A></LI>
+		<LI><A HREF="#class">class</A></LI>
+		<LI><A HREF="#matrix">matrix</A></LI>
+		<LI><A HREF="#length">length</A></LI>
+		<LI><A HREF="#revcom">revcom</A></LI>
+		<LI><A HREF="#rawprint">rawprint</A></LI>
+		<LI><A HREF="#prettyprint">prettyprint</A></LI>
+	</UL>
+
+</UL>
+<!-- INDEX END -->
+
+<HR>
+<P>
+<H1><A NAME="name">NAME</A></H1>
+<P>TFBS::Matrix::PWM - class for position weight matrices of nucleotide
+patterns</P>
+<P>
+<HR>
+<H1><A NAME="synopsis">SYNOPSIS</A></H1>
+<UL>
+<LI><STRONG><A NAME="item_creating_a_TFBS%3A%3AMatrix%3A%3APWM_object_manual">creating a TFBS::Matrix::PWM object manually:</A></STRONG><BR>
+
+<PRE>
+    my $matrixref = [ [ 0.61, -3.16,  1.83, -3.16,  1.21, -0.06],
+                      [-0.15, -2.57, -3.16, -3.16, -2.57, -1.83],
+                      [-1.57,  1.85, -2.57, -1.34, -1.57,  1.14],
+                      [ 0.31, -3.16, -2.57,  1.76,  0.24, -0.83]
+                    ];  
+    my $pwm = TFBS::Matrix::PWM-&gt;new(-matrix =&gt; $matrixref,
+                                     -name   =&gt; &quot;MyProfile&quot;,
+                                     -ID     =&gt; &quot;M0001&quot;
+                                    );
+    # or
+</PRE>
+<PRE>
+
+    my $matrixstring = &lt;&lt;ENDMATRIX
+     0.61 -3.16  1.83 -3.16  1.21 -0.06
+    -0.15 -2.57 -3.16 -3.16 -2.57 -1.83
+    -1.57  1.85 -2.57 -1.34 -1.57  1.14
+     0.31 -3.16 -2.57  1.76  0.24 -0.83
+    ENDMATRIX
+    ;
+    my $pwm = TFBS::Matrix::PWM-&gt;new(-matrixstring =&gt; $matrixstring,
+                                     -name         =&gt; &quot;MyProfile&quot;,
+                                     -ID           =&gt; &quot;M0001&quot;
+                                    );</PRE>
+<LI><STRONG><A NAME="item_retrieving_a_TFBS%3A%3AMatix%3A%3APWM_object_from_">retrieving a TFBS::Matix::PWM object from a database:</A></STRONG><BR>
+
+(See documentation of individual TFBS::DB::* modules to learn
+how to connect to different types of pattern databases and retrieve
+TFBS::Matrix::* objects from them.)
+
+<PRE>
+
+    my $db_obj = TFBS::DB::JASPAR2-&gt;new
+                    (-connect =&gt; [&quot;dbi:mysql:JASPAR2:myhost&quot;,
+                                  &quot;myusername&quot;, &quot;mypassword&quot;]);
+    my $pwm = $db_obj-&gt;get_Matrix_by_ID(&quot;M0001&quot;, &quot;PWM&quot;);
+    # or
+    my $pwm = $db_obj-&gt;get_Matrix_by_name(&quot;MyProfile&quot;, &quot;PWM&quot;);</PRE>
+<P></P>
+<LI><STRONG><A NAME="item_retrieving_list_of_individual_TFBS%3A%3AMatrix%3A%">retrieving list of individual TFBS::Matrix::PWM objects
+from a TFBS::MatrixSet object</A></STRONG><BR>
+
+(see decumentation of TFBS::MatrixSet to learn how to create 
+objects for storage and manipulation of multiple matrices)
+<PRE>
+    my @pwm_list = $matrixset-&gt;all_patterns(-sort_by=&gt;&quot;name&quot;);</PRE>
+<P>* scanning a nucleotide sequence with a matrix
+</P>
+<PRE>
+
+    my $siteset = $pwm-&gt;search_seq(-file      =&gt;&quot;myseq.fa&quot;,
+                                   -threshold =&gt; &quot;80%&quot;);</PRE>
+<P>* scanning a pairwise alignment with a matrix
+</P>
+<PRE>
+
+    my $site_pair_set = $pwm-&gt;search_aln(-file      =&gt;&quot;myalign.aln&quot;,
+                                         -threshold =&gt; &quot;80%&quot;,
+                                         -cutoff    =&gt; &quot;70%&quot;,
+                                         -window    =&gt; 50);</PRE>
+<P></P></UL>
+<P>
+<HR>
+<H1><A NAME="description">DESCRIPTION</A></H1>
+<P>TFBS::Matrix::PWM is a class whose instances are objects representing
+position weight matrices (PWMs). A PWM is normally calculated from a
+raw position frequency matrix (see <A HREF="POD/TFBS/Matrix/PFM.html">the TFBS::Matrix::PFM manpage</A>
+for the explanation of position frequency matrices). For example, given
+the following position frequency matrix:</P>
+<PRE>
+    A:[ 12     3     0     0     4     0  ]
+    C:[  0     0     0    11     7     0  ]
+    G:[  0     9    12     0     0     0  ]
+    T:[  0     0     0     1     1    12  ]</PRE>
+<P>The standard computational procedure is applied to convert it into the
+following position weight matrix:</P>
+<PRE>
+    A:[ 0.61 -3.16  1.83 -3.16  1.21 -0.06]
+    C:[-0.15 -2.57 -3.16 -3.16 -2.57 -1.83]
+    G:[-1.57  1.85 -2.57 -1.34 -1.57  1.14]
+    T:[ 0.31 -3.16 -2.57  1.76  0.24 -0.83]</PRE>
+<P>which contains the ``weights'' associated with the occurence of each
+nucleotide at the given position in a pattern.</P>
+<P>A TFBS::Matrix::PWM object is equipped with methods to search nucleotide
+sequences and pairwise alignments of nucleotide sequences with the
+pattern they represent, and return a set of sites in nucleotide
+sequence (a TFBS::SiteSet object for single sequence search, and a
+TFBS::SitePairSet for the alignment search).</P>
+<P>
+<HR>
+<H1><A NAME="feedback">FEEDBACK</A></H1>
+<P>Please send bug reports and other comments to the author.</P>
+<P>
+<HR>
+<H1><A NAME="author  boris lenhard">AUTHOR - Boris Lenhard</A></H1>
+<P>Boris Lenhard &lt;<A HREF="mailto:Boris.Lenhard@cgb.ki.se">Boris.Lenhard@cgb.ki.se</A>&gt;</P>
+<P>
+<HR>
+<H1><A NAME="appendix">APPENDIX</A></H1>
+<P>The rest of the documentation details each of the object
+methods. Internal methods are preceded with an underscore.</P>
+<P>
+<H2><A NAME="new">new</A></H2>
+<PRE>
+ Title   : new
+ Usage   : my $pwm = TFBS::Matrix::PWM-&gt;new(%args)
+ Function: constructor for the TFBS::Matrix::PWM object
+ Returns : a new TFBS::Matrix::PWM object
+ Args    : # you must specify either one of the following three:
+</PRE>
+<PRE>
+
+           -matrix,      # reference to an array of arrays of integers
+              #or
+           -matrixstring,# a string containing four lines
+                         # of tab- or space-delimited integers
+              #or
+           -matrixfile,  # the name of a file containing four lines
+                         # of tab- or space-delimited integers
+           #######</PRE>
+<PRE>
+
+           -name,        # string, OPTIONAL
+           -ID,          # string, OPTIONAL
+           -class,       # string, OPTIONAL
+           -tags         # an array reference, OPTIONAL</PRE>
+<P>
+<H2><A NAME="search_seq">search_seq</A></H2>
+<PRE>
+ Title   : search_seq
+ Usage   : my $siteset = $pwm-&gt;search_seq(%args)
+ Function: scans a nucleotide sequence with the pattern represented
+           by the PWM
+ Returns : a TFBS::SiteSet object
+ Args    : # you must specify either one of the following three:</PRE>
+<PRE>
+           -file,       # the name od a fasta file (single sequence)
+              #or
+           -seqobj      # a Bio::Seq object
+                        # (more accurately, a Bio::PrimarySeqobject or a
+                        #  subclass thereof)
+              #or
+           -seqstring # a string containing the sequence</PRE>
+<PRE>
+           -threshold,  # minimum score for the hit, either absolute
+                        # (e.g. 11.2) or relative (e.g. &quot;75%&quot;)
+                        # OPTIONAL: default &quot;80%&quot;</PRE>
+<P>
+<H2><A NAME="search_aln">search_aln</A></H2>
+<PRE>
+ Title   : search_aln
+ Usage   : my $site_pair_set = $pwm-&gt;search_aln(%args)
+ Function: Scans a pairwise alignment of nucleotide sequences
+           with the pattern represented by the PWM: it reports only
+           those hits that are present in equivalent positions of both
+           sequences and exceed a specified threshold score in both, AND
+           are found in regions of the alignment above the specified
+           conservation cutoff value.
+ Returns : a TFBS::SitePairSet object
+ Args    : # you must specify either one of the following three:</PRE>
+<PRE>
+           -file,       # the name of the alignment file in Clustal
+                               format
+              #or
+           -alignobj      # a Bio::SimpleAlign object
+                        # (more accurately, a Bio::PrimarySeqobject or a
+                        #  subclass thereof)
+              #or
+           -alignstring # a multi-line string containing the alignment
+                        # in clustal format
+           #############</PRE>
+<PRE>
+           -threshold,  # minimum score for the hit, either absolute
+                        # (e.g. 11.2) or relative (e.g. &quot;75%&quot;)
+                        # OPTIONAL: default &quot;80%&quot;</PRE>
+<PRE>
+           -window,     # size of the sliding window (inn nucleotides)
+                        # for calculating local conservation in the
+                        # alignment
+                        # OPTIONAL: default 50</PRE>
+<PRE>
+           -cutoff      # conservation cutoff (%) for including the
+                        # region in the results of the pattern search
+                        # OPTIONAL: default &quot;70%&quot;</PRE>
+<P>
+<H2><A NAME="name">name</A></H2>
+<P>
+<H2><A NAME="id">ID</A></H2>
+<P>
+<H2><A NAME="class">class</A></H2>
+<P>
+<H2><A NAME="matrix">matrix</A></H2>
+<P>
+<H2><A NAME="length">length</A></H2>
+<P>
+<H2><A NAME="revcom">revcom</A></H2>
+<P>
+<H2><A NAME="rawprint">rawprint</A></H2>
+<P>
+<H2><A NAME="prettyprint">prettyprint</A></H2>
+<P>The above methods are common to all matrix objects. Please consult
+<A HREF="POD/TFBS/Matrix.html">the TFBS::Matrix manpage</A> to find out how to use them.</P>
+
+</BODY>
+
+</HTML>
