@@ -42,6 +42,7 @@ git clone https://github.com/ComputationalRegulatoryGenomicsICL/TFBS.git
 
 #  Recent changes
 Changes in 0.7.0
+
 * Update the DB interface for JASPAR 2016
 * Added TFFM module
 
