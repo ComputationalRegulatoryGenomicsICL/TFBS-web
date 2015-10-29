@@ -13,9 +13,7 @@ ICM documentation.
 <table id="daArea" width="100%"><tr><td id="daEntry" ><a href="#SUMMARY">Summary</a></td><td id="daEntry" ><a href="#libs">Included libraries</a></td><td id="daEntry" ><a href="#vardefs">Package variables</a></td><td id="daEntry" ><a href="#SYNOPSIS">Synopsis</a></td><td id="daEntry" ><a href="#DESCRIPTION">Description</a></td><td id="daEntry" ><a href="#General">General documentation</a></td><td id="daEntry" ><a href="#Methods">Methods</a></td></tr></table>
 <div id="sep"></div>
 <div id="descTitle">Summary</div>
-<div id="descArea"><pre id="podParagraph">    
-<B>TFBS::Matrix::ICM</B> - class for information content matrices of nucleotide
-patterns</pre></div>
+<div id="descArea"><pre id="podParagraph">    <br /><B>TFBS::Matrix::ICM</B> - class for information content matrices of nucleotide<br />patterns</pre></div>
 <div id="sep"></div>
 <a name="vardefs" id="vardefs"></a><div id="descTitle">Package variables</div>
 <div id="descArea"><div id="libEntry">No package variables defined.</div>
@@ -36,21 +34,12 @@ patterns</pre></div>
 <div id="sep"></div>
 <a name="SYNOPSIS" id="SYNOPSIS"></a>
 <div id="descTitle">Synopsis</div>
-<div id="descArea"><div id="podItem">&nbsp;&nbsp;&nbsp;&nbsp;* creating a <B>TFBS::Matrix::ICM</B> object manually:</div>&nbsp;&nbsp;&nbsp;&nbsp;<div id="podItemEntry">    my $matrixref = [ [ 0.00, 0.30, 0.00, 0.00, 0.24, 0.00 ],<br />		      [ 0.00, 0.00, 0.00, 1.45, 0.42, 0.00 ],<br />		      [ 0.00, 0.89, 2.00, 0.00, 0.00, 0.00 ],<br />		      [ 0.00, 0.00, 0.00, 0.13, 0.06, 2.00 ]<br />		    ];	<br />    my $icm = <B>TFBS::Matrix::ICM</B>-&gt;new(-matrix =&gt; $matrixref,<br />				     -name   =&gt; &quot;MyProfile&quot;,<br />				     -ID     =&gt; &quot;M0001&quot;<br />				    );<br /> <br />    # or<br /> <br />    my $matrixstring = &lt;&lt;ENDMATRIX<br />    2.00   0.30   0.00   0.00   0.24   0.00<br />    0.00   0.00   0.00   1.45   0.42   0.00<br />    0.00   0.89   2.00   0.00   0.00   0.00<br />    0.00   0.00   0.00   0.13   0.06   2.00<br />    ENDMATRIX<br />    ;<br />    my $icm = <B>TFBS::Matrix::ICM</B>-&gt;new(-matrixstring =&gt; $matrixstring,<br />				     -name   	   =&gt; &quot;MyProfile&quot;,<br />				     -ID           =&gt; &quot;M0001&quot;<br />				    );<br /></div><br /><div id="podItem">&nbsp;&nbsp;&nbsp;&nbsp;* retrieving a TFBS::Matix::ICM object from a database:</div>&nbsp;&nbsp;&nbsp;&nbsp;(See documentation of individual TFBS::DB::* modules to learn<br />how to connect to different types of pattern databases and retrieve<br />TFBS::Matrix::* objects from them.)<br />    <br />    my $db_obj = TFBS::DB::JASPAR2-&gt;new<br />		    (-connect =&gt; [&quot;dbi:mysql:JASPAR2:myhost&quot;,<br />				  &quot;myusername&quot;, &quot;mypassword&quot;]);<br />    my $pfm = $db_obj-&gt;get_Matrix_by_ID(&quot;M0001&quot;, &quot;ICM&quot;);<br />    # or<br />    my $pfm = $db_obj-&gt;get_Matrix_by_name(&quot;MyProfile&quot;, &quot;ICM&quot;);<br /><div id="podItem">&nbsp;&nbsp;&nbsp;&nbsp;* retrieving list of individual <B>TFBS::Matrix::ICM</B> objects</div>&nbsp;&nbsp;&nbsp;&nbsp;(see decumentation of TFBS::MatrixSet to learn how to create <br />objects for storage and manipulation of multiple matrices)<br /><pre id="podParagraph">    my @icm_list = $matrixset->all_patterns(-sort_by=>"name");
-</pre>&nbsp;&nbsp;&nbsp;&nbsp;* drawing a sequence logo<br />          <br />    $icm-&gt;draw_logo(-file=&gt;&quot;logo.png&quot;, <br />		    -full_scale =&gt;2.25,<br />		    -xsize=&gt;500,<br />		    -ysize =&gt;250, <br />		    -graph_title=&gt;&quot;C/EBPalpha binding site logo&quot;, <br />		    -x_title=&gt;&quot;position&quot;, <br />		    -y_title=&gt;&quot;bits&quot;);<br />
+<div id="descArea"><div id="podItem">&nbsp;&nbsp;&nbsp;&nbsp;* creating a <B>TFBS::Matrix::ICM</B> object manually:</div>&nbsp;&nbsp;&nbsp;&nbsp;<div id="podItemEntry">    my $matrixref = [ [ 0.00, 0.30, 0.00, 0.00, 0.24, 0.00 ],<br />		      [ 0.00, 0.00, 0.00, 1.45, 0.42, 0.00 ],<br />		      [ 0.00, 0.89, 2.00, 0.00, 0.00, 0.00 ],<br />		      [ 0.00, 0.00, 0.00, 0.13, 0.06, 2.00 ]<br />		    ];	<br />    my $icm = <B>TFBS::Matrix::ICM</B>-&gt;new(-matrix =&gt; $matrixref,<br />				     -name   =&gt; &quot;MyProfile&quot;,<br />				     -ID     =&gt; &quot;M0001&quot;<br />				    );<br /> <br />    # or<br /> <br />    my $matrixstring = &lt;&lt;ENDMATRIX<br />    2.00   0.30   0.00   0.00   0.24   0.00<br />    0.00   0.00   0.00   1.45   0.42   0.00<br />    0.00   0.89   2.00   0.00   0.00   0.00<br />    0.00   0.00   0.00   0.13   0.06   2.00<br />    ENDMATRIX<br />    ;<br />    my $icm = <B>TFBS::Matrix::ICM</B>-&gt;new(-matrixstring =&gt; $matrixstring,<br />				     -name   	   =&gt; &quot;MyProfile&quot;,<br />				     -ID           =&gt; &quot;M0001&quot;<br />				    );<br /></div><br /><div id="podItem">&nbsp;&nbsp;&nbsp;&nbsp;* retrieving a TFBS::Matix::ICM object from a database:</div>&nbsp;&nbsp;&nbsp;&nbsp;(See documentation of individual TFBS::DB::* modules to learn<br />how to connect to different types of pattern databases and retrieve<br />TFBS::Matrix::* objects from them.)<br />    <br />    my $db_obj = TFBS::DB::JASPAR2-&gt;new<br />		    (-connect =&gt; [&quot;dbi:mysql:JASPAR2:myhost&quot;,<br />				  &quot;myusername&quot;, &quot;mypassword&quot;]);<br />    my $pfm = $db_obj-&gt;get_Matrix_by_ID(&quot;M0001&quot;, &quot;ICM&quot;);<br />    # or<br />    my $pfm = $db_obj-&gt;get_Matrix_by_name(&quot;MyProfile&quot;, &quot;ICM&quot;);<br /><div id="podItem">&nbsp;&nbsp;&nbsp;&nbsp;* retrieving list of individual <B>TFBS::Matrix::ICM</B> objects</div>&nbsp;&nbsp;&nbsp;&nbsp;(see decumentation of TFBS::MatrixSet to learn how to create <br />objects for storage and manipulation of multiple matrices)<br /><pre id="podParagraph">    my @icm_list = $matrixset-&gt;all_patterns(-sort_by=&gt;&quot;name&quot;);<br /></pre>&nbsp;&nbsp;&nbsp;&nbsp;* drawing a sequence logo<br />          <br />    $icm-&gt;draw_logo(-file=&gt;&quot;logo.png&quot;, <br />		    -full_scale =&gt;2.25,<br />		    -xsize=&gt;500,<br />		    -ysize =&gt;250, <br />		    -graph_title=&gt;&quot;C/EBPalpha binding site logo&quot;, <br />		    -x_title=&gt;&quot;position&quot;, <br />		    -y_title=&gt;&quot;bits&quot;);<br />
 </div>
 <div id="sep"></div>
 <a name="DESCRIPTION" id="DESCRIPTION"></a>
 <div id="descTitle">Description</div>
-<div id="descArea"><B>TFBS::Matrix::ICM</B> is a class whose instances are objects representing<br />position weight matrices (PFMs). An ICM is normally calculated from a<br />raw position frequency matrix (see <a href="PFM.html" target="urlWin" id="podUrl"><b>TFBS::Matrix::PFM</b></a><br />for the explanation of position frequency matrices). For example, given<br />the following position frequency matrix,<br /><pre id="podParagraph">    A:[ 12     3     0     0     4     0  ]
-    C:[  0     0     0    11     7     0  ]
-    G:[  0     9    12     0     0     0  ]
-    T:[  0     0     0     1     1    12  ]
-</pre>the standard computational procedure is applied to convert it into the<br />following information content matrix:<br /><pre id="podParagraph">    A:[2.00  0.30  0.00  0.00  0.24  0.00]
-    C:[0.00  0.00  0.00  1.45  0.42  0.00]
-    G:[0.00  0.89  2.00  0.00  0.00  0.00]
-    T:[0.00  0.00  0.00  0.13  0.06  2.00]
-</pre>which contains the &quot;weights&quot; associated with the occurence of each<br />nucleotide at the given position in a pattern.<br />A TFBS::Matrix::PWM object is equipped with methods to search nucleotide<br />sequences and pairwise alignments of nucleotide sequences with the<br />pattern they represent, and return a set of sites in nucleotide<br />sequence (a TFBS::SiteSet object for single sequence search, and a<br />TFBS::SitePairSet for the alignment search).
+<div id="descArea"><B>TFBS::Matrix::ICM</B> is a class whose instances are objects representing<br />position weight matrices (PFMs). An ICM is normally calculated from a<br />raw position frequency matrix (see <a href="PFM.html" target="urlWin" id="podUrl"><b>TFBS::Matrix::PFM</b></a><br />for the explanation of position frequency matrices). For example, given<br />the following position frequency matrix,<br /><pre id="podParagraph">    A:[ 12     3     0     0     4     0  ]<br />    C:[  0     0     0    11     7     0  ]<br />    G:[  0     9    12     0     0     0  ]<br />    T:[  0     0     0     1     1    12  ]<br /></pre>the standard computational procedure is applied to convert it into the<br />following information content matrix:<br /><pre id="podParagraph">    A:[2.00  0.30  0.00  0.00  0.24  0.00]<br />    C:[0.00  0.00  0.00  1.45  0.42  0.00]<br />    G:[0.00  0.89  2.00  0.00  0.00  0.00]<br />    T:[0.00  0.00  0.00  0.13  0.06  2.00]<br /></pre>which contains the &quot;weights&quot; associated with the occurence of each<br />nucleotide at the given position in a pattern.<br />A TFBS::Matrix::PWM object is equipped with methods to search nucleotide<br />sequences and pairwise alignments of nucleotide sequences with the<br />pattern they represent, and return a set of sites in nucleotide<br />sequence (a TFBS::SiteSet object for single sequence search, and a<br />TFBS::SitePairSet for the alignment search).
 </div>
 <div id="sep"></div>
 <a name="Methods" id="Methods"></a>
@@ -79,89 +68,19 @@ patterns</pre></div>
 <div id="mainTitle">Methods description</div>
 <div id="sep"></div>
 <table id="methDescTitle" width="100%"><tr><td WIDTH="200"><a name="_pod__draw_ps_logo" id="_pod__draw_ps_logo"></a><a name="POD1" id="POD1"></a>_draw_ps_logo</td><td ><a href="#CODE3">code</a></td><td >&nbsp;&nbsp;&nbsp;&nbsp;</td><td ><a href="#POD2">next</a></td><td align="right"><a href="#TOP">Top</a></td></tr></table>
-<table id="methDescArea" width="100%"><tr><td><pre id="podParagraph"> Title   : _draw_ps_logo 
- Usage   : my $postscript_string = $icm->_draw_ps_logo(%args)
-           Internal method, should be accessed using draw_logo()
- Function: Draws a "sequence logo", a graphical representation
-	   of a possibly degenerate fixed-width nucleotide
-	   sequence pattern, from the information content matrix
- Returns : a postscript string;
-	   if you only need the image file you can ignore it
- Args    : -file,       # the name of the output PNG image file
-		        # OPTIONAL: default none
-	   -xsize       # width of the image in pixels
-		        # OPTIONAL: default 600
-	   -ysize       # height of the image in pixels
-		        # OPTIONAL: default 5/8 of -x_size
-	   -full_scale  # the maximum value on the y-axis, in bits
-		        # OPTIONAL: default 2.25
-	   -graph_title,# the graph title
-			# OPTIONAL: default none
-	   -x_title,    # x-axis title; OPTIONAL: default none
-	   -y_title     # y-axis title; OPTIONAL: default none</pre></td></tr></table>
+<table id="methDescArea" width="100%"><tr><td><pre id="podParagraph"> Title   : _draw_ps_logo <br /> Usage   : my $postscript_string = $icm-&gt;_draw_ps_logo(%args)<br />           Internal method, should be accessed using draw_logo()<br /> Function: Draws a &quot;sequence logo&quot;, a graphical representation<br />	   of a possibly degenerate fixed-width nucleotide<br />	   sequence pattern, from the information content matrix<br /> Returns : a postscript string;<br />	   if you only need the image file you can ignore it<br /> Args    : -file,       # the name of the output PNG image file<br />		        # OPTIONAL: default none<br />	   -xsize       # width of the image in pixels<br />		        # OPTIONAL: default 600<br />	   -ysize       # height of the image in pixels<br />		        # OPTIONAL: default 5/8 of -x_size<br />	   -full_scale  # the maximum value on the y-axis, in bits<br />		        # OPTIONAL: default 2.25<br />	   -graph_title,# the graph title<br />			# OPTIONAL: default none<br />	   -x_title,    # x-axis title; OPTIONAL: default none<br />	   -y_title     # y-axis title; OPTIONAL: default none</pre></td></tr></table>
 <div id="sep"></div>
 <table id="methDescTitle" width="100%"><tr><td WIDTH="200"><a name="_pod__draw_svg_logo " id="_pod__draw_svg_logo "></a><a name="POD2" id="POD2"></a>_draw_svg_logo </td><td ><a href="#CODE4">code</a></td><td ><a href="#POD1">prev</a></td><td ><a href="#POD3">next</a></td><td align="right"><a href="#TOP">Top</a></td></tr></table>
 <table id="methDescArea" width="100%"><tr><td></td></tr></table>
 <div id="sep"></div>
 <table id="methDescTitle" width="100%"><tr><td WIDTH="200"><a name="_pod_draw_logo" id="_pod_draw_logo"></a><a name="POD3" id="POD3"></a>draw_logo</td><td ><a href="#CODE13">code</a></td><td ><a href="#POD2">prev</a></td><td ><a href="#POD4">next</a></td><td align="right"><a href="#TOP">Top</a></td></tr></table>
-<table id="methDescArea" width="100%"><tr><td><pre id="podParagraph"> Title   : draw_logo
- Usage   : my $gdImageObj = $icm->draw_logo(%args)
- Function: Draws a "sequence logo", a graphical representation
-	   of a possibly degenerate fixed-width nucleotide
-	   sequence pattern, from the information content matrix
- Returns : a GD::Image object;
-	   if you only need the image file you can ignore it
- Args    : -file,       # the name of the output PNG image file
-		        # OPTIONAL: default none
-	   -xsize       # width of the image in pixels
-		        # OPTIONAL: default 600
-	   -ysize       # height of the image in pixels
-		        # OPTIONAL: default 5/8 of -x_size
-           -startpos    # start position in the logo for x axis
-                        # OPTIONAL: default is 1
-	   -margin      # size of image margins in pixels
-		        # OPTIONAL: default 15% of -y_size
-	   -full_scale  # the maximum value on the y-axis, in bits
-		        # OPTIONAL: default 2.25
-	   -graph_title,# the graph title
-			# OPTIONAL: default none
-	   -x_title,    # x-axis title; OPTIONAL: default none
-	   -y_title     # y-axis title; OPTIONAL: default none
-           -error_bars  # reference to an array of S.D. values for each column; OPTIONAL
-           -ps          # if true, produces a postscript string instead of a GD::Image object
-            -pdf          # if true AND the -file argumant is used, produces an output pdf file</pre></td></tr></table>
+<table id="methDescArea" width="100%"><tr><td><pre id="podParagraph"> Title   : draw_logo<br /> Usage   : my $gdImageObj = $icm-&gt;draw_logo(%args)<br /> Function: Draws a &quot;sequence logo&quot;, a graphical representation<br />	   of a possibly degenerate fixed-width nucleotide<br />	   sequence pattern, from the information content matrix<br /> Returns : a GD::Image object;<br />	   if you only need the image file you can ignore it<br /> Args    : -file,       # the name of the output PNG image file<br />		        # OPTIONAL: default none<br />	   -xsize       # width of the image in pixels<br />		        # OPTIONAL: default 600<br />	   -ysize       # height of the image in pixels<br />		        # OPTIONAL: default 5/8 of -x_size<br />           -startpos    # start position in the logo for x axis<br />                        # OPTIONAL: default is 1<br />	   -margin      # size of image margins in pixels<br />		        # OPTIONAL: default 15% of -y_size<br />	   -full_scale  # the maximum value on the y-axis, in bits<br />		        # OPTIONAL: default 2.25<br />	   -graph_title,# the graph title<br />			# OPTIONAL: default none<br />	   -x_title,    # x-axis title; OPTIONAL: default none<br />	   -y_title     # y-axis title; OPTIONAL: default none<br />           -error_bars  # reference to an array of S.D. values for each column; OPTIONAL<br />           -ps          # if true, produces a postscript string instead of a GD::Image object<br />            -pdf          # if true AND the -file argumant is used, produces an output pdf file</pre></td></tr></table>
 <div id="sep"></div>
 <table id="methDescTitle" width="100%"><tr><td WIDTH="200"><a name="_pod_new" id="_pod_new"></a><a name="POD4" id="POD4"></a>new</td><td ><a href="#CODE14">code</a></td><td ><a href="#POD3">prev</a></td><td ><a href="#POD5">next</a></td><td align="right"><a href="#TOP">Top</a></td></tr></table>
-<table id="methDescArea" width="100%"><tr><td><pre id="podParagraph"> Title   : new
- Usage   : my $icm = <B>TFBS::Matrix::ICM</B>->new(%args)
- Function: constructor for the <B>TFBS::Matrix::ICM</B> object
- Returns : a new <B>TFBS::Matrix::ICM</B> object
- Args    : # you must specify either one of the following three:
- 
-	   -matrix,      # reference to an array of arrays of integers
-	      #or
-	   -matrixstring,# a string containing four lines
-	                 # of tab- or space-delimited integers
-	      #or
-	   -matrixfile,  # the name of a file containing four lines
-	                 # of tab- or space-delimited integers
-	   #######
- 
-           -name,        # string, OPTIONAL
-           -ID,          # string, OPTIONAL
-           -class,       # string, OPTIONAL
-           -tags         # an array reference, OPTIONAL</pre></td></tr></table>
+<table id="methDescArea" width="100%"><tr><td><pre id="podParagraph"> Title   : new<br /> Usage   : my $icm = <B>TFBS::Matrix::ICM</B>-&gt;new(%args)<br /> Function: constructor for the <B>TFBS::Matrix::ICM</B> object<br /> Returns : a new <B>TFBS::Matrix::ICM</B> object<br /> Args    : # you must specify either one of the following three:<br /> <br />	   -matrix,      # reference to an array of arrays of integers<br />	      #or<br />	   -matrixstring,# a string containing four lines<br />	                 # of tab- or space-delimited integers<br />	      #or<br />	   -matrixfile,  # the name of a file containing four lines<br />	                 # of tab- or space-delimited integers<br />	   #######<br /> <br />           -name,        # string, OPTIONAL<br />           -ID,          # string, OPTIONAL<br />           -class,       # string, OPTIONAL<br />           -tags         # an array reference, OPTIONAL</pre></td></tr></table>
 <div id="sep"></div>
 <table id="methDescTitle" width="100%"><tr><td WIDTH="200"><a name="_pod_to_PWM" id="_pod_to_PWM"></a><a name="POD5" id="POD5"></a>to_PWM</td><td ><a href="#CODE15">code</a></td><td ><a href="#POD4">prev</a></td><td ><a href="#POD6">next</a></td><td align="right"><a href="#TOP">Top</a></td></tr></table>
-<table id="methDescArea" width="100%"><tr><td><pre id="podParagraph"> Title   : to_PWM
- Usage   : my $pwm = $icm->to_PWM()
- Function: converts an  information content matrix (a <B>TFBS::Matrix::ICM</B> object)
-	   to position weight matrix. At present it assumes uniform
-	   background distribution of nucleotide frequencies.
- Returns : a new TFBS::Matrix::PWM object
- Args    : none; in the future releases, it should be able to accept
-	   a user defined background probability of the four
-	   nucleotides</pre></td></tr></table>
+<table id="methDescArea" width="100%"><tr><td><pre id="podParagraph"> Title   : to_PWM<br /> Usage   : my $pwm = $icm-&gt;to_PWM()<br /> Function: converts an  information content matrix (a <B>TFBS::Matrix::ICM</B> object)<br />	   to position weight matrix. At present it assumes uniform<br />	   background distribution of nucleotide frequencies.<br /> Returns : a new TFBS::Matrix::PWM object<br /> Args    : none; in the future releases, it should be able to accept<br />	   a user defined background probability of the four<br />	   nucleotides</pre></td></tr></table>
 <div id="sep"></div>
 <a name="MethCode" id="MethCode"></a>
 <div id="mainTitle">Methods code</div>
@@ -172,7 +91,12 @@ patterns</pre></div>
 <div id="sep"></div>
 <table id="methCodeTitle" width="100%"><tr><td width="200"><a name="CODE1" id="CODE1"></a>DESTROY</td><td >description</td><td >prev</td><td ><a href="#CODE2">next</a></td><td align="right"><a href="#TOP">Top</a></td></tr></table>
 <div id="methCodeArea"><td ><span id="sub">sub</span> <span id="subName">DESTROY</span>
-{<pre>    <span id="comment"># nothing</span><br /></pre>}</td></div>
+{<pre>    <span id="comment"># nothing</span><br /><span id="braces">}</span>
+
+
+<span id="comment">#################################################################</span><br /><span id="comment"># UTILITY FUNCTIONS</span><br /><span id="comment">#################################################################</span><br />
+
+<span id="comment"># letter drawing routines</span><br /></pre>}</td></div>
 <div id="sep"></div>
 <table id="methCodeTitle" width="100%"><tr><td width="200"><a name="CODE2" id="CODE2"></a>_check_ic_validity</td><td >description</td><td ><a href="#CODE1">prev</a></td><td ><a href="#CODE3">next</a></td><td align="right"><a href="#TOP">Top</a></td></tr></table>
 <div id="methCodeArea"><td ><span id="sub">sub</span> <span id="privSubName">_check_ic_validity</span>
@@ -575,7 +499,12 @@ gsave\n"</span>;
     						<span id="var">$x</span>+0.42*<span id="var">$xsize</span>, <span id="var">$y</span>+<span id="var">$ysize</span>, <span id="var">$x</span>+0.42*<span id="var">$xsize</span>, <span id="var">$y</span>+0.16*<span id="var">$ysize</span>, 
     						<span id="var">$x</span>, <span id="var">$y</span>+0.16*<span id="var">$ysize</span><span id="braces">]</span>,
     			  fill =&gt; <span id="sqStr">'rgb(255,0,0)'</span><span id="braces">)</span>;
-    <span id="perlKey">return</span> 1;</pre>}</td></div>
+    <span id="perlKey">return</span> 1;
+<span id="braces">}</span>
+    
+
+
+1;</pre>}</td></div>
 <div id="sep"></div>
 <table id="methCodeTitle" width="100%"><tr><td width="200"><a name="CODE13" id="CODE13"></a>draw_logo</td><td ><a href="#POD3">description</a></td><td ><a href="#CODE12">prev</a></td><td ><a href="#CODE14">next</a></td><td align="right"><a href="#TOP">Top</a></td></tr></table>
 <div id="methCodeArea"><td ><span id="sub">sub</span> <span id="subName">draw_logo</span>

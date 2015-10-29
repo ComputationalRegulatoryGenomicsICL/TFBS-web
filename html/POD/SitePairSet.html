@@ -30,8 +30,7 @@ SitePairSet documentation.
 <div id="sep"></div>
 <a name="SYNOPSIS" id="SYNOPSIS"></a>
 <div id="descTitle">Synopsis</div>
-<div id="descArea"><pre id="podParagraph">    my $site_pair_set = <B>TFBS::SitePairSet</B>->new(@list_of_site_pair_objects);
-
+<div id="descArea"><pre id="podParagraph">    my $site_pair_set = <B>TFBS::SitePairSet</B>-&gt;new(@list_of_site_pair_objects);<br />
     # add a TFBS::SitePair object to set:
     
     $site_pair_set->add_site_pair($site_pair_obj);
@@ -69,68 +68,25 @@ SitePairSet documentation.
 <div id="mainTitle">Methods description</div>
 <div id="sep"></div>
 <table id="methDescTitle" width="100%"><tr><td WIDTH="200"><a name="_pod_GFF" id="_pod_GFF"></a><a name="POD1" id="POD1"></a>GFF</td><td ><a href="#CODE2">code</a></td><td >&nbsp;&nbsp;&nbsp;&nbsp;</td><td ><a href="#POD2">next</a></td><td align="right"><a href="#TOP">Top</a></td></tr></table>
-<table id="methDescArea" width="100%"><tr><td><pre id="podParagraph"> Title   : GFF
- Usage   : print $site->GFF();
-         : print $site->GFF($gff_formatter)
- Function: returns a "standard" multiline GFF string 
- Returns : a string (multiline, newline terminated)
- Args    : a $gff_formatter function reference (optional)</pre></td></tr></table>
+<table id="methDescArea" width="100%"><tr><td><pre id="podParagraph"> Title   : GFF<br /> Usage   : print $site-&gt;GFF();<br />         : print $site-&gt;GFF($gff_formatter)<br /> Function: returns a &quot;standard&quot; multiline GFF string <br /> Returns : a string (multiline, newline terminated)<br /> Args    : a $gff_formatter function reference (optional)</pre></td></tr></table>
 <div id="sep"></div>
 <table id="methDescTitle" width="100%"><tr><td WIDTH="200"><a name="_pod_Iterator" id="_pod_Iterator"></a><a name="POD2" id="POD2"></a>Iterator</td><td ><a href="#CODE3">code</a></td><td ><a href="#POD1">prev</a></td><td ><a href="#POD3">next</a></td><td align="right"><a href="#TOP">Top</a></td></tr></table>
-<table id="methDescArea" width="100%"><tr><td><pre id="podParagraph">  Title   : Iterator
-  Usage   : my $it = $sitepairset->Iterator(-sort_by=>'start');
-            while (my $site_pair = $it->next()) { #... 
-  Function: Returns an iterator object, used to iterate thorugh elements 
-            (TFBS::SitePair objects)
-  Returns : a TFBS::_Iterator object
-  Args    : -sort_by # optional - currently it accepts 
-                    #   (default sort order in parenthetse)
-                    #    'name' (pattern name, alphabetically)
-                    #    'ID' (pattern/matrix ID, alphabetically)
-                    #    'start' (site start in sequence, 
-                    #             numerically,increasing order)
-                    #    'end' (site end in sequence, 
-                    #           numerically, increasing order)
-                    #    'score' (1st site in pair,
-                    #             numerically, decreasing order)
-            -reverse # optional - reverses the default sorting order if true</pre></td></tr></table>
+<table id="methDescArea" width="100%"><tr><td><pre id="podParagraph">  Title   : Iterator<br />  Usage   : my $it = $sitepairset-&gt;Iterator(-sort_by=&gt;'start');<br />            while (my $site_pair = $it-&gt;next()) { #... <br />  Function: Returns an iterator object, used to iterate thorugh elements <br />            (TFBS::SitePair objects)<br />  Returns : a TFBS::_Iterator object<br />  Args    : -sort_by # optional - currently it accepts <br />                    #   (default sort order in parenthetse)<br />                    #    'name' (pattern name, alphabetically)<br />                    #    'ID' (pattern/matrix ID, alphabetically)<br />                    #    'start' (site start in sequence, <br />                    #             numerically,increasing order)<br />                    #    'end' (site end in sequence, <br />                    #           numerically, increasing order)<br />                    #    'score' (1st site in pair,<br />                    #             numerically, decreasing order)<br />            -reverse # optional - reverses the default sorting order if true</pre></td></tr></table>
 <div id="sep"></div>
 <table id="methDescTitle" width="100%"><tr><td WIDTH="200"><a name="_pod_add_site_pair" id="_pod_add_site_pair"></a><a name="POD3" id="POD3"></a>add_site_pair</td><td ><a href="#CODE6">code</a></td><td ><a href="#POD2">prev</a></td><td ><a href="#POD4">next</a></td><td align="right"><a href="#TOP">Top</a></td></tr></table>
-<table id="methDescArea" width="100%"><tr><td><pre id="podParagraph"> Title   : add_site_pair
- Usage   : $sitepairset->add_site_pair($site_pair_object)
-           $sitepairset->add_site_pair(@list_of_site_pair_objects)
- Function: adds TFBS::SitePair objects to an existing <B>TFBS::SitePairSet</B> object
- Returns : $sitepairset object (usually ignored)
- Args    : A list of TFBS::SitePair objects to add</pre></td></tr></table>
+<table id="methDescArea" width="100%"><tr><td><pre id="podParagraph"> Title   : add_site_pair<br /> Usage   : $sitepairset-&gt;add_site_pair($site_pair_object)<br />           $sitepairset-&gt;add_site_pair(@list_of_site_pair_objects)<br /> Function: adds TFBS::SitePair objects to an existing <B>TFBS::SitePairSet</B> object<br /> Returns : $sitepairset object (usually ignored)<br /> Args    : A list of TFBS::SitePair objects to add</pre></td></tr></table>
 <div id="sep"></div>
 <table id="methDescTitle" width="100%"><tr><td WIDTH="200"><a name="_pod_add_site_pair_set" id="_pod_add_site_pair_set"></a><a name="POD4" id="POD4"></a>add_site_pair_set</td><td ><a href="#CODE7">code</a></td><td ><a href="#POD3">prev</a></td><td ><a href="#POD5">next</a></td><td align="right"><a href="#TOP">Top</a></td></tr></table>
-<table id="methDescArea" width="100%"><tr><td><pre id="podParagraph"> Title   : add_site_pair_set
- Usage   : $sitepairset->add_site_pair_set($site_pair_set_object)
-           $sitepairset->add_site_pair(@list_of_site_pair_set_objects)
- Function: adds the contents of other <B>TFBS::SitePairSet</B> objects 
-           to an existing <B>TFBS::SitePairSet</B> object
- Returns : $sitepairset object (usually ignored)
- Args    : A list of <B>TFBS::SitePairSet</B> objects whose contents should be 
-           added to $sitepairset</pre></td></tr></table>
+<table id="methDescArea" width="100%"><tr><td><pre id="podParagraph"> Title   : add_site_pair_set<br /> Usage   : $sitepairset-&gt;add_site_pair_set($site_pair_set_object)<br />           $sitepairset-&gt;add_site_pair(@list_of_site_pair_set_objects)<br /> Function: adds the contents of other <B>TFBS::SitePairSet</B> objects <br />           to an existing <B>TFBS::SitePairSet</B> object<br /> Returns : $sitepairset object (usually ignored)<br /> Args    : A list of <B>TFBS::SitePairSet</B> objects whose contents should be <br />           added to $sitepairset</pre></td></tr></table>
 <div id="sep"></div>
 <table id="methDescTitle" width="100%"><tr><td WIDTH="200"><a name="_pod_set1" id="_pod_set1"></a><a name="POD5" id="POD5"></a>set1</td><td ><a href="#CODE9">code</a></td><td ><a href="#POD4">prev</a></td><td ><a href="#POD6">next</a></td><td align="right"><a href="#TOP">Top</a></td></tr></table>
 <table id="methDescArea" width="100%"><tr><td></td></tr></table>
 <div id="sep"></div>
 <table id="methDescTitle" width="100%"><tr><td WIDTH="200"><a name="_pod_set2" id="_pod_set2"></a><a name="POD6" id="POD6"></a>set2</td><td ><a href="#CODE10">code</a></td><td ><a href="#POD5">prev</a></td><td ><a href="#POD7">next</a></td><td align="right"><a href="#TOP">Top</a></td></tr></table>
-<table id="methDescArea" width="100%"><tr><td><pre id="podParagraph">  Title   : set1
-            set2
-  Usage   : my $siteset1 = $sitepairset->set1();
-          : my $siteset2 = $sitepairset->set2()
-  Function: Returns individual TFBS::SiteSet objects, from the site set pair
-  Returns : A TFBS::SiteSet object
-  Args    : none</pre></td></tr></table>
+<table id="methDescArea" width="100%"><tr><td><pre id="podParagraph">  Title   : set1<br />            set2<br />  Usage   : my $siteset1 = $sitepairset-&gt;set1();<br />          : my $siteset2 = $sitepairset-&gt;set2()<br />  Function: Returns individual TFBS::SiteSet objects, from the site set pair<br />  Returns : A TFBS::SiteSet object<br />  Args    : none</pre></td></tr></table>
 <div id="sep"></div>
 <table id="methDescTitle" width="100%"><tr><td WIDTH="200"><a name="_pod_size" id="_pod_size"></a><a name="POD7" id="POD7"></a>size</td><td ><a href="#CODE11">code</a></td><td ><a href="#POD6">prev</a></td><td ><a href="#POD8">next</a></td><td align="right"><a href="#TOP">Top</a></td></tr></table>
-<table id="methDescArea" width="100%"><tr><td><pre id="podParagraph"> Title   : size
- Usage   : my $size = $sitepairset->size()
- Function: returns a number of TFBS::SitePair objects contained in the set
- Returns : a scalar (integer) 
- Args    : none</pre></td></tr></table>
+<table id="methDescArea" width="100%"><tr><td><pre id="podParagraph"> Title   : size<br /> Usage   : my $size = $sitepairset-&gt;size()<br /> Function: returns a number of TFBS::SitePair objects contained in the set<br /> Returns : a scalar (integer) <br /> Args    : none</pre></td></tr></table>
 <div id="sep"></div>
 <a name="MethCode" id="MethCode"></a>
 <div id="mainTitle">Methods code</div>
@@ -162,7 +118,10 @@ SitePairSet documentation.
 	<span id="var">$gff_string</span> .= <span id="var">$sitepair</span>-&gt;<span id="method">GFF</span><span id="braces">(</span><span id="var">%args</span><span id="braces">)</span>.<span id="dqStr">"\n"</span>;
     <span id="braces">}</span>
     
-    <span id="perlKey">return</span> <span id="var">$gff_string</span>;</pre>}</td></div>
+    <span id="perlKey">return</span> <span id="var">$gff_string</span>;
+<span id="braces">}</span>
+
+<span id="comment">##############################################################</span><br /><span id="comment"># PRIVATE AND AUTOMATIC METHODS</span><br /><span id="comment">##############################################################</span><br /></pre>}</td></div>
 <div id="sep"></div>
 <table id="methCodeTitle" width="100%"><tr><td width="200"><a name="CODE3" id="CODE3"></a>Iterator</td><td ><a href="#POD2">description</a></td><td ><a href="#CODE2">prev</a></td><td ><a href="#CODE4">next</a></td><td align="right"><a href="#TOP">Top</a></td></tr></table>
 <div id="methCodeArea"><td ><span id="sub">sub</span> <span id="subName">Iterator</span>
@@ -187,7 +146,10 @@ SitePairSet documentation.
 <table id="methCodeTitle" width="100%"><tr><td width="200"><a name="CODE5" id="CODE5"></a>_no_more</td><td >description</td><td ><a href="#CODE4">prev</a></td><td ><a href="#CODE6">next</a></td><td align="right"><a href="#TOP">Top</a></td></tr></table>
 <div id="methCodeArea"><td ><span id="sub">sub</span> <span id="privSubName">_no_more</span>
 {<pre>    <span id="var">$_</span><span id="braces">[</span>0<span id="braces">]</span>-&gt;<span id="method">throw</span><span id="braces">(</span><span id="dqStr">"Method '<span id="var">$_</span>[1]' is no longer available in "</span>. 
-		 <span id="perlFunc">ref</span><span id="braces">(</span><span id="var">$_</span><span id="braces">[</span>0<span id="braces">]</span><span id="braces">)</span>.<span id="dqStr">". Use the 'Iterator' method instead."</span><span id="braces">)</span>;</pre>}</td></div>
+		 <span id="perlFunc">ref</span><span id="braces">(</span><span id="var">$_</span><span id="braces">[</span>0<span id="braces">]</span><span id="braces">)</span>.<span id="dqStr">". Use the 'Iterator' method instead."</span><span id="braces">)</span>;
+<span id="braces">}</span>
+
+1;</pre>}</td></div>
 <div id="sep"></div>
 <table id="methCodeTitle" width="100%"><tr><td width="200"><a name="CODE6" id="CODE6"></a>add_site_pair</td><td ><a href="#POD3">description</a></td><td ><a href="#CODE5">prev</a></td><td ><a href="#CODE7">next</a></td><td align="right"><a href="#TOP">Top</a></td></tr></table>
 <div id="methCodeArea"><td ><span id="sub">sub</span> <span id="subName">add_site_pair</span>

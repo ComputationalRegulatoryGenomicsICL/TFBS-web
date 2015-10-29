@@ -34,10 +34,7 @@ YMF documentation.
 <div id="sep"></div>
 <a name="SYNOPSIS" id="SYNOPSIS"></a>
 <div id="descTitle">Synopsis</div>
-<div id="descArea"><pre id="podParagraph">    my $patterngen =
-            TFBS::PatternGen::MEME->new(-seq_file=>'sequences.fa',
-                                            -binary => 'meme'
-
+<div id="descArea"><pre id="podParagraph">    my $patterngen =<br />            TFBS::PatternGen::MEME-&gt;new(-seq_file=&gt;'sequences.fa',<br />                                            -binary =&gt; 'meme'<br />
     my $pfm = $patterngen->pattern(); # $pfm is now a TFBS::Matrix::PFM object</pre>
 </div>
 <div id="sep"></div>
@@ -57,25 +54,7 @@ YMF documentation.
 <div id="mainTitle">Methods description</div>
 <div id="sep"></div>
 <table id="methDescTitle" width="100%"><tr><td WIDTH="200"><a name="_pod_new" id="_pod_new"></a><a name="POD1" id="POD1"></a>new</td><td ><a href="#CODE3">code</a></td><td >&nbsp;&nbsp;&nbsp;&nbsp;</td><td ><a href="#POD2">next</a></td><td align="right"><a href="#TOP">Top</a></td></tr></table>
-<table id="methDescArea" width="100%"><tr><td><pre id="podParagraph"> Title   : new
- Usage   : my $patterngen = <B>TFBS::PatternGen::YMF</B>->new(%args);
- Function: the constructor for the TFBS::PatternGen::MEME object
- Returns : a TFBS::PatternGen::MEME object
- Args    : This method takes named arguments;
-            you must specify one of the following three
-            -seq_list     # a reference to an array of strings
-                          #   and/or Bio::Seq objects
-              # or
-            -seq_stream   # A Bio::SeqIO object
-              # or
-            -seq_file     # the name of the fasta file containing
-                          #   all the sequences
-           Other arguments are:
-            -binary       # a fully qualified path to the 'meme' executable
-                          #  OPTIONAL: default 'meme'
-            -additional_params  # a string containing additional
-                                #   command-line switches for the
-                                #   meme program</pre></td></tr></table>
+<table id="methDescArea" width="100%"><tr><td><pre id="podParagraph"> Title   : new<br /> Usage   : my $patterngen = <B>TFBS::PatternGen::YMF</B>-&gt;new(%args);<br /> Function: the constructor for the TFBS::PatternGen::MEME object<br /> Returns : a TFBS::PatternGen::MEME object<br /> Args    : This method takes named arguments;<br />            you must specify one of the following three<br />            -seq_list     # a reference to an array of strings<br />                          #   and/or Bio::Seq objects<br />              # or<br />            -seq_stream   # A Bio::SeqIO object<br />              # or<br />            -seq_file     # the name of the fasta file containing<br />                          #   all the sequences<br />           Other arguments are:<br />            -binary       # a fully qualified path to the 'meme' executable<br />                          #  OPTIONAL: default 'meme'<br />            -additional_params  # a string containing additional<br />                                #   command-line switches for the<br />                                #   meme program</pre></td></tr></table>
 <div id="sep"></div>
 <a name="MethCode" id="MethCode"></a>
 <div id="mainTitle">Methods code</div>
@@ -107,7 +86,9 @@ YMF documentation.
     <span id="perlFunc">push</span> @<span id="braces">{</span> <span id="var">$self</span>-&gt;<span id="braces">{</span><span id="sqStr">'motifs'</span><span id="braces">}</span> <span id="braces">}</span>, <span id="var">$motif</span>;
     <span id="braces">}</span>
     <span id="perlKey">my</span> <span id="var">$command</span>=<span id="dqStr">"rm -r <span id="var">$temp_dir</span>"</span>;
-    <span id="comment">#print $command;</span><br />    `<span id="var">$command</span>`;<span id="comment"># or die &quot;could not unlink $!&quot;;</span><br /><span id="comment"># return </span><br /></pre>}</td></div>
+    <span id="comment">#print $command;</span><br />    `<span id="var">$command</span>`;<span id="comment"># or die &quot;could not unlink $!&quot;;</span><br /><span id="comment"># return </span><br /><span id="braces">}</span>
+<span id="comment">#</span><br />
+1;</pre>}</td></div>
 <div id="sep"></div>
 <table id="methCodeTitle" width="100%"><tr><td width="200"><a name="CODE2" id="CODE2"></a>_run_stats</td><td >description</td><td ><a href="#CODE1">prev</a></td><td ><a href="#CODE3">next</a></td><td align="right"><a href="#TOP">Top</a></td></tr></table>
 <div id="methCodeArea"><td ><span id="sub">sub</span> <span id="privSubName">_run_stats</span>
@@ -134,7 +115,12 @@ YMF documentation.
  <span id="comment">#   print STDERR $resultstring;</span><br />    
     <span id="var">$self</span>-&gt;<span id="method">_parse_stats_output</span><span id="braces">(</span><span id="var">$resultstring</span>,<span id="var">$command_line</span>,<span id="var">$dumpfile</span>,<span id="var">$dir</span><span id="braces">)</span>;
     <span id="perlFunc">unlink</span> <span id="var">$tmp_file</span>;
-    <span id="comment">#unlink $dumpfile;</span><br />    <span id="perlKey">return</span> 1</pre>}</td></div>
+    <span id="comment">#unlink $dumpfile;</span><br />    <span id="perlKey">return</span> 1
+<span id="braces">}</span>
+
+
+
+<span id="comment">#</span><br /></pre>}</td></div>
 <div id="sep"></div>
 <table id="methCodeTitle" width="100%"><tr><td width="200"><a name="CODE3" id="CODE3"></a>new</td><td ><a href="#POD1">description</a></td><td ><a href="#CODE2">prev</a></td><td >next</td><td align="right"><a href="#TOP">Top</a></td></tr></table>
 <div id="methCodeArea"><td ><span id="sub">sub</span> <span id="subName">new</span>

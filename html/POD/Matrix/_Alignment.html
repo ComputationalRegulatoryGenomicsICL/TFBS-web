@@ -125,7 +125,10 @@ _Alignment documentation.
     <span id="perlKey">my</span> <span id="var">$alnio</span> = <span id="module">Bio::AlignIO</span>-&gt;<span id="perlKey">new</span><span id="braces">(</span>-fh=&gt;<span id="var">$io</span>, -<span id="perlFunc">format</span>=&gt;<span id="var">$format</span><span id="braces">)</span>;
     <span id="perlKey">my</span> <span id="var">$alignobj</span> = <span id="var">$alnio</span>-&gt;<span id="method">next_aln</span><span id="braces">(</span><span id="braces">)</span>;
     <span id="var">$alnio</span>-&gt;<span id="perlFunc">close</span><span id="braces">(</span><span id="braces">)</span>;
-<span id="comment">#    $io-&gt;close;</span><br />    <span id="perlKey">return</span> <span id="var">$alignstring</span>;</pre>}</td></div>
+<span id="comment">#    $io-&gt;close;</span><br />    <span id="perlKey">return</span> <span id="var">$alignstring</span>;
+<span id="braces">}</span>
+
+<span id="comment"># uglier than AUTOLOAD, but faster - a quick fix to get rid of Class::MethodMaker</span><br /></pre>}</td></div>
 <div id="sep"></div>
 <table id="methCodeTitle" width="100%"><tr><td width="200"><a name="CODE6" id="CODE6"></a>_calculate_conservation</td><td >description</td><td ><a href="#CODE5">prev</a></td><td ><a href="#CODE7">next</a></td><td align="right"><a href="#TOP">Top</a></td></tr></table>
 <div id="methCodeArea"><td ><span id="sub">sub</span> <span id="privSubName">_calculate_conservation</span>
@@ -154,7 +157,17 @@ _Alignment documentation.
   	    <span id="perlKey">unless</span> <span id="braces">(</span><span id="var">$seq1</span><span id="braces">[</span><span id="var">$i</span><span id="braces">]</span> <span id="perlKey">eq</span> <span id="dqStr">"-"</span> or <span id="var">$seq1</span><span id="braces">[</span><span id="var">$i</span><span id="braces">]</span> <span id="perlKey">eq</span> <span id="dqStr">"."</span><span id="braces">)</span>;
     <span id="braces">}</span>
     <span id="perlKey">my</span> <span id="var">@graph</span>=<span id="braces">(</span><span id="var">$match</span><span id="braces">[</span>0<span id="braces">]</span><span id="braces">)</span>;
-    <span id="perlKey">for</span> <span id="perlKey">my</span> <span id="var">$i</span> <span id="braces">(</span>1..<span id="braces">(</span>$#match+$WINDOW<span id="regExp">/2))  {<br />  	</span><span id="var">$graph</span><span id="regExp">[</span><span id="var">$i</span><span id="regExp">] = (</span><span id="var">$graph</span><span id="regExp">[</span><span id="var">$i</span><span id="regExp">-1] or 0)<br />  	           + (</span><span id="var">$i</span>&gt;$#match ? 0: $match[$i])<br />  		   - ($i&lt;$WINDOW ? 0: $match[$i-$WINDOW]);<br /></pre>}</td></div>
+    <span id="perlKey">for</span> <span id="perlKey">my</span> <span id="var">$i</span> <span id="braces">(</span>1..<span id="braces">(</span>$#match+$WINDOW<span id="regExp">/2))  {<br />  	</span><span id="var">$graph</span><span id="regExp">[</span><span id="var">$i</span><span id="regExp">] = (</span><span id="var">$graph</span><span id="regExp">[</span><span id="var">$i</span><span id="regExp">-1] or 0)<br />  	           + (</span><span id="var">$i</span>&gt;$#match ? 0: $match[$i])<br />  		   - ($i&lt;$WINDOW ? 0: $match[$i-$WINDOW]);<br />    <span id="braces">}</span>
+
+    <span id="comment"># at this point, the graph values are shifted $WINDOW/2 to the right</span><br />    <span id="comment"># i.e. the score at a certain position is the score of the window</span><br />    <span id="comment"># UPSTREAM of it: To fix it, we shoud discard the first $WINDOW/2 scores:</span><br />    <span id="comment">#$self-&gt;conservation1 ([]);</span><br />    <span id="perlKey">foreach</span> <span id="perlKey">my</span> <span id="var">$pos</span> <span id="braces">(</span><span id="var">@graph</span><span id="braces">[</span><span id="perlFunc">int</span><span id="braces">(</span><span id="var">$WINDOW</span><span id="regExp">/2)..$#graph])  {<br />	push @CONSERVATION, 100*$pos/</span><span id="var">$WINDOW</span>;
+    <span id="braces">}</span>
+
+    <span id="comment"># correction</span><br />    <span id="perlKey">foreach</span> <span id="perlKey">my</span> <span id="var">$pos</span> <span id="braces">(</span>0..<span id="perlFunc">int</span><span id="braces">(</span><span id="var">$WINDOW</span><span id="regExp">/2))  {<br />	</span><span id="var">$CONSERVATION</span><span id="regExp">[</span><span id="var">$pos</span><span id="regExp">] =<br />	    </span><span id="var">$CONSERVATION</span><span id="regExp">[</span><span id="var">$pos</span><span id="regExp">]*</span><span id="var">$WINDOW</span><span id="regExp">/</span><span id="braces">(</span><span id="perlFunc">int</span><span id="braces">(</span><span id="var">$WINDOW</span><span id="regExp">/2)+</span><span id="var">$pos</span>);<br />	<span id="var">$CONSERVATION</span><span id="braces">[</span>$#CONSERVATION - <span id="var">$pos</span><span id="braces">]</span> =
+	    <span id="var">$CONSERVATION</span><span id="braces">[</span>$#CONSERVATION - <span id="var">$pos</span><span id="braces">]</span>*<span id="var">$WINDOW</span><span id="regExp">/(int(</span><span id="var">$WINDOW</span><span id="regExp">/</span>2<span id="braces">)</span>+<span id="var">$pos</span><span id="braces">)</span>;
+    <span id="braces">}</span>
+
+
+    <span id="perlKey">return</span> <span id="braces">[</span><span id="var">@CONSERVATION</span><span id="braces">]</span>;</pre>}</td></div>
 <div id="sep"></div>
 <table id="methCodeTitle" width="100%"><tr><td width="200"><a name="CODE7" id="CODE7"></a>_calculate_cutoff</td><td >description</td><td ><a href="#CODE6">prev</a></td><td ><a href="#CODE8">next</a></td><td align="right"><a href="#TOP">Top</a></td></tr></table>
 <div id="methCodeArea"><td ><span id="sub">sub</span> <span id="privSubName">_calculate_cutoff</span>
@@ -333,7 +346,12 @@ _Alignment documentation.
 <div id="sep"></div>
 <table id="methCodeTitle" width="100%"><tr><td width="200"><a name="CODE17" id="CODE17"></a>end_at</td><td >description</td><td ><a href="#CODE16">prev</a></td><td ><a href="#CODE18">next</a></td><td align="right"><a href="#TOP">Top</a></td></tr></table>
 <div id="methCodeArea"><td ><span id="sub">sub</span> <span id="subName">end_at</span>
-{<pre> <span id="var">$_</span><span id="braces">[</span>0<span id="braces">]</span>-&gt;<span id="braces">{</span><span id="sqStr">'end_at'</span><span id="braces">}</span>        = <span id="var">$_</span><span id="braces">[</span>1<span id="braces">]</span> <span id="perlKey">if</span> <span id="perlFunc">exists</span> <span id="var">$_</span><span id="braces">[</span>1<span id="braces">]</span>; <span id="var">$_</span><span id="braces">[</span>0<span id="braces">]</span>-&gt;<span id="braces">{</span><span id="sqStr">'end_at'</span><span id="braces">}</span>;</pre>}</td></div>
+{<pre> <span id="var">$_</span><span id="braces">[</span>0<span id="braces">]</span>-&gt;<span id="braces">{</span><span id="sqStr">'end_at'</span><span id="braces">}</span>        = <span id="var">$_</span><span id="braces">[</span>1<span id="braces">]</span> <span id="perlKey">if</span> <span id="perlFunc">exists</span> <span id="var">$_</span><span id="braces">[</span>1<span id="braces">]</span>; <span id="var">$_</span><span id="braces">[</span>0<span id="braces">]</span>-&gt;<span id="braces">{</span><span id="sqStr">'end_at'</span><span id="braces">}</span>;     <span id="braces">}</span>
+
+
+
+
+1;</pre>}</td></div>
 <div id="sep"></div>
 <table id="methCodeTitle" width="100%"><tr><td width="200"><a name="CODE18" id="CODE18"></a>exclude_orf</td><td >description</td><td ><a href="#CODE17">prev</a></td><td ><a href="#CODE19">next</a></td><td align="right"><a href="#TOP">Top</a></td></tr></table>
 <div id="methCodeArea"><td ><span id="sub">sub</span> <span id="subName">exclude_orf</span>

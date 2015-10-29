@@ -40,9 +40,7 @@ MatrixSet documentation.
 <div id="sep"></div>
 <a name="SYNOPSIS" id="SYNOPSIS"></a>
 <div id="descTitle">Synopsis</div>
-<div id="descArea"><pre id="podParagraph">    # creation of a <B>TFBS::MatrixSet</B> object
-    # let @list_of_matrix_objects be a list of TFBS::Matrix::* objects
-
+<div id="descArea"><pre id="podParagraph">    # creation of a <B>TFBS::MatrixSet</B> object<br />    # let @list_of_matrix_objects be a list of TFBS::Matrix::* objects<br />
     ###################################
     # Create a <B>TFBS::MatrixSet</B> object:
 
@@ -96,62 +94,20 @@ MatrixSet documentation.
 <div id="mainTitle">Methods description</div>
 <div id="sep"></div>
 <table id="methDescTitle" width="100%"><tr><td WIDTH="200"><a name="_pod_Iterator" id="_pod_Iterator"></a><a name="POD1" id="POD1"></a>Iterator</td><td ><a href="#CODE1">code</a></td><td >&nbsp;&nbsp;&nbsp;&nbsp;</td><td ><a href="#POD2">next</a></td><td align="right"><a href="#TOP">Top</a></td></tr></table>
-<table id="methDescArea" width="100%"><tr><td><pre id="podParagraph"> Title   : Iterator
- Usage   : my $matrixset_iterator =
-                   $matrixset->Iterator(-sort_by =>'total_ic');
-           while (my $matrix_object = $matrix_iterator->next) {
-	       # do whatever you want with individual matrix objects
-	   }
- Function: Returns an iterator object that can be used to go through
-           all members of the set
- Returns : an iterator object (currently undocumentened in TFBS -
-			       but understands the 'next' method)
- Args    : -sort_by # optional - currently it accepts
-                    #    'ID' (alphabetically)
-                    #    'name' (alphabetically)
-                    #    'class' (alphabetically)
-                    #    'total_ic' (numerically, decreasing order)
-
+<table id="methDescArea" width="100%"><tr><td><pre id="podParagraph"> Title   : Iterator<br /> Usage   : my $matrixset_iterator =<br />                   $matrixset-&gt;Iterator(-sort_by =&gt;'total_ic');<br />           while (my $matrix_object = $matrix_iterator-&gt;next) {<br />	       # do whatever you want with individual matrix objects<br />	   }<br /> Function: Returns an iterator object that can be used to go through<br />           all members of the set<br /> Returns : an iterator object (currently undocumentened in TFBS -<br />			       but understands the 'next' method)<br /> Args    : -sort_by # optional - currently it accepts<br />                    #    'ID' (alphabetically)<br />                    #    'name' (alphabetically)<br />                    #    'class' (alphabetically)<br />                    #    'total_ic' (numerically, decreasing order)<br />
            -reverse # optional - reverses the default sorting order if true</pre></td></tr></table>
 <div id="sep"></div>
 <table id="methDescTitle" width="100%"><tr><td WIDTH="200"><a name="_pod_add_matrix" id="_pod_add_matrix"></a><a name="POD2" id="POD2"></a>add_matrix</td><td ><a href="#CODE12">code</a></td><td ><a href="#POD1">prev</a></td><td ><a href="#POD3">next</a></td><td align="right"><a href="#TOP">Top</a></td></tr></table>
-<table id="methDescArea" width="100%"><tr><td><pre id="podParagraph"> Title   : add_matrix
- Usage   : $matrixset->add_matrix(@list_of_matrix_objects);
- Function: Adds matrix objects to matrixset
- Returns : object reference (usually ignored)
- Args    : one or more TFBS::Matrix::* objects</pre></td></tr></table>
+<table id="methDescArea" width="100%"><tr><td><pre id="podParagraph"> Title   : add_matrix<br /> Usage   : $matrixset-&gt;add_matrix(@list_of_matrix_objects);<br /> Function: Adds matrix objects to matrixset<br /> Returns : object reference (usually ignored)<br /> Args    : one or more TFBS::Matrix::* objects</pre></td></tr></table>
 <div id="sep"></div>
 <table id="methDescTitle" width="100%"><tr><td WIDTH="200"><a name="_pod_add_matrix_set" id="_pod_add_matrix_set"></a><a name="POD3" id="POD3"></a>add_matrix_set</td><td ><a href="#CODE13">code</a></td><td ><a href="#POD2">prev</a></td><td ><a href="#POD4">next</a></td><td align="right"><a href="#TOP">Top</a></td></tr></table>
-<table id="methDescArea" width="100%"><tr><td><pre id="podParagraph"> Title   : add_matrix
- Usage   : $matrixset->add_matrix(@list_of_matrixset_objects);
- Function: Adds to the matrixset matrix objects contained in one or
-           more other matrixsets
- Returns : object reference (usually ignored)
- Args    : one or more <B>TFBS::MatrixSet</B> objects</pre></td></tr></table>
+<table id="methDescArea" width="100%"><tr><td><pre id="podParagraph"> Title   : add_matrix<br /> Usage   : $matrixset-&gt;add_matrix(@list_of_matrixset_objects);<br /> Function: Adds to the matrixset matrix objects contained in one or<br />           more other matrixsets<br /> Returns : object reference (usually ignored)<br /> Args    : one or more <B>TFBS::MatrixSet</B> objects</pre></td></tr></table>
 <div id="sep"></div>
 <table id="methDescTitle" width="100%"><tr><td WIDTH="200"><a name="_pod_cluster" id="_pod_cluster"></a><a name="POD4" id="POD4"></a>cluster</td><td ><a href="#CODE14">code</a></td><td ><a href="#POD3">prev</a></td><td ><a href="#POD5">next</a></td><td align="right"><a href="#TOP">Top</a></td></tr></table>
-<table id="methDescArea" width="100%"><tr><td><pre id="podParagraph"> Title   : cluster
- Usage   : $matrixset->cluster(%args)
- Function: Clusters the matrices in the set
- Returns : The root node of the hierachical clustering tree. 
-           An integer specifying the optimal number of clusters.
-           An array of TFBS::MatrixSets, one for each cluster.
- Args    : Many:
-            -stampdir   Directory where stamp is located. Not necessary if it is in the PATH.
-            -tempdir    Directory to put temporary files. Defaults to "/tmp"
-            -noclean    1 to clean up temporary files, 0 otherwise
-            -tree       Method for constructing tree (UPGMA/SOTA). Def:UPGMA</pre></td></tr></table>
+<table id="methDescArea" width="100%"><tr><td><pre id="podParagraph"> Title   : cluster<br /> Usage   : $matrixset-&gt;cluster(%args)<br /> Function: Clusters the matrices in the set<br /> Returns : The root node of the hierachical clustering tree. <br />           An integer specifying the optimal number of clusters.<br />           An array of TFBS::MatrixSets, one for each cluster.<br /> Args    : Many:<br />            -stampdir   Directory where stamp is located. Not necessary if it is in the PATH.<br />            -tempdir    Directory to put temporary files. Defaults to &quot;/tmp&quot;<br />            -noclean    1 to clean up temporary files, 0 otherwise<br />            -tree       Method for constructing tree (UPGMA/SOTA). Def:UPGMA</pre></td></tr></table>
 <div id="sep"></div>
 <table id="methDescTitle" width="100%"><tr><td WIDTH="200"><a name="_pod_fbp" id="_pod_fbp"></a><a name="POD5" id="POD5"></a>fbp</td><td ><a href="#CODE15">code</a></td><td ><a href="#POD4">prev</a></td><td ><a href="#POD6">next</a></td><td align="right"><a href="#TOP">Top</a></td></tr></table>
-<table id="methDescArea" width="100%"><tr><td><pre id="podParagraph"> Title   : fbp 
- Usage   : $matrixset->fbp(%args);
- Function: Creates a familial binding profile (FBP) for the set
- Returns : A familial binding profile represented as a TFBS::Matrix::PFM
- Args    : Many
-            -stampdir   Directory where stamp is located. Not necessary if it is in the PATH.
-            -tempdir    Directory to put temporary files. Defaults to "/tmp"
-            -noclean    1 to clean up temporary files, 0 otherwise
-            -align      Alignment method</pre></td></tr></table>
+<table id="methDescArea" width="100%"><tr><td><pre id="podParagraph"> Title   : fbp <br /> Usage   : $matrixset-&gt;fbp(%args);<br /> Function: Creates a familial binding profile (FBP) for the set<br /> Returns : A familial binding profile represented as a TFBS::Matrix::PFM<br /> Args    : Many<br />            -stampdir   Directory where stamp is located. Not necessary if it is in the PATH.<br />            -tempdir    Directory to put temporary files. Defaults to &quot;/tmp&quot;<br />            -noclean    1 to clean up temporary files, 0 otherwise<br />            -align      Alignment method</pre></td></tr></table>
 <div id="sep"></div>
 <table id="methDescTitle" width="100%"><tr><td WIDTH="200"><a name="_pod_new" id="_pod_new"></a><a name="POD6" id="POD6"></a>new</td><td ><a href="#CODE16">code</a></td><td ><a href="#POD5">prev</a></td><td ><a href="#POD7">next</a></td><td align="right"><a href="#TOP">Top</a></td></tr></table>
 <table id="methDescArea" width="100%"><tr><td></td></tr></table>
@@ -160,31 +116,13 @@ MatrixSet documentation.
 <table id="methDescArea" width="100%"><tr><td></td></tr></table>
 <div id="sep"></div>
 <table id="methDescTitle" width="100%"><tr><td WIDTH="200"><a name="_pod_randomize_columns" id="_pod_randomize_columns"></a><a name="POD8" id="POD8"></a>randomize_columns</td><td ><a href="#CODE19">code</a></td><td ><a href="#POD7">prev</a></td><td ><a href="#POD9">next</a></td><td align="right"><a href="#TOP">Top</a></td></tr></table>
-<table id="methDescArea" width="100%"><tr><td><pre id="podParagraph"> Title   : randomize_columns
- Usage   : $matrixset->randomize_columns();
- Function: Randomizes the columns between all the matrices in the set (in place).
- Returns : nothing
- Args    : none</pre></td></tr></table>
+<table id="methDescArea" width="100%"><tr><td><pre id="podParagraph"> Title   : randomize_columns<br /> Usage   : $matrixset-&gt;randomize_columns();<br /> Function: Randomizes the columns between all the matrices in the set (in place).<br /> Returns : nothing<br /> Args    : none</pre></td></tr></table>
 <div id="sep"></div>
 <table id="methDescTitle" width="100%"><tr><td WIDTH="200"><a name="_pod_remove_Matrix_by_ID" id="_pod_remove_Matrix_by_ID"></a><a name="POD9" id="POD9"></a>remove_Matrix_by_ID</td><td ><a href="#CODE20">code</a></td><td ><a href="#POD8">prev</a></td><td ><a href="#POD10">next</a></td><td align="right"><a href="#TOP">Top</a></td></tr></table>
-<table id="methDescArea" width="100%"><tr><td><pre id="podParagraph"> Title   : remove_Matrix_by_ID
- Usage   : $matrixset->remove_Matrix_by_ID($id);
- Function: Removes a matrix from the set
- Returns : Nothing
- Args    : None</pre></td></tr></table>
+<table id="methDescArea" width="100%"><tr><td><pre id="podParagraph"> Title   : remove_Matrix_by_ID<br /> Usage   : $matrixset-&gt;remove_Matrix_by_ID($id);<br /> Function: Removes a matrix from the set<br /> Returns : Nothing<br /> Args    : None</pre></td></tr></table>
 <div id="sep"></div>
 <table id="methDescTitle" width="100%"><tr><td WIDTH="200"><a name="_pod_search_aln" id="_pod_search_aln"></a><a name="POD10" id="POD10"></a>search_aln</td><td ><a href="#CODE22">code</a></td><td ><a href="#POD9">prev</a></td><td ><a href="#POD11">next</a></td><td align="right"><a href="#TOP">Top</a></td></tr></table>
-<table id="methDescArea" width="100%"><tr><td><pre id="podParagraph"> Title   : search_aln
- Usage   : my $site_pair_set = $matrixset->search_aln(%args)
- Function: Scans a pairwise alignment of nucleotide sequences
-	   with the pattern represented by the PWM: it reports only
-           those hits that are present in equivalent positions of both
-	   sequences and exceed a specified threshold score in both, AND
-	   are found in regions of the alignment above the specified
-	   conservation cutoff value.
-           It works only if all matrix object in $matrixset understand
-           search_aln method (currently only TFBS::Matrix::PWM objects do)
-
+<table id="methDescArea" width="100%"><tr><td><pre id="podParagraph"> Title   : search_aln<br /> Usage   : my $site_pair_set = $matrixset-&gt;search_aln(%args)<br /> Function: Scans a pairwise alignment of nucleotide sequences<br />	   with the pattern represented by the PWM: it reports only<br />           those hits that are present in equivalent positions of both<br />	   sequences and exceed a specified threshold score in both, AND<br />	   are found in regions of the alignment above the specified<br />	   conservation cutoff value.<br />           It works only if all matrix object in $matrixset understand<br />           search_aln method (currently only TFBS::Matrix::PWM objects do)<br />
  Returns : a TFBS::SitePairSet object
  Args    : # you must specify either one of the following three:
 
@@ -227,11 +165,7 @@ MatrixSet documentation.
 			# computed internally on the fly (less efficient)</pre></td></tr></table>
 <div id="sep"></div>
 <table id="methDescTitle" width="100%"><tr><td WIDTH="200"><a name="_pod_search_seq" id="_pod_search_seq"></a><a name="POD11" id="POD11"></a>search_seq</td><td ><a href="#CODE23">code</a></td><td ><a href="#POD10">prev</a></td><td ><a href="#POD12">next</a></td><td align="right"><a href="#TOP">Top</a></td></tr></table>
-<table id="methDescArea" width="100%"><tr><td><pre id="podParagraph"> Title   : search_seq
- Usage   : my $siteset = $matrixset->search_seq(%args)
- Function: scans a nucleotide sequence with all patterns represented
-           stored in $matrixset;
-
+<table id="methDescArea" width="100%"><tr><td><pre id="podParagraph"> Title   : search_seq<br /> Usage   : my $siteset = $matrixset-&gt;search_seq(%args)<br /> Function: scans a nucleotide sequence with all patterns represented<br />           stored in $matrixset;<br />
            It works only if all matrix objects in $matrixset understand
            search_seq method (currently only TFBS::Matrix::PWM objects do)
  Returns : a TFBS::SiteSet object
@@ -250,12 +184,7 @@ MatrixSet documentation.
 			# OPTIONAL: default "80%"</pre></td></tr></table>
 <div id="sep"></div>
 <table id="methDescTitle" width="100%"><tr><td WIDTH="200"><a name="_pod_size" id="_pod_size"></a><a name="POD12" id="POD12"></a>size</td><td ><a href="#CODE24">code</a></td><td ><a href="#POD11">prev</a></td><td ><a href="#POD13">next</a></td><td align="right"><a href="#TOP">Top</a></td></tr></table>
-<table id="methDescArea" width="100%"><tr><td><pre id="podParagraph"> Title   : size
- Usage   : my $number_of_matrices = $matrixset->size;
- Function: gets the number of matrix objects in the $matrixset
-           (i.e. the size of the set)
- Returns : a number
- Args    : none</pre></td></tr></table>
+<table id="methDescArea" width="100%"><tr><td><pre id="podParagraph"> Title   : size<br /> Usage   : my $number_of_matrices = $matrixset-&gt;size;<br /> Function: gets the number of matrix objects in the $matrixset<br />           (i.e. the size of the set)<br /> Returns : a number<br /> Args    : none</pre></td></tr></table>
 <div id="sep"></div>
 <a name="MethCode" id="MethCode"></a>
 <div id="mainTitle">Methods code</div>
@@ -596,7 +525,13 @@ MatrixSet documentation.
 
     <span id="perlKey">my</span> <span id="braces">(</span><span id="var">$fh</span>, <span id="var">$output</span>, <span id="var">$tree</span>, <span id="var">$fbp</span><span id="braces">)</span> = <span id="var">$self</span>-&gt;<span id="method">_run_STAMP</span><span id="braces">(</span><span id="var">%args</span><span id="braces">)</span>;
 
-    <span id="perlKey">return</span> <span id="var">$fbp</span>;</pre>}</td></div>
+    <span id="perlKey">return</span> <span id="var">$fbp</span>;
+<span id="braces">}</span>
+
+
+
+
+1;</pre>}</td></div>
 <div id="sep"></div>
 <table id="methCodeTitle" width="100%"><tr><td width="200"><a name="CODE16" id="CODE16"></a>new</td><td ><a href="#POD6">description</a></td><td ><a href="#CODE15">prev</a></td><td ><a href="#CODE17">next</a></td><td align="right"><a href="#TOP">Top</a></td></tr></table>
 <div id="methCodeArea"><td ><span id="sub">sub</span> <span id="subName">new</span>
@@ -682,7 +617,10 @@ MatrixSet documentation.
 {<pre>    <span id="perlKey">my</span> <span id="braces">(</span><span id="var">$self</span>, <span id="var">$id</span><span id="braces">)</span> = <span id="var">@_</span>;
 
     <span id="perlKey">my</span> <span id="var">@list</span> = <span id="perlFunc">grep</span> <span id="braces">{</span> <span id="var">$_</span>-&gt;<span id="method">ID</span><span id="braces">(</span><span id="braces">)</span> <span id="perlKey">ne</span> <span id="var">$id</span> <span id="braces">}</span> @<span id="braces">{</span><span id="var">$self</span>-&gt;<span id="braces">{</span>matrix_list<span id="braces">}</span><span id="braces">}</span>;
-    <span id="var">$self</span>-&gt;<span id="braces">{</span>matrix_list<span id="braces">}</span> =\@ list;</pre>}</td></div>
+    <span id="var">$self</span>-&gt;<span id="braces">{</span>matrix_list<span id="braces">}</span> =\@ list;
+<span id="braces">}</span>
+
+<span id="perlKey">my</span> <span id="var">$error</span>;</pre>}</td></div>
 <div id="sep"></div>
 <table id="methCodeTitle" width="100%"><tr><td width="200"><a name="CODE21" id="CODE21"></a>reset</td><td >description</td><td ><a href="#CODE20">prev</a></td><td ><a href="#CODE22">next</a></td><td align="right"><a href="#TOP">Top</a></td></tr></table>
 <div id="methCodeArea"><td ><span id="sub">sub</span> <span id="subName">reset</span>

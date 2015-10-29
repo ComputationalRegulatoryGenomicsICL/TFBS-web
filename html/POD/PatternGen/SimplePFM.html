@@ -30,15 +30,7 @@ SimplePFM documentation.
 <div id="sep"></div>
 <a name="SYNOPSIS" id="SYNOPSIS"></a>
 <div id="descTitle">Synopsis</div>
-<div id="descArea"><pre id="podParagraph">  
-    my @sequences = qw( AAGCCT AGGCAT AAGCCT
-                        AAGCCT AGGCAT AGGCCT
-                        AGGCAT AGGTTT AGGCAT
-                        AGGCCT AGGCCT );
-    my $patterngen =
-            <B>TFBS::PatternGen::SimplePFM</B>->new(-seq_list=>\@sequences);
-  
-    my $pfm = $patterngen->pattern(); # $pfm is now a TFBS::Matrix::PFM object</pre>
+<div id="descArea"><pre id="podParagraph">  <br />    my @sequences = qw( AAGCCT AGGCAT AAGCCT<br />                        AAGCCT AGGCAT AGGCCT<br />                        AGGCAT AGGTTT AGGCAT<br />                        AGGCCT AGGCCT );<br />    my $patterngen =<br />            <B>TFBS::PatternGen::SimplePFM</B>-&gt;new(-seq_list=&gt;\@sequences);<br />  <br />    my $pfm = $patterngen-&gt;pattern(); # $pfm is now a TFBS::Matrix::PFM object</pre>
 </div>
 <div id="sep"></div>
 <a name="DESCRIPTION" id="DESCRIPTION"></a>
@@ -57,20 +49,7 @@ SimplePFM documentation.
 <div id="mainTitle">Methods description</div>
 <div id="sep"></div>
 <table id="methDescTitle" width="100%"><tr><td WIDTH="200"><a name="_pod_new" id="_pod_new"></a><a name="POD1" id="POD1"></a>new</td><td ><a href="#CODE3">code</a></td><td >&nbsp;&nbsp;&nbsp;&nbsp;</td><td ><a href="#POD2">next</a></td><td align="right"><a href="#TOP">Top</a></td></tr></table>
-<table id="methDescArea" width="100%"><tr><td><pre id="podParagraph"> Title   : new
- Usage   : my $db = <B>TFBS::PatternGen::SimplePFM</B>->new(%args);
- Function: the constructor for the TFBS::PatternGen::SimplePFM
-	    object
- Returns : a <B>TFBS::PatternGen::SimplePFM</B> obkect
- Args    : This method takes named arguments;
-            you must specify one of the following
-            -seq_list     # a reference to an array of strings
-                          # and/or Bio::Seq objects
-              # or
-            -seq_stream   # A Bio::SeqIO object
-              # or
-            -seq_file     # the name of the fasta file containing
-                          # all the sequences</pre></td></tr></table>
+<table id="methDescArea" width="100%"><tr><td><pre id="podParagraph"> Title   : new<br /> Usage   : my $db = <B>TFBS::PatternGen::SimplePFM</B>-&gt;new(%args);<br /> Function: the constructor for the TFBS::PatternGen::SimplePFM<br />	    object<br /> Returns : a <B>TFBS::PatternGen::SimplePFM</B> obkect<br /> Args    : This method takes named arguments;<br />            you must specify one of the following<br />            -seq_list     # a reference to an array of strings<br />                          # and/or Bio::Seq objects<br />              # or<br />            -seq_stream   # A Bio::SeqIO object<br />              # or<br />            -seq_file     # the name of the fasta file containing<br />                          # all the sequences</pre></td></tr></table>
 <div id="sep"></div>
 <a name="MethCode" id="MethCode"></a>
 <div id="mainTitle">Methods code</div>
@@ -106,7 +85,11 @@ SimplePFM documentation.
 <div id="methCodeArea"><td ><span id="sub">sub</span> <span id="privSubName">_validate_seq</span>
 {<pre>    <span id="comment"># a utility function</span><br />    <span id="perlKey">my</span> <span id="braces">(</span><span id="var">$sequence</span><span id="braces">)</span>=<span id="var">@_</span>;
     <span id="var">$sequence</span>=~ <span id="regExp">s/[ACGT]//g</span>;
-    <span id="perlKey">return</span> <span id="braces">(</span><span id="var">$sequence</span> <span id="perlKey">eq</span> <span id="dqStr">""</span> ? 1 : 0<span id="braces">)</span>;</pre>}</td></div>
+    <span id="perlKey">return</span> <span id="braces">(</span><span id="var">$sequence</span> <span id="perlKey">eq</span> <span id="dqStr">""</span> ? 1 : 0<span id="braces">)</span>;
+<span id="braces">}</span>
+
+
+1;</pre>}</td></div>
 <div id="sep"></div>
 <table id="methCodeTitle" width="100%"><tr><td width="200"><a name="CODE3" id="CODE3"></a>new</td><td ><a href="#POD1">description</a></td><td ><a href="#CODE2">prev</a></td><td >next</td><td align="right"><a href="#TOP">Top</a></td></tr></table>
 <div id="methCodeArea"><td ><span id="sub">sub</span> <span id="subName">new</span>

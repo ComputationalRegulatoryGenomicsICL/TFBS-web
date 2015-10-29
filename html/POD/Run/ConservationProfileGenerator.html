@@ -65,7 +65,15 @@ ConservationProfileGenerator documentation.
     <span id="perlKey">my</span> <span id="var">$outstream</span> = <span id="module">Bio::AlignIO</span>-&gt;<span id="perlKey">new</span><span id="braces">(</span> -fh =&gt; <span id="var">$fh</span>, -<span id="perlFunc">format</span> =&gt; <span id="var">$format</span> <span id="braces">)</span>;
     <span id="var">$outstream</span>-&gt;<span id="method">write_aln</span><span id="braces">(</span> <span id="var">$self</span>-&gt;<span id="method">alignment</span> <span id="braces">)</span>;
     <span id="var">$outstream</span>-&gt;<span id="perlFunc">close</span>;
-    <span id="perlKey">return</span> <span id="var">$alnstring</span>;</pre>}</td></div>
+    <span id="perlKey">return</span> <span id="var">$alnstring</span>;
+<span id="braces">}</span>
+
+
+
+
+<span id="comment">#sub _UNIT_TESTS  {</span><br /><span id="comment">#    require Test;</span><br /><span id="comment">#    require CONSNP::Test::TestObjects;</span><br /><span id="comment">#    my $to = CONSNP::Test::TestObjects-&gt;new;</span><br /><span id="comment">#</span><br /><span id="comment">#    plan(tests =&gt; 5);</span><br /><span id="comment">#</span><br /><span id="comment">#    exit(0);</span><br /><span id="comment">#</span><br /><span id="comment">#</span><br /><span id="comment">#}</span><br />
+
+1;</pre>}</td></div>
 <div id="sep"></div>
 <table id="methCodeTitle" width="100%"><tr><td width="200"><a name="CODE2" id="CODE2"></a>_run_Malins</td><td >description</td><td ><a href="#CODE1">prev</a></td><td ><a href="#CODE3">next</a></td><td align="right"><a href="#TOP">Top</a></td></tr></table>
 <div id="methCodeArea"><td ><span id="sub">sub</span> <span id="privSubName">_run_Malins</span>
@@ -146,7 +154,23 @@ ConservationProfileGenerator documentation.
           <span id="perlKey">unless</span> <span id="braces">(</span> <span id="var">$seq1</span><span id="braces">[</span><span id="var">$i</span><span id="braces">]</span> <span id="perlKey">eq</span> <span id="dqStr">"-"</span> or <span id="var">$seq1</span><span id="braces">[</span><span id="var">$i</span><span id="braces">]</span> <span id="perlKey">eq</span> <span id="dqStr">"."</span> <span id="braces">)</span>;
     <span id="braces">}</span>
     <span id="perlKey">my</span> <span id="var">@graph</span> = <span id="braces">(</span> <span id="var">$match</span><span id="braces">[</span>0<span id="braces">]</span> <span id="braces">)</span>;
-    <span id="perlKey">for</span> <span id="perlKey">my</span> <span id="var">$i</span> <span id="braces">(</span> 1 .. <span id="braces">(</span> $#match + <span id="var">$window_size</span> <span id="regExp">/ 2 ) ) {<br />        </span><span id="var">$graph</span><span id="regExp">[</span><span id="var">$i</span><span id="regExp">] = </span><span id="var">$graph</span><span id="regExp">[ </span><span id="var">$i</span><span id="regExp"> - 1 ] + ( </span><span id="var">$i</span> &gt; $#match ? 0 : $match[$i] ) -<br />          ( $i &lt; $window_size ? 0 : $match[ $i - $window_size ] );<br /></pre>}</td></div>
+    <span id="perlKey">for</span> <span id="perlKey">my</span> <span id="var">$i</span> <span id="braces">(</span> 1 .. <span id="braces">(</span> $#match + <span id="var">$window_size</span> <span id="regExp">/ 2 ) ) {<br />        </span><span id="var">$graph</span><span id="regExp">[</span><span id="var">$i</span><span id="regExp">] = </span><span id="var">$graph</span><span id="regExp">[ </span><span id="var">$i</span><span id="regExp"> - 1 ] + ( </span><span id="var">$i</span> &gt; $#match ? 0 : $match[$i] ) -<br />          ( $i &lt; $window_size ? 0 : $match[ $i - $window_size ] );<br />    <span id="braces">}</span>
+
+  <span id="comment"># at this point, the graph values are shifted $window_size/2 to the right</span><br />  <span id="comment"># i.e. the score at a certain position is the score of the window</span><br />  <span id="comment"># UPSTREAM of it: To fix it, we shoud discard the first $window_size/2 scores:</span><br />  <span id="comment">#$self-&gt;conservation1 ([]);</span><br />    <span id="perlKey">foreach</span> <span id="perlKey">my</span> <span id="var">$match_point</span> <span id="braces">(</span> <span id="var">@graph</span><span id="braces">[</span> <span id="perlFunc">int</span><span id="braces">(</span> <span id="var">$window_size</span> <span id="regExp">/ 2 ) .. $#graph ] ) {<br />        push @CONSERVATION, $match_point /</span> <span id="var">$window_size</span>;
+    <span id="braces">}</span>
+
+    <span id="perlKey">return</span> <span id="module"><a href="../ConservationProfile.html">TFBS::ConservationProfile</a></span>-&gt;<span id="perlKey">new</span><span id="braces">(</span>
+        conservation =&gt;\@ CONSERVATION,
+        parameters   =&gt; <span id="braces">{</span>
+            window       =&gt; <span id="var">$window_size</span>,
+            cutoff       =&gt; <span id="var">$cutoff</span>,
+            ref_seq_nr   =&gt; <span id="var">$ref_seq_nr</span>,
+            other_seq_nr =&gt; <span id="var">$other_seq_nr</span>,
+            method       =&gt; <span id="dqStr">"simple"</span>
+        <span id="braces">}</span>,
+        ref_sequence =&gt; <span id="var">$self</span>-&gt;<span id="method">ref_sequence</span>,
+        alignment    =&gt; <span id="var">$self</span>-&gt;<span id="method">alignment</span>
+    <span id="braces">)</span>;</pre>}</td></div>
 <div id="sep"></div>
 <table id="methCodeTitle" width="100%"><tr><td width="200"><a name="CODE5" id="CODE5"></a>alignment</td><td >description</td><td ><a href="#CODE4">prev</a></td><td ><a href="#CODE6">next</a></td><td align="right"><a href="#TOP">Top</a></td></tr></table>
 <div id="methCodeArea"><td ><span id="sub">sub</span> <span id="subName">alignment</span>

@@ -34,10 +34,7 @@ MEME documentation.
 <div id="sep"></div>
 <a name="SYNOPSIS" id="SYNOPSIS"></a>
 <div id="descTitle">Synopsis</div>
-<div id="descArea"><pre id="podParagraph">    my $patterngen =
-            <B>TFBS::PatternGen::MEME</B>->new(-seq_file=>'sequences.fa',
-                                            -binary => 'meme'
-
+<div id="descArea"><pre id="podParagraph">    my $patterngen =<br />            <B>TFBS::PatternGen::MEME</B>-&gt;new(-seq_file=&gt;'sequences.fa',<br />                                            -binary =&gt; 'meme'<br />
     my $pfm = $patterngen->pattern(); # $pfm is now a TFBS::Matrix::PFM object</pre>
 </div>
 <div id="sep"></div>
@@ -58,25 +55,7 @@ MEME documentation.
 <div id="mainTitle">Methods description</div>
 <div id="sep"></div>
 <table id="methDescTitle" width="100%"><tr><td WIDTH="200"><a name="_pod_new" id="_pod_new"></a><a name="POD1" id="POD1"></a>new</td><td ><a href="#CODE4">code</a></td><td >&nbsp;&nbsp;&nbsp;&nbsp;</td><td ><a href="#POD2">next</a></td><td align="right"><a href="#TOP">Top</a></td></tr></table>
-<table id="methDescArea" width="100%"><tr><td><pre id="podParagraph"> Title   : new
- Usage   : my $pattrengen = <B>TFBS::PatternGen::MEME</B>->new(%args);
- Function: the constructor for the <B>TFBS::PatternGen::MEME</B> object
- Returns : a <B>TFBS::PatternGen::MEME</B> object
- Args    : This method takes named arguments;
-            you must specify one of the following three
-            -seq_list     # a reference to an array of strings
-                          #   and/or Bio::Seq objects
-              # or
-            -seq_stream   # A Bio::SeqIO object
-              # or
-            -seq_file     # the name of the fasta file containing
-                          #   all the sequences
-           Other arguments are:
-            -binary       # a fully qualified path to the 'meme' executable
-                          #  OPTIONAL: default 'meme'
-            -additional_params  # a string containing additional
-                                #   command-line switches for the
-                                #   meme program</pre></td></tr></table>
+<table id="methDescArea" width="100%"><tr><td><pre id="podParagraph"> Title   : new<br /> Usage   : my $pattrengen = <B>TFBS::PatternGen::MEME</B>-&gt;new(%args);<br /> Function: the constructor for the <B>TFBS::PatternGen::MEME</B> object<br /> Returns : a <B>TFBS::PatternGen::MEME</B> object<br /> Args    : This method takes named arguments;<br />            you must specify one of the following three<br />            -seq_list     # a reference to an array of strings<br />                          #   and/or Bio::Seq objects<br />              # or<br />            -seq_stream   # A Bio::SeqIO object<br />              # or<br />            -seq_file     # the name of the fasta file containing<br />                          #   all the sequences<br />           Other arguments are:<br />            -binary       # a fully qualified path to the 'meme' executable<br />                          #  OPTIONAL: default 'meme'<br />            -additional_params  # a string containing additional<br />                                #   command-line switches for the<br />                                #   meme program</pre></td></tr></table>
 <div id="sep"></div>
 <a name="MethCode" id="MethCode"></a>
 <div id="mainTitle">Methods code</div>
@@ -98,7 +77,9 @@ MEME documentation.
       <span id="braces">)</span>;
     <span id="perlFunc">push</span> @<span id="braces">{</span> <span id="var">$self</span>-&gt;<span id="braces">{</span><span id="sqStr">'motifs'</span><span id="braces">}</span> <span id="braces">}</span>, <span id="var">$motif</span>;
     <span id="braces">}</span>
- <span id="perlKey">return</span></pre>}</td></div>
+ <span id="perlKey">return</span> 
+<span id="braces">}</span>
+<span id="comment">#</span><br /><span id="comment">#</span><br /></pre>}</td></div>
 <div id="sep"></div>
 <table id="methCodeTitle" width="100%"><tr><td width="200"><a name="CODE2" id="CODE2"></a>_parse_raw_matrix</td><td >description</td><td ><a href="#CODE1">prev</a></td><td ><a href="#CODE3">next</a></td><td align="right"><a href="#TOP">Top</a></td></tr></table>
 <div id="methCodeArea"><td ><span id="sub">sub</span> <span id="privSubName">_parse_raw_matrix</span>
@@ -135,7 +116,11 @@ MEME documentation.
     <span id="braces">}</span>
     <span id="perlKey">my</span> <span id="var">$patterngen</span>=<span id="module"><a href="SimplePFM.html">TFBS::PatternGen::SimplePFM</a></span>-&gt;<span id="perlKey">new</span><span id="braces">(</span>-seq_list=&gt;\<span id="var">@matrix</span><span id="braces">)</span>;
     <span id="perlKey">my</span> <span id="var">$matrix</span>=<span id="var">$patterngen</span>-&gt;<span id="method">pattern</span>-&gt;<span id="method">rawprint</span>;
- <span id="comment">#   print STDERR $matrix;</span><br />    <span id="perlKey">return</span> <span id="braces">(</span><span id="var">$matrix</span>,\<span id="var">@sites</span>,<span id="var">$e_value</span><span id="braces">)</span>;</pre>}</td></div>
+ <span id="comment">#   print STDERR $matrix;</span><br />    <span id="perlKey">return</span> <span id="braces">(</span><span id="var">$matrix</span>,\<span id="var">@sites</span>,<span id="var">$e_value</span><span id="braces">)</span>;
+<span id="braces">}</span>
+
+
+1;</pre>}</td></div>
 <div id="sep"></div>
 <table id="methCodeTitle" width="100%"><tr><td width="200"><a name="CODE3" id="CODE3"></a>_run_meme</td><td >description</td><td ><a href="#CODE2">prev</a></td><td ><a href="#CODE4">next</a></td><td align="right"><a href="#TOP">Top</a></td></tr></table>
 <div id="methCodeArea"><td ><span id="sub">sub</span> <span id="privSubName">_run_meme</span>

@@ -31,8 +31,7 @@ SiteSet documentation.
 <div id="sep"></div>
 <a name="SYNOPSIS" id="SYNOPSIS"></a>
 <div id="descTitle">Synopsis</div>
-<div id="descArea"><pre id="podParagraph">    my $site_set = <B>TFBS::SiteSet</B>->new(@list_of_site_objects);
-
+<div id="descArea"><pre id="podParagraph">    my $site_set = <B>TFBS::SiteSet</B>-&gt;new(@list_of_site_objects);<br />
     # add a TFBS::Site object to set:
     
     $site_set->add_site($site_obj);
@@ -69,50 +68,16 @@ SiteSet documentation.
 <div id="mainTitle">Methods description</div>
 <div id="sep"></div>
 <table id="methDescTitle" width="100%"><tr><td WIDTH="200"><a name="_pod_GFF" id="_pod_GFF"></a><a name="POD1" id="POD1"></a>GFF</td><td ><a href="#CODE2">code</a></td><td >&nbsp;&nbsp;&nbsp;&nbsp;</td><td ><a href="#POD2">next</a></td><td align="right"><a href="#TOP">Top</a></td></tr></table>
-<table id="methDescArea" width="100%"><tr><td><pre id="podParagraph"> Title   : GFF
- Usage   : print $siteset->GFF();
-         : print $siteset->GFF($gff_formatter)
- Function: returns a "standard" multiline GFF string 
- Returns : a string (multiline, newline terminated)
- Args    : a $gff_formatter function reference (optional)</pre></td></tr></table>
+<table id="methDescArea" width="100%"><tr><td><pre id="podParagraph"> Title   : GFF<br /> Usage   : print $siteset-&gt;GFF();<br />         : print $siteset-&gt;GFF($gff_formatter)<br /> Function: returns a &quot;standard&quot; multiline GFF string <br /> Returns : a string (multiline, newline terminated)<br /> Args    : a $gff_formatter function reference (optional)</pre></td></tr></table>
 <div id="sep"></div>
 <table id="methDescTitle" width="100%"><tr><td WIDTH="200"><a name="_pod_Iterator" id="_pod_Iterator"></a><a name="POD2" id="POD2"></a>Iterator</td><td ><a href="#CODE3">code</a></td><td ><a href="#POD1">prev</a></td><td ><a href="#POD3">next</a></td><td align="right"><a href="#TOP">Top</a></td></tr></table>
-<table id="methDescArea" width="100%"><tr><td><pre id="podParagraph"> Title   : Iterator
- Usage   : my $siteset_iterator = 
-                   $siteset->Iterator(-sort_by =>'start');
-           while (my $site = $siteset_iterator->next) {
-	       # do whatever you want with individual matrix objects
-	   }
- Function: Returns an iterator object that can be used to go through
-           all members of the set (TFBS::Site objects)
- Returns : an iterator object (currently undocumentened in TFBS -
-			       but understands the 'next' method)
- Args    : -sort_by # optional - currently it accepts 
-                    #   (default sort order in parenthetse)
-                    #    'name' (pattern name, alphabetically)
-                    #    'ID' (pattern/matrix ID, alphabetically)
-                    #    'start' (site start in sequence, 
-                    #             numerically,increasing order)
-                    #    'end' (site end in sequence, 
-                    #           numerically, increasing order)
-                    #    'score' (numerically, decreasing order)
-                    
-           -reverse # optional - reverses the default sorting order if true</pre></td></tr></table>
+<table id="methDescArea" width="100%"><tr><td><pre id="podParagraph"> Title   : Iterator<br /> Usage   : my $siteset_iterator = <br />                   $siteset-&gt;Iterator(-sort_by =&gt;'start');<br />           while (my $site = $siteset_iterator-&gt;next) {<br />	       # do whatever you want with individual matrix objects<br />	   }<br /> Function: Returns an iterator object that can be used to go through<br />           all members of the set (TFBS::Site objects)<br /> Returns : an iterator object (currently undocumentened in TFBS -<br />			       but understands the 'next' method)<br /> Args    : -sort_by # optional - currently it accepts <br />                    #   (default sort order in parenthetse)<br />                    #    'name' (pattern name, alphabetically)<br />                    #    'ID' (pattern/matrix ID, alphabetically)<br />                    #    'start' (site start in sequence, <br />                    #             numerically,increasing order)<br />                    #    'end' (site end in sequence, <br />                    #           numerically, increasing order)<br />                    #    'score' (numerically, decreasing order)<br />                    <br />           -reverse # optional - reverses the default sorting order if true</pre></td></tr></table>
 <div id="sep"></div>
 <table id="methDescTitle" width="100%"><tr><td WIDTH="200"><a name="_pod_add_site" id="_pod_add_site"></a><a name="POD3" id="POD3"></a>add_site</td><td ><a href="#CODE5">code</a></td><td ><a href="#POD2">prev</a></td><td ><a href="#POD4">next</a></td><td align="right"><a href="#TOP">Top</a></td></tr></table>
-<table id="methDescArea" width="100%"><tr><td><pre id="podParagraph"> Title   : add_site
- Usage   : $siteset->add_site($site_object)
-           $siteset->add_site(@list_of_site_objects)
- Function: adds TFBS::Site objects to an existing <B>TFBS::SiteSet</B> object
- Returns : $sitepair object (usually ignored)
- Args    : A list of TFBS::Site objects to add</pre></td></tr></table>
+<table id="methDescArea" width="100%"><tr><td><pre id="podParagraph"> Title   : add_site<br /> Usage   : $siteset-&gt;add_site($site_object)<br />           $siteset-&gt;add_site(@list_of_site_objects)<br /> Function: adds TFBS::Site objects to an existing <B>TFBS::SiteSet</B> object<br /> Returns : $sitepair object (usually ignored)<br /> Args    : A list of TFBS::Site objects to add</pre></td></tr></table>
 <div id="sep"></div>
 <table id="methDescTitle" width="100%"><tr><td WIDTH="200"><a name="_pod_size" id="_pod_size"></a><a name="POD4" id="POD4"></a>size</td><td ><a href="#CODE10">code</a></td><td ><a href="#POD3">prev</a></td><td ><a href="#POD5">next</a></td><td align="right"><a href="#TOP">Top</a></td></tr></table>
-<table id="methDescArea" width="100%"><tr><td><pre id="podParagraph"> Title   : size
- Usage   : my $size = $siteset->size()
- Function: returns a number of TFBS::Site objects contained in the set
- Returns : a scalar (integer) 
- Args    : none</pre></td></tr></table>
+<table id="methDescArea" width="100%"><tr><td><pre id="podParagraph"> Title   : size<br /> Usage   : my $size = $siteset-&gt;size()<br /> Function: returns a number of TFBS::Site objects contained in the set<br /> Returns : a scalar (integer) <br /> Args    : none</pre></td></tr></table>
 <div id="sep"></div>
 <a name="MethCode" id="MethCode"></a>
 <div id="mainTitle">Methods code</div>
@@ -144,7 +109,12 @@ SiteSet documentation.
 	<span id="var">$gff_string</span> .= <span id="var">$site</span>-&gt;<span id="method">GFF</span><span id="braces">(</span><span id="var">%args</span><span id="braces">)</span>.<span id="dqStr">"\n"</span>;
     <span id="braces">}</span>
     
-    <span id="perlKey">return</span> <span id="var">$gff_string</span>;</pre>}</td></div>
+    <span id="perlKey">return</span> <span id="var">$gff_string</span>;
+<span id="braces">}</span>
+
+
+
+<span id="comment">########################################################</span><br /><span id="comment"># OBSOLETE METHODS</span><br /><span id="comment">########################################################</span><br /></pre>}</td></div>
 <div id="sep"></div>
 <table id="methCodeTitle" width="100%"><tr><td width="200"><a name="CODE3" id="CODE3"></a>Iterator</td><td ><a href="#POD2">description</a></td><td ><a href="#CODE2">prev</a></td><td ><a href="#CODE4">next</a></td><td align="right"><a href="#TOP">Top</a></td></tr></table>
 <div id="methCodeArea"><td ><span id="sub">sub</span> <span id="subName">Iterator</span>
@@ -158,7 +128,10 @@ SiteSet documentation.
 <table id="methCodeTitle" width="100%"><tr><td width="200"><a name="CODE4" id="CODE4"></a>_no_more</td><td >description</td><td ><a href="#CODE3">prev</a></td><td ><a href="#CODE5">next</a></td><td align="right"><a href="#TOP">Top</a></td></tr></table>
 <div id="methCodeArea"><td ><span id="sub">sub</span> <span id="privSubName">_no_more</span>
 {<pre>    <span id="var">$_</span><span id="braces">[</span>0<span id="braces">]</span>-&gt;<span id="method">throw</span><span id="braces">(</span><span id="dqStr">"Method '<span id="var">$_</span>[1]' is no longer available in "</span>. 
-		 <span id="perlFunc">ref</span><span id="braces">(</span><span id="var">$_</span><span id="braces">[</span>0<span id="braces">]</span><span id="braces">)</span>.<span id="dqStr">". Use the 'Iterator' method instead."</span><span id="braces">)</span>;</pre>}</td></div>
+		 <span id="perlFunc">ref</span><span id="braces">(</span><span id="var">$_</span><span id="braces">[</span>0<span id="braces">]</span><span id="braces">)</span>.<span id="dqStr">". Use the 'Iterator' method instead."</span><span id="braces">)</span>;
+<span id="braces">}</span>
+
+1;</pre>}</td></div>
 <div id="sep"></div>
 <table id="methCodeTitle" width="100%"><tr><td width="200"><a name="CODE5" id="CODE5"></a>add_site</td><td ><a href="#POD3">description</a></td><td ><a href="#CODE4">prev</a></td><td ><a href="#CODE6">next</a></td><td align="right"><a href="#TOP">Top</a></td></tr></table>
 <div id="methCodeArea"><td ><span id="sub">sub</span> <span id="subName">add_site</span>
@@ -207,7 +180,12 @@ SiteSet documentation.
     <span id="perlKey">while</span> <span id="braces">(</span><span id="perlKey">my</span> <span id="var">$site</span> = <span id="var">$site_iterator</span>-&gt;<span id="perlKey">next</span><span id="braces">(</span><span id="braces">)</span><span id="braces">)</span>  <span id="braces">{</span>
 	<span id="var">$GFFset</span>-&gt;<span id="method">addGeneFeature</span><span id="braces">(</span><span id="var">$site</span>-&gt;<span id="method">GFF</span><span id="braces">(</span><span id="braces">)</span><span id="braces">)</span>;
     <span id="braces">}</span>
-    <span id="perlKey">return</span> <span id="var">$GFFset</span>;</pre>}</td></div>
+    <span id="perlKey">return</span> <span id="var">$GFFset</span>;
+<span id="braces">}</span>
+
+
+
+<span id="comment">##############################################################</span><br /><span id="comment"># PRIVATE AND AUTOMATIC METHODS</span><br /><span id="comment">##############################################################</span><br /></pre>}</td></div>
 <div id="sep"></div>
 <table id="methCodeTitle" width="100%"><tr><td width="200"><a name="CODE10" id="CODE10"></a>size</td><td ><a href="#POD4">description</a></td><td ><a href="#CODE9">prev</a></td><td >next</td><td align="right"><a href="#TOP">Top</a></td></tr></table>
 <div id="methCodeArea"><td ><span id="sub">sub</span> <span id="subName">size</span>
@@ -226,14 +204,7 @@ SiteSet documentation.
 <div id="genInfoArea">The rest of the documentation details each of the object<br />methods. Internal methods are preceded with an underscore.</div>
 <div id="sep"></div>
 <table id="genInfoTitle" width="100%"><tr><td><a name="_pod_add_site_set" id="_pod_add_site_set"></a>add_site_set</td><td align="right"><a href="#TOP">Top</a></td></tr></table>
-<div id="genInfoArea"><pre id="podParagraph"> Title   : add_site_set
- Usage   : $siteset->add_site_set($site_set_object)
-           $siteset->add_site(@list_of_site_set_objects)
- Function: adds the contents of other <B>TFBS::SiteSet</B> objects 
-           to an existing <B>TFBS::SiteSet</B> object
- Returns : $siteset object (usually ignored)
- Args    : A list of <B>TFBS::SiteSet</B> objects whose contents should be 
-           added to $siteset</pre></div>
+<div id="genInfoArea"><pre id="podParagraph"> Title   : add_site_set<br /> Usage   : $siteset-&gt;add_site_set($site_set_object)<br />           $siteset-&gt;add_site(@list_of_site_set_objects)<br /> Function: adds the contents of other <B>TFBS::SiteSet</B> objects <br />           to an existing <B>TFBS::SiteSet</B> object<br /> Returns : $siteset object (usually ignored)<br /> Args    : A list of <B>TFBS::SiteSet</B> objects whose contents should be <br />           added to $siteset</pre></div>
 <div id="sep"></div>
 </body>
 </html>

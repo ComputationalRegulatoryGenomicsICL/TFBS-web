@@ -71,148 +71,38 @@ JASPAR2 documentation.
 <div id="mainTitle">Methods description</div>
 <div id="sep"></div>
 <table id="methDescTitle" width="100%"><tr><td WIDTH="200"><a name="_pod_connect" id="_pod_connect"></a><a name="POD1" id="POD1"></a>connect</td><td ><a href="#CODE12">code</a></td><td >&nbsp;&nbsp;&nbsp;&nbsp;</td><td ><a href="#POD2">next</a></td><td align="right"><a href="#TOP">Top</a></td></tr></table>
-<table id="methDescArea" width="100%"><tr><td><pre id="podParagraph"> Title   : connect
- Usage   : my $db =
-	    <B>TFBS::DB::JASPAR2</B>->connect("dbi:mysql:DATABASENAME:HOSTNAME",
-					"USERNAME",
-					"PASSWORD");
- Function: connects to the existing JASPAR2-type database and
-	   returns a database object that interfaces the database
- Returns : a <B>TFBS::DB::JASPAR2</B> object
- Args    : a standard database connection triplet
-	   ("dbi:mysql:DATABASENAME:HOSTNAME",  "USERNAME", "PASSWORD")
-	   In place of DATABASENAME, HOSTNAME, USERNAME and PASSWORD,
-	   use the actual values. PASSWORD and USERNAME might be
-	   optional, depending on the user acces permissions for
-	   the database server.</pre></td></tr></table>
+<table id="methDescArea" width="100%"><tr><td><pre id="podParagraph"> Title   : connect<br /> Usage   : my $db =<br />	    <B>TFBS::DB::JASPAR2</B>-&gt;connect(&quot;dbi:mysql:DATABASENAME:HOSTNAME&quot;,<br />					&quot;USERNAME&quot;,<br />					&quot;PASSWORD&quot;);<br /> Function: connects to the existing JASPAR2-type database and<br />	   returns a database object that interfaces the database<br /> Returns : a <B>TFBS::DB::JASPAR2</B> object<br /> Args    : a standard database connection triplet<br />	   (&quot;dbi:mysql:DATABASENAME:HOSTNAME&quot;,  &quot;USERNAME&quot;, &quot;PASSWORD&quot;)<br />	   In place of DATABASENAME, HOSTNAME, USERNAME and PASSWORD,<br />	   use the actual values. PASSWORD and USERNAME might be<br />	   optional, depending on the user acces permissions for<br />	   the database server.</pre></td></tr></table>
 <div id="sep"></div>
 <table id="methDescTitle" width="100%"><tr><td WIDTH="200"><a name="_pod_create" id="_pod_create"></a><a name="POD2" id="POD2"></a>create</td><td ><a href="#CODE13">code</a></td><td ><a href="#POD1">prev</a></td><td ><a href="#POD3">next</a></td><td align="right"><a href="#TOP">Top</a></td></tr></table>
-<table id="methDescArea" width="100%"><tr><td><pre id="podParagraph"> Title   : create
- Usage   : my $newdb =
-	    <B>TFBS::DB::JASPAR2</B>->create("dbi:mysql:NEWDATABASENAME:HOSTNAME",
-				      "USERNAME",
-				      "PASSWORD");
- Function: connects to the database server, creates a new JASPAR2-type database and returns a database
-	   object that interfaces the database
- Returns : a <B>TFBS::DB::JASPAR2</B> object
- Args    : a standard database connection triplet
-	    ("dbi:mysql:NEWDATABASENAME:HOSTNAME",  "USERNAME", "PASSWORD")
-	   In place of NEWDATABASENAME, HOSTNAME, USERNAME and
-	   PASSWORD use the actual values. PASSWORD and USERNAME
-           might be optional, depending on the users acces permissions
-           for the database server.</pre></td></tr></table>
+<table id="methDescArea" width="100%"><tr><td><pre id="podParagraph"> Title   : create<br /> Usage   : my $newdb =<br />	    <B>TFBS::DB::JASPAR2</B>-&gt;create(&quot;dbi:mysql:NEWDATABASENAME:HOSTNAME&quot;,<br />				      &quot;USERNAME&quot;,<br />				      &quot;PASSWORD&quot;);<br /> Function: connects to the database server, creates a new JASPAR2-type database and returns a database<br />	   object that interfaces the database<br /> Returns : a <B>TFBS::DB::JASPAR2</B> object<br /> Args    : a standard database connection triplet<br />	    (&quot;dbi:mysql:NEWDATABASENAME:HOSTNAME&quot;,  &quot;USERNAME&quot;, &quot;PASSWORD&quot;)<br />	   In place of NEWDATABASENAME, HOSTNAME, USERNAME and<br />	   PASSWORD use the actual values. PASSWORD and USERNAME<br />           might be optional, depending on the users acces permissions<br />           for the database server.</pre></td></tr></table>
 <div id="sep"></div>
 <table id="methDescTitle" width="100%"><tr><td WIDTH="200"><a name="_pod_dbh" id="_pod_dbh"></a><a name="POD3" id="POD3"></a>dbh</td><td ><a href="#CODE14">code</a></td><td ><a href="#POD2">prev</a></td><td ><a href="#POD4">next</a></td><td align="right"><a href="#TOP">Top</a></td></tr></table>
-<table id="methDescArea" width="100%"><tr><td><pre id="podParagraph"> Title   : dbh
- Usage   : my $dbh = $db->dbh();
-	   $dbh->do("UPDATE matrix_data SET name='ADD1' WHERE NAME='SREBP2'");
- Function: returns the DBI database handle of the MySQL database
-	   interfaced by $db; THIS IS USED FOR WRITING NEW METHODS
-	   FOR DIRECT RELATIONAL DATABASE MANIPULATION - if you
-	   have write access AND do not know what you are doing,
-	   you can severely  corrupt the data
-	   For documentation about database handle methods, see <a href="#_pod_DBI">DBI</a><br /> Returns : the database (DBI) handle of the MySQL JASPAR2-type<br />	   relational database associated with the TFBS::DB::JASPAR2<br />	   object<br /> Args    : none</pre></td></tr></table>
+<table id="methDescArea" width="100%"><tr><td><pre id="podParagraph"> Title   : dbh<br /> Usage   : my $dbh = $db-&gt;dbh();<br />	   $dbh-&gt;do(&quot;UPDATE matrix_data SET name='ADD1' WHERE NAME='SREBP2'&quot;);<br /> Function: returns the DBI database handle of the MySQL database<br />	   interfaced by $db; THIS IS USED FOR WRITING NEW METHODS<br />	   FOR DIRECT RELATIONAL DATABASE MANIPULATION - if you<br />	   have write access AND do not know what you are doing,<br />	   you can severely  corrupt the data<br />	   For documentation about database handle methods, see <a href="#_pod_DBI">DBI</a><br /> Returns : the database (DBI) handle of the MySQL JASPAR2-type<br />	   relational database associated with the TFBS::DB::JASPAR2<br />	   object<br /> Args    : none</pre></td></tr></table>
 <div id="sep"></div>
 <table id="methDescTitle" width="100%"><tr><td WIDTH="200"><a name="_pod_delete_Matrix_having_ID" id="_pod_delete_Matrix_having_ID"></a><a name="POD4" id="POD4"></a>delete_Matrix_having_ID</td><td ><a href="#CODE15">code</a></td><td ><a href="#POD3">prev</a></td><td ><a href="#POD5">next</a></td><td align="right"><a href="#TOP">Top</a></td></tr></table>
-<table id="methDescArea" width="100%"><tr><td><pre id="podParagraph"> Title   : delete_Matrix_having_ID
- Usage   : $db->delete_Matrix_with_ID('M00045');
- Function: Deletes the matrix having the given ID from the database
- Returns : 0 on success; $@ contents on failure
-	   (this is too C-like and may change in future versions)
- Args    : (ID)
-	   A string
- Comment : Yeah, yeah, 'delete_Matrix_having_ID' is a stupid name
-	   for a method, but at least it should be obviuos what it does.</pre></td></tr></table>
+<table id="methDescArea" width="100%"><tr><td><pre id="podParagraph"> Title   : delete_Matrix_having_ID<br /> Usage   : $db-&gt;delete_Matrix_with_ID('M00045');<br /> Function: Deletes the matrix having the given ID from the database<br /> Returns : 0 on success; $@ contents on failure<br />	   (this is too C-like and may change in future versions)<br /> Args    : (ID)<br />	   A string<br /> Comment : Yeah, yeah, 'delete_Matrix_having_ID' is a stupid name<br />	   for a method, but at least it should be obviuos what it does.</pre></td></tr></table>
 <div id="sep"></div>
 <table id="methDescTitle" width="100%"><tr><td WIDTH="200"><a name="_pod_get_MatrixSet" id="_pod_get_MatrixSet"></a><a name="POD5" id="POD5"></a>get_MatrixSet</td><td ><a href="#CODE16">code</a></td><td ><a href="#POD4">prev</a></td><td ><a href="#POD6">next</a></td><td align="right"><a href="#TOP">Top</a></td></tr></table>
-<table id="methDescArea" width="100%"><tr><td><pre id="podParagraph"> Title   : get_MatrixSet
- Usage   : my $matrixset = $db->get_MatrixSet(%args);
- Function: fetches matrix data under for all matrices in the database
-	   matching criteria defined by the named arguments
-	   and returns a TFBS::MatrixSet object
- Returns : a TFBS::MatrixSet object
- Args    : This method accepts named arguments:
-	   -IDs        # a reference to an array of IDs (strings)
-	   -names      # a reference to an array of
-		       #  transcription factor names (string)
-	   -classes    # a reference to an array of
-		       #  structural class names (strings)
-	   -species    # a reference to an array of
-		       #   Latin species names (strings)
-	   -sysgroups  # a reference to an array of
-		       #  higher taxonomic categories (strings)
-
+<table id="methDescArea" width="100%"><tr><td><pre id="podParagraph"> Title   : get_MatrixSet<br /> Usage   : my $matrixset = $db-&gt;get_MatrixSet(%args);<br /> Function: fetches matrix data under for all matrices in the database<br />	   matching criteria defined by the named arguments<br />	   and returns a TFBS::MatrixSet object<br /> Returns : a TFBS::MatrixSet object<br /> Args    : This method accepts named arguments:<br />	   -IDs        # a reference to an array of IDs (strings)<br />	   -names      # a reference to an array of<br />		       #  transcription factor names (string)<br />	   -classes    # a reference to an array of<br />		       #  structural class names (strings)<br />	   -species    # a reference to an array of<br />		       #   Latin species names (strings)<br />	   -sysgroups  # a reference to an array of<br />		       #  higher taxonomic categories (strings)<br />
 	   -matrixtype # a string, 'PFM', 'ICM' or 'PWM'
 	   -min_ic     # float, minimum total information content
 		       #   of the matrix
-</pre>The five arguments that expect list references are used in database<br />query formulation: elements within lists are combined with 'OR'<br />operators, and the lists of different types with 'AND'. For example,<br /><pre id="podParagraph">    my $matrixset = $db->(-classes => ['TRP_CLUSTER', 'FORKHEAD'],
-			  -species => ['Homo sapiens', 'Mus musculus'],
-			  -matrixtype => 'PWM');
-</pre>gives a set of PWMs whose (structural clas is 'TRP_CLUSTER' OR<br />'FORKHEAD') AND (the species they are derived from is 'Homo sapiens'<br />OR 'Mus musculus').<br />The -min_ic filter is applied after the query in the sense that the<br />matrices profiles with total infromation content less than specified<br />are not included in the set.</td></tr></table>
+</pre>The five arguments that expect list references are used in database<br />query formulation: elements within lists are combined with 'OR'<br />operators, and the lists of different types with 'AND'. For example,<br /><pre id="podParagraph">    my $matrixset = $db-&gt;(-classes =&gt; ['TRP_CLUSTER', 'FORKHEAD'],<br />			  -species =&gt; ['Homo sapiens', 'Mus musculus'],<br />			  -matrixtype =&gt; 'PWM');<br /></pre>gives a set of PWMs whose (structural clas is 'TRP_CLUSTER' OR<br />'FORKHEAD') AND (the species they are derived from is 'Homo sapiens'<br />OR 'Mus musculus').<br />The -min_ic filter is applied after the query in the sense that the<br />matrices profiles with total infromation content less than specified<br />are not included in the set.</td></tr></table>
 <div id="sep"></div>
 <table id="methDescTitle" width="100%"><tr><td WIDTH="200"><a name="_pod_get_Matrix_by_ID" id="_pod_get_Matrix_by_ID"></a><a name="POD6" id="POD6"></a>get_Matrix_by_ID</td><td ><a href="#CODE17">code</a></td><td ><a href="#POD5">prev</a></td><td ><a href="#POD7">next</a></td><td align="right"><a href="#TOP">Top</a></td></tr></table>
-<table id="methDescArea" width="100%"><tr><td><pre id="podParagraph"> Title   : get_Matrix_by_ID
- Usage   : my $pfm = $db->get_Matrix_by_ID('M00034', 'PFM');
- Function: fetches matrix data under the given ID from the
-           database and returns a TFBS::Matrix::* object
- Returns : a TFBS::Matrix::* object; the exact type of the
-	   object depending on the second argument (allowed
-	   values are 'PFM', 'ICM', and 'PWM'); returns undef if
-	   matrix with the given ID is not found
- Args    : (Matrix_ID, Matrix_type)
-	   Matrix_ID is a string; Matrix_type is one of the
-	   following: 'PFM' (raw position frequency matrix),
-	   'ICM' (information content matrix) or 'PWM' (position
-	   weight matrix)
-	   If Matrix_type is omitted, a PWM is retrieved by default.</pre></td></tr></table>
+<table id="methDescArea" width="100%"><tr><td><pre id="podParagraph"> Title   : get_Matrix_by_ID<br /> Usage   : my $pfm = $db-&gt;get_Matrix_by_ID('M00034', 'PFM');<br /> Function: fetches matrix data under the given ID from the<br />           database and returns a TFBS::Matrix::* object<br /> Returns : a TFBS::Matrix::* object; the exact type of the<br />	   object depending on the second argument (allowed<br />	   values are 'PFM', 'ICM', and 'PWM'); returns undef if<br />	   matrix with the given ID is not found<br /> Args    : (Matrix_ID, Matrix_type)<br />	   Matrix_ID is a string; Matrix_type is one of the<br />	   following: 'PFM' (raw position frequency matrix),<br />	   'ICM' (information content matrix) or 'PWM' (position<br />	   weight matrix)<br />	   If Matrix_type is omitted, a PWM is retrieved by default.</pre></td></tr></table>
 <div id="sep"></div>
 <table id="methDescTitle" width="100%"><tr><td WIDTH="200"><a name="_pod_get_Matrix_by_name" id="_pod_get_Matrix_by_name"></a><a name="POD7" id="POD7"></a>get_Matrix_by_name</td><td ><a href="#CODE18">code</a></td><td ><a href="#POD6">prev</a></td><td ><a href="#POD8">next</a></td><td align="right"><a href="#TOP">Top</a></td></tr></table>
-<table id="methDescArea" width="100%"><tr><td><pre id="podParagraph"> Title   : get_Matrix_by_name
- Usage   : my $pfm = $db->get_Matrix_by_name('HNF-1', 'PWM');
- Function: fetches matrix data under the given name from the
-	   database and returns a TFBS::Matrix::* object
- Returns : a TFBS::Matrix::* object; the exact type of the object
-	   depending on the second argument (allowed values are
-	   'PFM', 'ICM', and 'PWM')
- Args    : (Matrix_name, Matrix_type)
-	   Matrix_name is a string; Matrix_type is one of the
-	   following:
-	   'PFM' (raw position frequency matrix),
-	   'ICM' (information content matrix) or
-	   'PWM' (position weight matrix)
-	   If Matrix_type is omitted, a PWM is retrieved by default.
- Warning : According to the current JASPAR2 data model, name is
-	   not necessarily a unique identifier. In the case where
-	   there are several matrices with the same name in the
-	   database, the function fetches the first one and prints
-	   a warning on STDERR. You have been warned.</pre></td></tr></table>
+<table id="methDescArea" width="100%"><tr><td><pre id="podParagraph"> Title   : get_Matrix_by_name<br /> Usage   : my $pfm = $db-&gt;get_Matrix_by_name('HNF-1', 'PWM');<br /> Function: fetches matrix data under the given name from the<br />	   database and returns a TFBS::Matrix::* object<br /> Returns : a TFBS::Matrix::* object; the exact type of the object<br />	   depending on the second argument (allowed values are<br />	   'PFM', 'ICM', and 'PWM')<br /> Args    : (Matrix_name, Matrix_type)<br />	   Matrix_name is a string; Matrix_type is one of the<br />	   following:<br />	   'PFM' (raw position frequency matrix),<br />	   'ICM' (information content matrix) or<br />	   'PWM' (position weight matrix)<br />	   If Matrix_type is omitted, a PWM is retrieved by default.<br /> Warning : According to the current JASPAR2 data model, name is<br />	   not necessarily a unique identifier. In the case where<br />	   there are several matrices with the same name in the<br />	   database, the function fetches the first one and prints<br />	   a warning on STDERR. You have been warned.</pre></td></tr></table>
 <div id="sep"></div>
 <table id="methDescTitle" width="100%"><tr><td WIDTH="200"><a name="_pod_new" id="_pod_new"></a><a name="POD8" id="POD8"></a>new</td><td ><a href="#CODE19">code</a></td><td ><a href="#POD7">prev</a></td><td ><a href="#POD9">next</a></td><td align="right"><a href="#TOP">Top</a></td></tr></table>
-<table id="methDescArea" width="100%"><tr><td><pre id="podParagraph"> Title   : new
- Usage   : DEPRECATED - for backward compatibility only
-           Use connect() or create() instead</pre></td></tr></table>
+<table id="methDescArea" width="100%"><tr><td><pre id="podParagraph"> Title   : new<br /> Usage   : DEPRECATED - for backward compatibility only<br />           Use connect() or create() instead</pre></td></tr></table>
 <div id="sep"></div>
 <table id="methDescTitle" width="100%"><tr><td WIDTH="200"><a name="_pod_store_Matrix" id="_pod_store_Matrix"></a><a name="POD9" id="POD9"></a>store_Matrix</td><td ><a href="#CODE20">code</a></td><td ><a href="#POD8">prev</a></td><td ><a href="#POD10">next</a></td><td align="right"><a href="#TOP">Top</a></td></tr></table>
-<table id="methDescArea" width="100%"><tr><td><pre id="podParagraph"> Title   : store_Matrix
- Usage   : $db->store_Matrix($pfm);
- Function: Stores the contents of a TFBS::Matrix::DB object in the database
- Returns : 0 on success; $@ contents on failure
-	   (this is too C-like and may change in future versions)
- Args    : (PFM_object)
-	   A TFBS::Matrix::PFM object
- Comment : this is an experimental method that is not 100% bulletproof;
-	   use at your own risk</pre></td></tr></table>
+<table id="methDescArea" width="100%"><tr><td><pre id="podParagraph"> Title   : store_Matrix<br /> Usage   : $db-&gt;store_Matrix($pfm);<br /> Function: Stores the contents of a TFBS::Matrix::DB object in the database<br /> Returns : 0 on success; $@ contents on failure<br />	   (this is too C-like and may change in future versions)<br /> Args    : (PFM_object)<br />	   A TFBS::Matrix::PFM object<br /> Comment : this is an experimental method that is not 100% bulletproof;<br />	   use at your own risk</pre></td></tr></table>
 <div id="sep"></div>
 <table id="methDescTitle" width="100%"><tr><td WIDTH="200"><a name="_pod_store_MatrixSet" id="_pod_store_MatrixSet"></a><a name="POD10" id="POD10"></a>store_MatrixSet</td><td ><a href="#CODE21">code</a></td><td ><a href="#POD9">prev</a></td><td ><a href="#POD11">next</a></td><td align="right"><a href="#TOP">Top</a></td></tr></table>
-<table id="methDescArea" width="100%"><tr><td><pre id="podParagraph"> Title   : store_MatrixSet
- Usage   : $db->store_Matrix($matrixset);
- Function: Stores the TFBS::DB::PFM object that are part of a
-           TFBS::MatrixSet object into the database
- Returns : 0 on success; $@ contents on failure
-	   (this is too C-like and may change in future versions)
- Args    : (MatrixSet_object)
-	   A TFBS::MatrixSet object
- Comment : THIS METHOD IS NOT YET IMPLEMENTED</pre></td></tr></table>
+<table id="methDescArea" width="100%"><tr><td><pre id="podParagraph"> Title   : store_MatrixSet<br /> Usage   : $db-&gt;store_Matrix($matrixset);<br /> Function: Stores the TFBS::DB::PFM object that are part of a<br />           TFBS::MatrixSet object into the database<br /> Returns : 0 on success; $@ contents on failure<br />	   (this is too C-like and may change in future versions)<br /> Args    : (MatrixSet_object)<br />	   A TFBS::MatrixSet object<br /> Comment : THIS METHOD IS NOT YET IMPLEMENTED</pre></td></tr></table>
 <div id="sep"></div>
 <a name="MethCode" id="MethCode"></a>
 <div id="mainTitle">Methods code</div>
@@ -256,7 +146,14 @@ JASPAR2 documentation.
 <div id="sep"></div>
 <table id="methCodeTitle" width="100%"><tr><td width="200"><a name="CODE2" id="CODE2"></a>DESTROY</td><td >description</td><td ><a href="#CODE1">prev</a></td><td ><a href="#CODE3">next</a></td><td align="right"><a href="#TOP">Top</a></td></tr></table>
 <div id="methCodeArea"><td ><span id="sub">sub</span> <span id="subName">DESTROY</span>
-{<pre>    <span id="var">$_</span><span id="braces">[</span>0<span id="braces">]</span>-&gt;<span id="method">dbh</span>-&gt;<span id="method">disconnect</span><span id="braces">(</span><span id="braces">)</span> <span id="perlKey">if</span> <span id="var">$_</span><span id="braces">[</span>0<span id="braces">]</span>-&gt;<span id="method">dbh</span>;</pre>}</td></div>
+{<pre>    <span id="var">$_</span><span id="braces">[</span>0<span id="braces">]</span>-&gt;<span id="method">dbh</span>-&gt;<span id="method">disconnect</span><span id="braces">(</span><span id="braces">)</span> <span id="perlKey">if</span> <span id="var">$_</span><span id="braces">[</span>0<span id="braces">]</span>-&gt;<span id="method">dbh</span>;
+<span id="braces">}</span>
+
+
+
+
+
+1;</pre>}</td></div>
 <div id="sep"></div>
 <table id="methCodeTitle" width="100%"><tr><td width="200"><a name="CODE3" id="CODE3"></a>_create_tables</td><td >description</td><td ><a href="#CODE2">prev</a></td><td ><a href="#CODE4">next</a></td><td align="right"><a href="#TOP">Top</a></td></tr></table>
 <div id="methCodeArea"><td ><span id="sub">sub</span> <span id="privSubName">_create_tables</span>
@@ -515,7 +412,13 @@ JASPAR2 documentation.
 	    <span id="braces">}</span>
 	<span id="braces">}</span>
     <span id="braces">}</span>;
-    <span id="perlKey">return</span> $@;</pre>}</td></div>
+    <span id="perlKey">return</span> $@;
+    
+<span id="braces">}</span>
+
+
+
+<span id="comment">#########################################################################</span><br /><span id="comment"># PRIVATE METHODS</span><br /><span id="comment">#########################################################################</span><br /></pre>}</td></div>
 <div id="sep"></div>
 <table id="methCodeTitle" width="100%"><tr><td width="200"><a name="CODE16" id="CODE16"></a>get_MatrixSet</td><td ><a href="#POD5">description</a></td><td ><a href="#CODE15">prev</a></td><td ><a href="#CODE17">next</a></td><td align="right"><a href="#TOP">Top</a></td></tr></table>
 <div id="methCodeArea"><td ><span id="sub">sub</span> <span id="subName">get_MatrixSet</span>
@@ -591,19 +494,7 @@ JASPAR2 documentation.
 <div id="mainTitle">General documentation</div>
 <div id="sep"></div>
 <table id="genInfoTitle" width="100%"><tr><td><a name="_pod_JASPAR2 DATA MODEL" id="_pod_JASPAR2 DATA MODEL"></a>JASPAR2 DATA MODEL</td><td align="right"><a href="#TOP">Top</a></td></tr></table>
-<div id="genInfoArea">JASPAR2 is working name for a relational database model used<br />for storing transcriptional factor pattern matrices in a MySQL database.<br />It was initially designed to store matrices for the JASPAR database of<br />high quality eukaryotic transcription factor specificity profiles by<br />Albin Sandelin and Wyeth W. Wasserman. Besides the profile matrix itself,<br />this data model stores profile ID (unique), name, structural class,<br />basic taxonomic and bibliographic information<br />as well as some additional optional tags.<br />Due to its data model, which precedeed the design of the <br />module, <B>TFBS::DB::JASPAR2</B> cannot store arbitrary tags for a matrix.<br />The supported tags are<br />    'acc'      # (accession number; <br />	       # originally for transcription factor protein seq)<br />    'seqdb'    # sequence database where 'acc' comes from<br />    'medline'  # PubMed ID<br />    'species'  # Species name<br />    'sysgroup'<br />    'total_ic' # total information content - redundant, present <br />               # for historical<br />&quot;medline&quot; =&gt; ($self-&gt;_get_medline($ID) or  &quot;&quot;),<br />		          &quot;species&quot; =&gt; ($self-&gt;_get_species($ID) or &quot;&quot;),<br />		          &quot;sysgroup&quot;=&gt; ($self-&gt;_get_sysgroup($ID) or &quot;&quot;),<br />		          &quot;type&quot;    =&gt; ($self-&gt;_get_type($ID) or &quot;&quot;),<br />		          &quot;seqdb&quot;   =&gt; ($self-&gt;_get_seqdb($ID) or &quot;&quot;),<br />		          &quot;acc&quot;     =&gt; ($self-&gt;_get_acc($ID) or &quot;&quot;),<br />		          &quot;total_ic&quot;=<br />-----------------------  ADVANCED  ---------------------------------<br />For the developers and the curious, here is the JASPAR2 data model:<br /><pre id="podParagraph">       CREATE TABLE matrix_data (
-         ID varchar(16) DEFAULT '' NOT NULL,
-         pos_ID varchar(24) DEFAULT '' NOT NULL,
-         base enum('A','C','G','T'),
-         position tinyint(3) unsigned,
-         raw int(3) unsigned,
-         info float(7,5) unsigned, -- calculated
-         pwm float(7,5) unsigned,  -- calculated
-         normalized float(7,5) unsigned,
-         PRIMARY KEY (pos_ID),
-         KEY id_index (ID)
-       );
-
+<div id="genInfoArea">JASPAR2 is working name for a relational database model used<br />for storing transcriptional factor pattern matrices in a MySQL database.<br />It was initially designed to store matrices for the JASPAR database of<br />high quality eukaryotic transcription factor specificity profiles by<br />Albin Sandelin and Wyeth W. Wasserman. Besides the profile matrix itself,<br />this data model stores profile ID (unique), name, structural class,<br />basic taxonomic and bibliographic information<br />as well as some additional optional tags.<br />Due to its data model, which precedeed the design of the <br />module, <B>TFBS::DB::JASPAR2</B> cannot store arbitrary tags for a matrix.<br />The supported tags are<br />    'acc'      # (accession number; <br />	       # originally for transcription factor protein seq)<br />    'seqdb'    # sequence database where 'acc' comes from<br />    'medline'  # PubMed ID<br />    'species'  # Species name<br />    'sysgroup'<br />    'total_ic' # total information content - redundant, present <br />               # for historical<br />&quot;medline&quot; =&gt; ($self-&gt;_get_medline($ID) or  &quot;&quot;),<br />		          &quot;species&quot; =&gt; ($self-&gt;_get_species($ID) or &quot;&quot;),<br />		          &quot;sysgroup&quot;=&gt; ($self-&gt;_get_sysgroup($ID) or &quot;&quot;),<br />		          &quot;type&quot;    =&gt; ($self-&gt;_get_type($ID) or &quot;&quot;),<br />		          &quot;seqdb&quot;   =&gt; ($self-&gt;_get_seqdb($ID) or &quot;&quot;),<br />		          &quot;acc&quot;     =&gt; ($self-&gt;_get_acc($ID) or &quot;&quot;),<br />		          &quot;total_ic&quot;=<br />-----------------------  ADVANCED  ---------------------------------<br />For the developers and the curious, here is the JASPAR2 data model:<br /><pre id="podParagraph">       CREATE TABLE matrix_data (<br />         ID varchar(16) DEFAULT '' NOT NULL,<br />         pos_ID varchar(24) DEFAULT '' NOT NULL,<br />         base enum('A','C','G','T'),<br />         position tinyint(3) unsigned,<br />         raw int(3) unsigned,<br />         info float(7,5) unsigned, -- calculated<br />         pwm float(7,5) unsigned,  -- calculated<br />         normalized float(7,5) unsigned,<br />         PRIMARY KEY (pos_ID),<br />         KEY id_index (ID)<br />       );<br />
        CREATE TABLE matrix_info (
          ID varchar(16) DEFAULT '' NOT NULL,
          name varchar(15) DEFAULT '' NOT NULL,

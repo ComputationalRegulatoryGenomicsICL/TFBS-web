@@ -13,10 +13,7 @@ TRANSFAC documentation.
 <table id="daArea" width="100%"><tr><td id="daEntry" ><a href="#SUMMARY">Summary</a></td><td id="daEntry" ><a href="#libs">Included libraries</a></td><td id="daEntry" ><a href="#vardefs">Package variables</a></td><td id="daEntry" ><a href="#SYNOPSIS">Synopsis</a></td><td id="daEntry" ><a href="#DESCRIPTION">Description</a></td><td id="daEntry" ><a href="#General">General documentation</a></td><td id="daEntry" ><a href="#Methods">Methods</a></td></tr></table>
 <div id="sep"></div>
 <div id="descTitle">Summary</div>
-<div id="descArea"><B>TFBS::DB::TRANSFAC</B> - interface to database of TRANSFAC public<br />position frequency matrices at TESS (<a href="http://www.cbil.upenn.edu/tess" target="urlWin" id="podUrl">http://www.cbil.upenn.edu/tess</a>)<br /><pre id="podParagraph"> -------------------------------- NOTICE ----------------------------------
-  The TRANSFAC database is free for non-commercial use.  For commercial use
-  the TRANSFAC databases and programs have to be licensed. Please read 
-  the DISCLAIMER at <a href="http://transfac.gbf.de/TRANSFAC/disclaimer.htm" target="urlWin" id="podUrl">http://transfac.gbf.de/TRANSFAC/disclaimer.htm</a>.<br /> -------------------------------------------------------------------------</pre></div>
+<div id="descArea"><B>TFBS::DB::TRANSFAC</B> - interface to database of TRANSFAC public<br />position frequency matrices at TESS (<a href="http://www.cbil.upenn.edu/tess" target="urlWin" id="podUrl">http://www.cbil.upenn.edu/tess</a>)<br /><pre id="podParagraph"> -------------------------------- NOTICE ----------------------------------<br />  The TRANSFAC database is free for non-commercial use.  For commercial use<br />  the TRANSFAC databases and programs have to be licensed. Please read <br />  the DISCLAIMER at <a href="http://transfac.gbf.de/TRANSFAC/disclaimer.htm" target="urlWin" id="podUrl">http://transfac.gbf.de/TRANSFAC/disclaimer.htm</a>.<br /> -------------------------------------------------------------------------</pre></div>
 <div id="sep"></div>
 <a name="vardefs" id="vardefs"></a><div id="descTitle">Package variables</div>
 <div id="descArea"><div id="libEntry">No package variables defined.</div>
@@ -56,56 +53,16 @@ TRANSFAC documentation.
 <div id="mainTitle">Methods description</div>
 <div id="sep"></div>
 <table id="methDescTitle" width="100%"><tr><td WIDTH="200"><a name="_pod_connect" id="_pod_connect"></a><a name="POD1" id="POD1"></a>connect</td><td ><a href="#CODE2">code</a></td><td >&nbsp;&nbsp;&nbsp;&nbsp;</td><td ><a href="#POD2">next</a></td><td align="right"><a href="#TOP">Top</a></td></tr></table>
-<table id="methDescArea" width="100%"><tr><td><pre id="podParagraph"> Title   : connect
- Usage   : my $db = <B>TFBS::DB::TRANSFAC</B>->connect(%args);
- Function: Creates a TRANSFAC database connection object, which can be used
-           to retrieve matrices from public TRANSFAC databases via the web
- Returns : a <B>TFBS::DB::TRANSFAC</B> object
- Args    : -proxy # OPTIONAL: a http proxy server name, 
-                  # usually required for accessing TRANSFAC from behind 
-                  # a firewall
-           -accept_conditions # OPTIONAL: by setting this to a true 
-                              # value, you confirm that you
-                              # have read and accepted the terms 
-                              # of use of TRANSFAC at
-                              # <a href="http://transfac.gbf.de/TRANSFAC/disclaimer.htm" target="urlWin" id="podUrl">http://transfac.gbf.de/TRANSFAC/disclaimer.htm</a>;<br />                              # this also supresses the annoying<br />                              # message that is printed to STDERR<br />                              # upon invoking the method</pre></td></tr></table>
+<table id="methDescArea" width="100%"><tr><td><pre id="podParagraph"> Title   : connect<br /> Usage   : my $db = <B>TFBS::DB::TRANSFAC</B>-&gt;connect(%args);<br /> Function: Creates a TRANSFAC database connection object, which can be used<br />           to retrieve matrices from public TRANSFAC databases via the web<br /> Returns : a <B>TFBS::DB::TRANSFAC</B> object<br /> Args    : -proxy # OPTIONAL: a http proxy server name, <br />                  # usually required for accessing TRANSFAC from behind <br />                  # a firewall<br />           -accept_conditions # OPTIONAL: by setting this to a true <br />                              # value, you confirm that you<br />                              # have read and accepted the terms <br />                              # of use of TRANSFAC at<br />                              # <a href="http://transfac.gbf.de/TRANSFAC/disclaimer.htm" target="urlWin" id="podUrl">http://transfac.gbf.de/TRANSFAC/disclaimer.htm</a>;<br />                              # this also supresses the annoying<br />                              # message that is printed to STDERR<br />                              # upon invoking the method</pre></td></tr></table>
 <div id="sep"></div>
 <table id="methDescTitle" width="100%"><tr><td WIDTH="200"><a name="_pod_get_Matrix_by_ID" id="_pod_get_Matrix_by_ID"></a><a name="POD2" id="POD2"></a>get_Matrix_by_ID</td><td ><a href="#CODE4">code</a></td><td ><a href="#POD1">prev</a></td><td ><a href="#POD3">next</a></td><td align="right"><a href="#TOP">Top</a></td></tr></table>
-<table id="methDescArea" width="100%"><tr><td><pre id="podParagraph"> Title   : get_Matrix_by_ID
- Usage   : my $pfm = $db->get_Matrix_by_ID('V$CREB_01', 'PFM');
- Function: fetches matrix data under the given TRANSFAC ID from the
-           database and returns a TFBS::Matrix::* object
- Returns : a TFBS::Matrix::* object; the exact type of the
-	   object depending on the second argument (allowed
-	   values are 'PFM', 'ICM', and 'PWM'); returns undef if
-	   matrix with the given ID is not found
- Args    : (Matrix_ID, Matrix_type)
-	   Matrix_ID is a string; Matrix_type is one of the
-	   following: 'PFM' (raw position frequency matrix),
-	   'ICM' (information content matrix) or 'PWM' (position
-	   weight matrix)
-	   If Matrix_type is omitted, a PFM is retrieved by default.</pre></td></tr></table>
+<table id="methDescArea" width="100%"><tr><td><pre id="podParagraph"> Title   : get_Matrix_by_ID<br /> Usage   : my $pfm = $db-&gt;get_Matrix_by_ID('V$CREB_01', 'PFM');<br /> Function: fetches matrix data under the given TRANSFAC ID from the<br />           database and returns a TFBS::Matrix::* object<br /> Returns : a TFBS::Matrix::* object; the exact type of the<br />	   object depending on the second argument (allowed<br />	   values are 'PFM', 'ICM', and 'PWM'); returns undef if<br />	   matrix with the given ID is not found<br /> Args    : (Matrix_ID, Matrix_type)<br />	   Matrix_ID is a string; Matrix_type is one of the<br />	   following: 'PFM' (raw position frequency matrix),<br />	   'ICM' (information content matrix) or 'PWM' (position<br />	   weight matrix)<br />	   If Matrix_type is omitted, a PFM is retrieved by default.</pre></td></tr></table>
 <div id="sep"></div>
 <table id="methDescTitle" width="100%"><tr><td WIDTH="200"><a name="_pod_get_Matrix_by_acc" id="_pod_get_Matrix_by_acc"></a><a name="POD3" id="POD3"></a>get_Matrix_by_acc</td><td ><a href="#CODE5">code</a></td><td ><a href="#POD2">prev</a></td><td ><a href="#POD4">next</a></td><td align="right"><a href="#TOP">Top</a></td></tr></table>
-<table id="methDescArea" width="100%"><tr><td><pre id="podParagraph"> Title   : get_Matrix_by_acc
- Usage   : my $pfm = $db->get_Matrix_by_acc('V$CREB_01', 'PFM');
- Function: fetches matrix data under the given TRANSFAC aaccession number
-	   from database and returns a TFBS::Matrix::* object
- Returns : a TFBS::Matrix::* object; the exact type of the
-	   object depending on the second argument (allowed
-	   values are 'PFM', 'ICM', and 'PWM'); returns undef if
-	   matrix with the given ID is not found
- Args    : (Matrix_ID, Matrix_type)
-	   Matrix_ID is a string; Matrix_type is one of the
-	   following: 'PFM' (raw position frequency matrix),
-	   'ICM' (information content matrix) or 'PWM' (position
-	   weight matrix)
-	   If Matrix_type is omitted, a PFM is retrieved by default.</pre></td></tr></table>
+<table id="methDescArea" width="100%"><tr><td><pre id="podParagraph"> Title   : get_Matrix_by_acc<br /> Usage   : my $pfm = $db-&gt;get_Matrix_by_acc('V$CREB_01', 'PFM');<br /> Function: fetches matrix data under the given TRANSFAC aaccession number<br />	   from database and returns a TFBS::Matrix::* object<br /> Returns : a TFBS::Matrix::* object; the exact type of the<br />	   object depending on the second argument (allowed<br />	   values are 'PFM', 'ICM', and 'PWM'); returns undef if<br />	   matrix with the given ID is not found<br /> Args    : (Matrix_ID, Matrix_type)<br />	   Matrix_ID is a string; Matrix_type is one of the<br />	   following: 'PFM' (raw position frequency matrix),<br />	   'ICM' (information content matrix) or 'PWM' (position<br />	   weight matrix)<br />	   If Matrix_type is omitted, a PFM is retrieved by default.</pre></td></tr></table>
 <div id="sep"></div>
 <table id="methDescTitle" width="100%"><tr><td WIDTH="200"><a name="_pod_new" id="_pod_new"></a><a name="POD4" id="POD4"></a>new</td><td ><a href="#CODE6">code</a></td><td ><a href="#POD3">prev</a></td><td ><a href="#POD5">next</a></td><td align="right"><a href="#TOP">Top</a></td></tr></table>
-<table id="methDescArea" width="100%"><tr><td><pre id="podParagraph"> Title   : connect
- Usage   : my $db = <B>TFBS::DB::TRANSFAC</B>->connect(%args);
- Function: Here, <i>new</i> is just a synonim for <i>connect</i><br />           (to make the interface consistent with other<br />            bioperl read-obly Bio::DB::* objects)<br /> Returns : a <B>TFBS::DB::TRANSFAC</B> object<br /> Args    : -accept_conditions # see explanation at <i>new</i></pre></td></tr></table>
+<table id="methDescArea" width="100%"><tr><td><pre id="podParagraph"> Title   : connect<br /> Usage   : my $db = <B>TFBS::DB::TRANSFAC</B>-&gt;connect(%args);<br /> Function: Here, <i>new</i> is just a synonim for <i>connect</i><br />           (to make the interface consistent with other<br />            bioperl read-obly Bio::DB::* objects)<br /> Returns : a <B>TFBS::DB::TRANSFAC</B> object<br /> Args    : -accept_conditions # see explanation at <i>new</i></pre></td></tr></table>
 <div id="sep"></div>
 <a name="MethCode" id="MethCode"></a>
 <div id="mainTitle">Methods code</div>
@@ -143,7 +100,10 @@ TRANSFAC documentation.
     <span id="perlKey">if</span> <span id="braces">(</span>!<span id="perlFunc">defined</span><span id="braces">(</span><span id="var">$mt</span><span id="braces">)</span> or <span id="perlFunc">uc</span><span id="braces">(</span><span id="var">$mt</span><span id="braces">)</span> <span id="perlKey">eq</span> <span id="dqStr">"PFM"</span><span id="braces">)</span> <span id="braces">{</span><span id="perlKey">return</span> <span id="var">$pfm</span>;<span id="braces">}</span>
     <span id="perlKey">elsif</span> <span id="braces">(</span><span id="perlFunc">uc</span><span id="braces">(</span><span id="var">$mt</span><span id="braces">)</span> <span id="perlKey">eq</span> <span id="dqStr">"ICM"</span><span id="braces">)</span> <span id="braces">{</span><span id="perlKey">return</span> <span id="var">$pfm</span>-&gt;<span id="method">to_ICM</span>;<span id="braces">}</span>
     <span id="perlKey">elsif</span> <span id="braces">(</span><span id="perlFunc">uc</span><span id="braces">(</span><span id="var">$mt</span><span id="braces">)</span> <span id="perlKey">eq</span> <span id="dqStr">"PWM"</span><span id="braces">)</span> <span id="braces">{</span><span id="perlKey">return</span> <span id="var">$pfm</span>-&gt;<span id="method">to_PWM</span>;<span id="braces">}</span>
-    <span id="perlKey">else</span>  <span id="braces">{</span>  <span id="var">$self</span>-&gt;<span id="method">throw</span><span id="braces">(</span><span id="dqStr">"Unrecognized matrix format: <span id="var">$mt</span>"</span><span id="braces">)</span>;  <span id="braces">}</span></pre>}</td></div>
+    <span id="perlKey">else</span>  <span id="braces">{</span>  <span id="var">$self</span>-&gt;<span id="method">throw</span><span id="braces">(</span><span id="dqStr">"Unrecognized matrix format: <span id="var">$mt</span>"</span><span id="braces">)</span>;  <span id="braces">}</span>
+<span id="braces">}</span>
+
+1;</pre>}</td></div>
 <div id="sep"></div>
 <table id="methCodeTitle" width="100%"><tr><td width="200"><a name="CODE2" id="CODE2"></a>connect</td><td ><a href="#POD1">description</a></td><td ><a href="#CODE1">prev</a></td><td ><a href="#CODE3">next</a></td><td align="right"><a href="#TOP">Top</a></td></tr></table>
 <div id="methCodeArea"><td ><span id="sub">sub</span> <span id="subName">connect</span>

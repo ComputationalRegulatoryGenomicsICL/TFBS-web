@@ -38,27 +38,12 @@ PWM documentation.
 <div id="sep"></div>
 <a name="SYNOPSIS" id="SYNOPSIS"></a>
 <div id="descTitle">Synopsis</div>
-<div id="descArea"><div id="podItem">&nbsp;&nbsp;&nbsp;&nbsp;* creating a <B>TFBS::Matrix::PWM</B> object manually:</div>&nbsp;&nbsp;&nbsp;&nbsp;<div id="podItemEntry">    my $matrixstring = &lt;&lt;ENDMATRIX<br />     0.61 -3.16  1.83 -3.16  1.21 -0.06<br />    -0.15 -2.57 -3.16 -3.16 -2.57 -1.83<br />    -1.57  1.85 -2.57 -1.34 -1.57  1.14<br />     0.31 -3.16 -2.57  1.76  0.24 -0.83<br />    ENDMATRIX<br />    ;<br />    my $pwm = <B>TFBS::Matrix::PWM</B>-&gt;new(-matrixstring =&gt; $matrixstring,<br />				     -name   	   =&gt; &quot;MyProfile&quot;,<br />				     -ID           =&gt; &quot;M0001&quot;<br />				    );<br /></div><br /><div id="podItem">&nbsp;&nbsp;&nbsp;&nbsp;* retrieving a TFBS::Matix::PWM object from a database:</div>&nbsp;&nbsp;&nbsp;&nbsp;(See documentation of individual TFBS::DB::* modules to learn<br />how to connect to different types of pattern databases and retrieve<br />TFBS::Matrix::* objects from them.)<br /><pre id="podParagraph">    my $db_obj = TFBS::DB::JASPAR2->new
-		    (-connect => ["dbi:mysql:JASPAR2:myhost",
-				  "myusername", "mypassword"]);
-    my $pwm = $db_obj->get_Matrix_by_ID("M0001", "PWM");
-    # or
-    my $pwm = $db_obj->get_Matrix_by_name("MyProfile", "PWM");
-</pre><div id="podItem">&nbsp;&nbsp;&nbsp;&nbsp;* retrieving list of individual <B>TFBS::Matrix::PWM</B> objects</div>&nbsp;&nbsp;&nbsp;&nbsp;(see decumentation of TFBS::MatrixSet to learn how to create<br />objects for storage and manipulation of multiple matrices)<br /><pre id="podParagraph">    my @pwm_list = $matrixset->all_patterns(-sort_by=>"name");
-</pre><div id="podItem">&nbsp;&nbsp;&nbsp;&nbsp;* scanning a nucleotide sequence with a matrix</div>&nbsp;&nbsp;&nbsp;&nbsp;<div id="podItemEntry">    my $siteset = $pwm-&gt;search_seq(-file      =&gt;&quot;myseq.fa&quot;,<br />				   -threshold =&gt; &quot;80%&quot;);<br /></div><br /><div id="podItem">&nbsp;&nbsp;&nbsp;&nbsp;* scanning a pairwise alignment with a matrix</div>&nbsp;&nbsp;&nbsp;&nbsp;<div id="podItemEntry">    my $site_pair_set = $pwm-&gt;search_aln(-file      =&gt;&quot;myalign.aln&quot;,<br />				         -threshold =&gt; &quot;80%&quot;,<br />				         -cutoff    =&gt; &quot;70%&quot;,<br />					 -window    =&gt; 50);<br /></div><br />
+<div id="descArea"><div id="podItem">&nbsp;&nbsp;&nbsp;&nbsp;* creating a <B>TFBS::Matrix::PWM</B> object manually:</div>&nbsp;&nbsp;&nbsp;&nbsp;<div id="podItemEntry">    my $matrixstring = &lt;&lt;ENDMATRIX<br />     0.61 -3.16  1.83 -3.16  1.21 -0.06<br />    -0.15 -2.57 -3.16 -3.16 -2.57 -1.83<br />    -1.57  1.85 -2.57 -1.34 -1.57  1.14<br />     0.31 -3.16 -2.57  1.76  0.24 -0.83<br />    ENDMATRIX<br />    ;<br />    my $pwm = <B>TFBS::Matrix::PWM</B>-&gt;new(-matrixstring =&gt; $matrixstring,<br />				     -name   	   =&gt; &quot;MyProfile&quot;,<br />				     -ID           =&gt; &quot;M0001&quot;<br />				    );<br /></div><br /><div id="podItem">&nbsp;&nbsp;&nbsp;&nbsp;* retrieving a TFBS::Matix::PWM object from a database:</div>&nbsp;&nbsp;&nbsp;&nbsp;(See documentation of individual TFBS::DB::* modules to learn<br />how to connect to different types of pattern databases and retrieve<br />TFBS::Matrix::* objects from them.)<br /><pre id="podParagraph">    my $db_obj = TFBS::DB::JASPAR2-&gt;new<br />		    (-connect =&gt; [&quot;dbi:mysql:JASPAR2:myhost&quot;,<br />				  &quot;myusername&quot;, &quot;mypassword&quot;]);<br />    my $pwm = $db_obj-&gt;get_Matrix_by_ID(&quot;M0001&quot;, &quot;PWM&quot;);<br />    # or<br />    my $pwm = $db_obj-&gt;get_Matrix_by_name(&quot;MyProfile&quot;, &quot;PWM&quot;);<br /></pre><div id="podItem">&nbsp;&nbsp;&nbsp;&nbsp;* retrieving list of individual <B>TFBS::Matrix::PWM</B> objects</div>&nbsp;&nbsp;&nbsp;&nbsp;(see decumentation of TFBS::MatrixSet to learn how to create<br />objects for storage and manipulation of multiple matrices)<br /><pre id="podParagraph">    my @pwm_list = $matrixset-&gt;all_patterns(-sort_by=&gt;&quot;name&quot;);<br /></pre><div id="podItem">&nbsp;&nbsp;&nbsp;&nbsp;* scanning a nucleotide sequence with a matrix</div>&nbsp;&nbsp;&nbsp;&nbsp;<div id="podItemEntry">    my $siteset = $pwm-&gt;search_seq(-file      =&gt;&quot;myseq.fa&quot;,<br />				   -threshold =&gt; &quot;80%&quot;);<br /></div><br /><div id="podItem">&nbsp;&nbsp;&nbsp;&nbsp;* scanning a pairwise alignment with a matrix</div>&nbsp;&nbsp;&nbsp;&nbsp;<div id="podItemEntry">    my $site_pair_set = $pwm-&gt;search_aln(-file      =&gt;&quot;myalign.aln&quot;,<br />				         -threshold =&gt; &quot;80%&quot;,<br />				         -cutoff    =&gt; &quot;70%&quot;,<br />					 -window    =&gt; 50);<br /></div><br />
 </div>
 <div id="sep"></div>
 <a name="DESCRIPTION" id="DESCRIPTION"></a>
 <div id="descTitle">Description</div>
-<div id="descArea"><B>TFBS::Matrix::PWM</B> is a class whose instances are objects representing<br />position weight matrices (PWMs). A PWM is normally calculated from a<br />raw position frequency matrix (see <a href="PFM.html" target="urlWin" id="podUrl"><b>TFBS::Matrix::PFM</b></a><br />for the explanation of position frequency matrices). For example, given<br />the following position frequency matrix:<br /><pre id="podParagraph">    A:[ 12     3     0     0     4     0  ]
-    C:[  0     0     0    11     7     0  ]
-    G:[  0     9    12     0     0     0  ]
-    T:[  0     0     0     1     1    12  ]
-</pre>The standard computational procedure is applied to convert it into the<br />following position weight matrix:<br /><pre id="podParagraph">    A:[ 0.61 -3.16  1.83 -3.16  1.21 -0.06]
-    C:[-0.15 -2.57 -3.16 -3.16 -2.57 -1.83]
-    G:[-1.57  1.85 -2.57 -1.34 -1.57  1.14]
-    T:[ 0.31 -3.16 -2.57  1.76  0.24 -0.83]
-</pre>which contains the &quot;weights&quot; associated with the occurence of each<br />nucleotide at the given position in a pattern.<br />A <B>TFBS::Matrix::PWM</B> object is equipped with methods to search nucleotide<br />sequences and pairwise alignments of nucleotide sequences with the<br />pattern they represent, and return a set of sites in nucleotide<br />sequence (a TFBS::SiteSet object for single sequence search, and a<br />TFBS::SitePairSet for the alignment search).
+<div id="descArea"><B>TFBS::Matrix::PWM</B> is a class whose instances are objects representing<br />position weight matrices (PWMs). A PWM is normally calculated from a<br />raw position frequency matrix (see <a href="PFM.html" target="urlWin" id="podUrl"><b>TFBS::Matrix::PFM</b></a><br />for the explanation of position frequency matrices). For example, given<br />the following position frequency matrix:<br /><pre id="podParagraph">    A:[ 12     3     0     0     4     0  ]<br />    C:[  0     0     0    11     7     0  ]<br />    G:[  0     9    12     0     0     0  ]<br />    T:[  0     0     0     1     1    12  ]<br /></pre>The standard computational procedure is applied to convert it into the<br />following position weight matrix:<br /><pre id="podParagraph">    A:[ 0.61 -3.16  1.83 -3.16  1.21 -0.06]<br />    C:[-0.15 -2.57 -3.16 -3.16 -2.57 -1.83]<br />    G:[-1.57  1.85 -2.57 -1.34 -1.57  1.14]<br />    T:[ 0.31 -3.16 -2.57  1.76  0.24 -0.83]<br /></pre>which contains the &quot;weights&quot; associated with the occurence of each<br />nucleotide at the given position in a pattern.<br />A <B>TFBS::Matrix::PWM</B> object is equipped with methods to search nucleotide<br />sequences and pairwise alignments of nucleotide sequences with the<br />pattern they represent, and return a set of sites in nucleotide<br />sequence (a TFBS::SiteSet object for single sequence search, and a<br />TFBS::SitePairSet for the alignment search).
 </div>
 <div id="sep"></div>
 <a name="Methods" id="Methods"></a>
@@ -81,12 +66,7 @@ PWM documentation.
 <div id="mainTitle">Methods description</div>
 <div id="sep"></div>
 <table id="methDescTitle" width="100%"><tr><td WIDTH="200"><a name="_pod_new" id="_pod_new"></a><a name="POD1" id="POD1"></a>new</td><td ><a href="#CODE10">code</a></td><td >&nbsp;&nbsp;&nbsp;&nbsp;</td><td ><a href="#POD2">next</a></td><td align="right"><a href="#TOP">Top</a></td></tr></table>
-<table id="methDescArea" width="100%"><tr><td><pre id="podParagraph"> Title   : new
- Usage   : my $pwm = <B>TFBS::Matrix::PWM</B>->new(%args)
- Function: constructor for the <B>TFBS::Matrix::PWM</B> object
- Returns : a new <B>TFBS::Matrix::PWM</B> object
- Args    : # you must specify either one of the following three:
-
+<table id="methDescArea" width="100%"><tr><td><pre id="podParagraph"> Title   : new<br /> Usage   : my $pwm = <B>TFBS::Matrix::PWM</B>-&gt;new(%args)<br /> Function: constructor for the <B>TFBS::Matrix::PWM</B> object<br /> Returns : a new <B>TFBS::Matrix::PWM</B> object<br /> Args    : # you must specify either one of the following three:<br />
 	   -matrix,      # reference to an array of arrays of integers
 	      #or
 	   -matrixstring,# a string containing four lines
@@ -102,17 +82,7 @@ PWM documentation.
            -tags         # an array reference, OPTIONAL</pre></td></tr></table>
 <div id="sep"></div>
 <table id="methDescTitle" width="100%"><tr><td WIDTH="200"><a name="_pod_search_aln" id="_pod_search_aln"></a><a name="POD2" id="POD2"></a>search_aln</td><td ><a href="#CODE11">code</a></td><td ><a href="#POD1">prev</a></td><td ><a href="#POD3">next</a></td><td align="right"><a href="#TOP">Top</a></td></tr></table>
-<table id="methDescArea" width="100%"><tr><td><pre id="podParagraph"> Title   : search_aln
- Usage   : my $site_pair_set = $pwm->search_aln(%args)
- Function: Scans a pairwise alignment of nucleotide sequences
-	   with the pattern represented by the PWM: it reports only
-           those hits that are present in equivalent positions of both
-	   sequences and exceed a specified threshold score in both, AND
-	   are found in regions of the alignment above the specified
-	   conservation cutoff value.
- Returns : a TFBS::SitePairSet object
- Args    : # you must specify either one of the following three:
-
+<table id="methDescArea" width="100%"><tr><td><pre id="podParagraph"> Title   : search_aln<br /> Usage   : my $site_pair_set = $pwm-&gt;search_aln(%args)<br /> Function: Scans a pairwise alignment of nucleotide sequences<br />	   with the pattern represented by the PWM: it reports only<br />           those hits that are present in equivalent positions of both<br />	   sequences and exceed a specified threshold score in both, AND<br />	   are found in regions of the alignment above the specified<br />	   conservation cutoff value.<br /> Returns : a TFBS::SitePairSet object<br /> Args    : # you must specify either one of the following three:<br />
 	   -file,       # the name of the alignment file in Clustal
 			       format
 	      #or
@@ -152,13 +122,7 @@ PWM documentation.
 			# computed internally on the fly (less efficient)</pre></td></tr></table>
 <div id="sep"></div>
 <table id="methDescTitle" width="100%"><tr><td WIDTH="200"><a name="_pod_search_seq" id="_pod_search_seq"></a><a name="POD3" id="POD3"></a>search_seq</td><td ><a href="#CODE12">code</a></td><td ><a href="#POD2">prev</a></td><td ><a href="#POD4">next</a></td><td align="right"><a href="#TOP">Top</a></td></tr></table>
-<table id="methDescArea" width="100%"><tr><td><pre id="podParagraph"> Title   : search_seq
- Usage   : my $siteset = $pwm->search_seq(%args)
- Function: scans a nucleotide sequence with the pattern represented
-	   by the PWM
- Returns : a TFBS::SiteSet object
- Args    : # you must specify either one of the following three:
-
+<table id="methDescArea" width="100%"><tr><td><pre id="podParagraph"> Title   : search_seq<br /> Usage   : my $siteset = $pwm-&gt;search_seq(%args)<br /> Function: scans a nucleotide sequence with the pattern represented<br />	   by the PWM<br /> Returns : a TFBS::SiteSet object<br /> Args    : # you must specify either one of the following three:<br />
 	   -file,       # the name od a fasta file (single sequence)
 	      #or
 	   -seqobj      # a Bio::Seq object
@@ -184,7 +148,10 @@ PWM documentation.
 <div id="sep"></div>
 <table id="methCodeTitle" width="100%"><tr><td width="200"><a name="CODE1" id="CODE1"></a>DESTROY</td><td >description</td><td >prev</td><td ><a href="#CODE2">next</a></td><td align="right"><a href="#TOP">Top</a></td></tr></table>
 <div id="methCodeArea"><td ><span id="sub">sub</span> <span id="subName">DESTROY</span>
-{<pre>    <span id="comment"># nothing</span><br /></pre>}</td></div>
+{<pre>    <span id="comment"># nothing</span><br /><span id="braces">}</span>
+
+
+1;</pre>}</td></div>
 <div id="sep"></div>
 <table id="methCodeTitle" width="100%"><tr><td width="200"><a name="CODE2" id="CODE2"></a>_bsearch</td><td >description</td><td ><a href="#CODE1">prev</a></td><td ><a href="#CODE3">next</a></td><td align="right"><a href="#TOP">Top</a></td></tr></table>
 <div id="methCodeArea"><td ><span id="sub">sub</span> <span id="privSubName">_bsearch</span>

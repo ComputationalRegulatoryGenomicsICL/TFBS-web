@@ -29,9 +29,7 @@ Site documentation.
 <div id="sep"></div>
 <a name="SYNOPSIS" id="SYNOPSIS"></a>
 <div id="descTitle">Synopsis</div>
-<div id="descArea"><pre id="podParagraph">    # manual creation of site object;
-    # for details, see documentation of Bio::SeqFeature::Generic;
-
+<div id="descArea"><pre id="podParagraph">    # manual creation of site object;<br />    # for details, see documentation of Bio::SeqFeature::Generic;<br />
     my $site = TFBS::Site
                   (-start => $start_pos,     # integer
 		   -end   => $end_pos,       # integer
@@ -88,44 +86,16 @@ Site documentation.
 <div id="mainTitle">Methods description</div>
 <div id="sep"></div>
 <table id="methDescTitle" width="100%"><tr><td WIDTH="200"><a name="_pod_GFF" id="_pod_GFF"></a><a name="POD1" id="POD1"></a>GFF</td><td ><a href="#CODE1">code</a></td><td >&nbsp;&nbsp;&nbsp;&nbsp;</td><td ><a href="#POD2">next</a></td><td align="right"><a href="#TOP">Top</a></td></tr></table>
-<table id="methDescArea" width="100%"><tr><td><pre id="podParagraph"> Title   : GFF
- Usage   : print $site->GFF();
-         : print $site->GFF($gff_formatter)
- Function: returns a "standard" GFF string - the "generic" gff_string
-           method is left untouched for possible customizations
- Returns : a string (NOT newline terminated! )
- Args    : a $gff_formatter function reference (optional)</pre></td></tr></table>
+<table id="methDescArea" width="100%"><tr><td><pre id="podParagraph"> Title   : GFF<br /> Usage   : print $site-&gt;GFF();<br />         : print $site-&gt;GFF($gff_formatter)<br /> Function: returns a &quot;standard&quot; GFF string - the &quot;generic&quot; gff_string<br />           method is left untouched for possible customizations<br /> Returns : a string (NOT newline terminated! )<br /> Args    : a $gff_formatter function reference (optional)</pre></td></tr></table>
 <div id="sep"></div>
 <table id="methDescTitle" width="100%"><tr><td WIDTH="200"><a name="_pod_new" id="_pod_new"></a><a name="POD2" id="POD2"></a>new</td><td ><a href="#CODE3">code</a></td><td ><a href="#POD1">prev</a></td><td ><a href="#POD3">next</a></td><td align="right"><a href="#TOP">Top</a></td></tr></table>
-<table id="methDescArea" width="100%"><tr><td><pre id="podParagraph"> Title   : new
- Usage   : my $site = <B>TFBS::Site</B>->new(%args)
- Function: constructor for the <B>TFBS::Site</B> object
- Returns : <B>TFBS::Site</B> object
- Args    : -start,       # integer
-           -end,         # integer
-           -strand,      # -1, 0 or 1
-           -score,       # float
-           -source,      # string (method used to detect it)
-           -primary,     # string (primary tag)
-           -seqobj,      # a Bio::Seq object
-           -pattern      # a pattern object, usu. TFBS::Matrix::PWM</pre></td></tr></table>
+<table id="methDescArea" width="100%"><tr><td><pre id="podParagraph"> Title   : new<br /> Usage   : my $site = <B>TFBS::Site</B>-&gt;new(%args)<br /> Function: constructor for the <B>TFBS::Site</B> object<br /> Returns : <B>TFBS::Site</B> object<br /> Args    : -start,       # integer<br />           -end,         # integer<br />           -strand,      # -1, 0 or 1<br />           -score,       # float<br />           -source,      # string (method used to detect it)<br />           -primary,     # string (primary tag)<br />           -seqobj,      # a Bio::Seq object<br />           -pattern      # a pattern object, usu. TFBS::Matrix::PWM</pre></td></tr></table>
 <div id="sep"></div>
 <table id="methDescTitle" width="100%"><tr><td WIDTH="200"><a name="_pod_pattern" id="_pod_pattern"></a><a name="POD3" id="POD3"></a>pattern</td><td ><a href="#CODE5">code</a></td><td ><a href="#POD2">prev</a></td><td ><a href="#POD4">next</a></td><td align="right"><a href="#TOP">Top</a></td></tr></table>
-<table id="methDescArea" width="100%"><tr><td><pre id="podParagraph"> Title   : pattern
- Usage   : my $pattern = $site->pattern();  # gets the pattern
-           $site->pattern($pwm);            # sets the pattern to $pwm
- Function: gets/sets the pattern object associated with the site
- Returns : pattern object, here TFBS::Matrix::PWM object
- Args    : pattern object (optional, for setting the pattern only)</pre></td></tr></table>
+<table id="methDescArea" width="100%"><tr><td><pre id="podParagraph"> Title   : pattern<br /> Usage   : my $pattern = $site-&gt;pattern();  # gets the pattern<br />           $site-&gt;pattern($pwm);            # sets the pattern to $pwm<br /> Function: gets/sets the pattern object associated with the site<br /> Returns : pattern object, here TFBS::Matrix::PWM object<br /> Args    : pattern object (optional, for setting the pattern only)</pre></td></tr></table>
 <div id="sep"></div>
 <table id="methDescTitle" width="100%"><tr><td WIDTH="200"><a name="_pod_rel_score" id="_pod_rel_score"></a><a name="POD4" id="POD4"></a>rel_score</td><td ><a href="#CODE6">code</a></td><td ><a href="#POD3">prev</a></td><td ><a href="#POD5">next</a></td><td align="right"><a href="#TOP">Top</a></td></tr></table>
-<table id="methDescArea" width="100%"><tr><td><pre id="podParagraph"> Title   : rel_score
- Usage   : my $percent_score = $site->rel_score() * 100;  # gets the pattern
- Function: gets relative score (between 0.0 to 1.0) with respect of the score
-           range of the associated pattern (matrix)
- Returns : floating point number between 0 and 1,
-           or undef if pattern not defined
- Args    : none</pre></td></tr></table>
+<table id="methDescArea" width="100%"><tr><td><pre id="podParagraph"> Title   : rel_score<br /> Usage   : my $percent_score = $site-&gt;rel_score() * 100;  # gets the pattern<br /> Function: gets relative score (between 0.0 to 1.0) with respect of the score<br />           range of the associated pattern (matrix)<br /> Returns : floating point number between 0 and 1,<br />           or undef if pattern not defined<br /> Args    : none</pre></td></tr></table>
 <div id="sep"></div>
 <a name="MethCode" id="MethCode"></a>
 <div id="mainTitle">Methods code</div>
@@ -202,7 +172,11 @@ Site documentation.
 	<span id="braces">}</span>
 	<span id="var">$GFFgf</span>-&gt;<span id="method">attribute</span><span id="braces">(</span><span id="var">$tag</span>, <span id="var">@values</span><span id="braces">)</span>;
     <span id="braces">}</span>
-    <span id="perlKey">return</span> <span id="var">$GFFgf</span>;</pre>}</td></div>
+    <span id="perlKey">return</span> <span id="var">$GFFgf</span>;
+<span id="braces">}</span>
+
+
+1;</pre>}</td></div>
 <div id="sep"></div>
 <table id="methCodeTitle" width="100%"><tr><td width="200"><a name="CODE5" id="CODE5"></a>pattern</td><td ><a href="#POD3">description</a></td><td ><a href="#CODE4">prev</a></td><td ><a href="#CODE6">next</a></td><td align="right"><a href="#TOP">Top</a></td></tr></table>
 <div id="methCodeArea"><td ><span id="sub">sub</span> <span id="subName">pattern</span>

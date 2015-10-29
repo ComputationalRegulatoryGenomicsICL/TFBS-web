@@ -44,82 +44,313 @@ JASPAR4 documentation.
 <div id="sep"></div>
 <a name="Methods" id="Methods"></a>
 <div id="descTitle">Methods</div>
-<table id="methIndArea" width="100%" cellspacing="0"><tr><td id="methIndEntry">connect</td><td id="methIndEntry"><a href="#POD1">Description</a></td><td id="methIndEntry"><a href="#CODE1">Code</a></td></tr>
-<tr><td id="methIndEntry">create</td><td id="methIndEntry"><div id="error">No description</div></td><td id="methIndEntry"><a href="#CODE2">Code</a></td></tr>
-<tr><td id="methIndEntry">dbh</td><td id="methIndEntry"><a href="#POD2">Description</a></td><td id="methIndEntry"><a href="#CODE3">Code</a></td></tr>
-<tr><td id="methIndEntry">get_Matrix_by_ID</td><td id="methIndEntry"><a href="#POD3">Description</a></td><td id="methIndEntry"><a href="#CODE4">Code</a></td></tr>
-<tr><td id="methIndEntry">new</td><td id="methIndEntry"><a href="#POD4">Description</a></td><td id="methIndEntry"><a href="#CODE5">Code</a></td></tr>
-<tr><td id="methIndEntry">store_Matrix</td><td id="methIndEntry"><a href="#POD5">Description</a></td><td id="methIndEntry"><a href="#CODE6">Code</a></td></tr>
+<table id="methIndArea" width="100%" cellspacing="0"><tr><td id="methIndEntry">DESTROY</td><td id="methIndEntry"><div id="error">No description</div></td><td id="methIndEntry"><a href="#CODE1">Code</a></td></tr>
+<tr><td id="methIndEntry">_create_tables</td><td id="methIndEntry"><div id="error">No description</div></td><td id="methIndEntry"><a href="#CODE2">Code</a></td></tr>
+<tr><td id="methIndEntry">_get_IDlist_by_query</td><td id="methIndEntry"><div id="error">No description</div></td><td id="methIndEntry"><a href="#CODE3">Code</a></td></tr>
+<tr><td id="methIndEntry">_get_matrixstring</td><td id="methIndEntry"><div id="error">No description</div></td><td id="methIndEntry"><a href="#CODE4">Code</a></td></tr>
+<tr><td id="methIndEntry">_new</td><td id="methIndEntry"><div id="error">No description</div></td><td id="methIndEntry"><a href="#CODE5">Code</a></td></tr>
+<tr><td id="methIndEntry">_store_matrix_annotation</td><td id="methIndEntry"><div id="error">No description</div></td><td id="methIndEntry"><a href="#CODE6">Code</a></td></tr>
+<tr><td id="methIndEntry">_store_matrix_data</td><td id="methIndEntry"><div id="error">No description</div></td><td id="methIndEntry"><a href="#CODE7">Code</a></td></tr>
+<tr><td id="methIndEntry">_store_matrix_info</td><td id="methIndEntry"><div id="error">No description</div></td><td id="methIndEntry"><a href="#CODE8">Code</a></td></tr>
+<tr><td id="methIndEntry">connect</td><td id="methIndEntry"><a href="#POD1">Description</a></td><td id="methIndEntry"><a href="#CODE9">Code</a></td></tr>
+<tr><td id="methIndEntry">create</td><td id="methIndEntry"><div id="error">No description</div></td><td id="methIndEntry"><a href="#CODE10">Code</a></td></tr>
+<tr><td id="methIndEntry">dbh</td><td id="methIndEntry"><a href="#POD2">Description</a></td><td id="methIndEntry"><a href="#CODE11">Code</a></td></tr>
+<tr><td id="methIndEntry">delete_Matrix_having_ID</td><td id="methIndEntry"><a href="#POD3">Description</a></td><td id="methIndEntry"><a href="#CODE12">Code</a></td></tr>
+<tr><td id="methIndEntry">get_MatrixSet</td><td id="methIndEntry"><a href="#POD4">Description</a></td><td id="methIndEntry"><a href="#CODE13">Code</a></td></tr>
+<tr><td id="methIndEntry">get_Matrix_by_ID</td><td id="methIndEntry"><a href="#POD5">Description</a></td><td id="methIndEntry"><a href="#CODE14">Code</a></td></tr>
+<tr><td id="methIndEntry">get_Matrix_by_name</td><td id="methIndEntry"><a href="#POD6">Description</a></td><td id="methIndEntry"><a href="#CODE15">Code</a></td></tr>
+<tr><td id="methIndEntry">new</td><td id="methIndEntry"><a href="#POD7">Description</a></td><td id="methIndEntry"><a href="#CODE16">Code</a></td></tr>
+<tr><td id="methIndEntry">store_Matrix</td><td id="methIndEntry"><a href="#POD8">Description</a></td><td id="methIndEntry"><a href="#CODE17">Code</a></td></tr>
+<tr><td id="methIndEntry">store_MatrixSet</td><td id="methIndEntry"><div id="error">No description</div></td><td id="methIndEntry"><a href="#CODE18">Code</a></td></tr>
 </table>
 <div id="sep"></div>
 <a name="MethDesc" id="MethDesc"></a>
 <div id="mainTitle">Methods description</div>
 <div id="sep"></div>
-<table id="methDescTitle" width="100%"><tr><td WIDTH="200"><a name="_pod_connect" id="_pod_connect"></a><a name="POD1" id="POD1"></a>connect</td><td ><a href="#CODE1">code</a></td><td >&nbsp;&nbsp;&nbsp;&nbsp;</td><td ><a href="#POD2">next</a></td><td align="right"><a href="#TOP">Top</a></td></tr></table>
-<table id="methDescArea" width="100%"><tr><td><pre id="podParagraph"> Title   : connect
- Usage   : my $db =
-	    <B>TFBS::DB::JASPAR4</B>->connect("dbi:mysql:DATABASENAME:HOSTNAME",
-					"USERNAME",
-					"PASSWORD");
- Function: connects to the existing JASPAR4-type database and
-	   returns a database object that interfaces the database
- Returns : a <B>TFBS::DB::JASPAR4</B> object
- Args    : a standard database connection triplet
-	   ("dbi:mysql:DATABASENAME:HOSTNAME",  "USERNAME", "PASSWORD")
-	   In place of DATABASENAME, HOSTNAME, USERNAME and PASSWORD,
-	   use the actual values. PASSWORD and USERNAME might be
-	   optional, depending on the user's acces permissions for
-	   the database server.</pre></td></tr></table>
+<table id="methDescTitle" width="100%"><tr><td WIDTH="200"><a name="_pod_connect" id="_pod_connect"></a><a name="POD1" id="POD1"></a>connect</td><td ><a href="#CODE9">code</a></td><td >&nbsp;&nbsp;&nbsp;&nbsp;</td><td ><a href="#POD2">next</a></td><td align="right"><a href="#TOP">Top</a></td></tr></table>
+<table id="methDescArea" width="100%"><tr><td><pre id="podParagraph"> Title   : connect<br /> Usage   : my $db =<br />	    <B>TFBS::DB::JASPAR4</B>-&gt;connect(&quot;dbi:mysql:DATABASENAME:HOSTNAME&quot;,<br />					&quot;USERNAME&quot;,<br />					&quot;PASSWORD&quot;);<br /> Function: connects to the existing JASPAR4-type database and<br />	   returns a database object that interfaces the database<br /> Returns : a <B>TFBS::DB::JASPAR4</B> object<br /> Args    : a standard database connection triplet<br />	   (&quot;dbi:mysql:DATABASENAME:HOSTNAME&quot;,  &quot;USERNAME&quot;, &quot;PASSWORD&quot;)<br />	   In place of DATABASENAME, HOSTNAME, USERNAME and PASSWORD,<br />	   use the actual values. PASSWORD and USERNAME might be<br />	   optional, depending on the user's acces permissions for<br />	   the database server.</pre></td></tr></table>
 <div id="sep"></div>
-<table id="methDescTitle" width="100%"><tr><td WIDTH="200"><a name="_pod_dbh" id="_pod_dbh"></a><a name="POD2" id="POD2"></a>dbh</td><td ><a href="#CODE3">code</a></td><td ><a href="#POD1">prev</a></td><td ><a href="#POD3">next</a></td><td align="right"><a href="#TOP">Top</a></td></tr></table>
-<table id="methDescArea" width="100%"><tr><td><pre id="podParagraph"> Title   : dbh
- Usage   : my $dbh = $db->dbh();
-	   $dbh->do("UPDATE matrix_data SET name='ADD1' WHERE NAME='SREBP2'");
- Function: returns the DBI database handle of the MySQL database
-	   interfaced by $db; THIS IS USED FOR WRITING NEW METHODS
-	   FOR DIRECT RELATIONAL DATABASE MANIPULATION - if you
-	   have write access AND do not know what you are doing,
-	   you can severely  corrupt the data
-	   For documentation about database handle methods, see <a href="#_pod_DBI">DBI</a><br /> Returns : the database (DBI) handle of the MySQL JASPAR2-type<br />	   relational database associated with the TFBS::DB::JASPAR2<br />	   object<br /> Args    : none</pre></td></tr></table>
+<table id="methDescTitle" width="100%"><tr><td WIDTH="200"><a name="_pod_dbh" id="_pod_dbh"></a><a name="POD2" id="POD2"></a>dbh</td><td ><a href="#CODE11">code</a></td><td ><a href="#POD1">prev</a></td><td ><a href="#POD3">next</a></td><td align="right"><a href="#TOP">Top</a></td></tr></table>
+<table id="methDescArea" width="100%"><tr><td><pre id="podParagraph"> Title   : dbh<br /> Usage   : my $dbh = $db-&gt;dbh();<br />	   $dbh-&gt;do(&quot;UPDATE matrix_data SET name='ADD1' WHERE NAME='SREBP2'&quot;);<br /> Function: returns the DBI database handle of the MySQL database<br />	   interfaced by $db; THIS IS USED FOR WRITING NEW METHODS<br />	   FOR DIRECT RELATIONAL DATABASE MANIPULATION - if you<br />	   have write access AND do not know what you are doing,<br />	   you can severely  corrupt the data<br />	   For documentation about database handle methods, see <a href="#_pod_DBI">DBI</a><br /> Returns : the database (DBI) handle of the MySQL JASPAR2-type<br />	   relational database associated with the TFBS::DB::JASPAR2<br />	   object<br /> Args    : none</pre></td></tr></table>
 <div id="sep"></div>
-<table id="methDescTitle" width="100%"><tr><td WIDTH="200"><a name="_pod_get_Matrix_by_ID" id="_pod_get_Matrix_by_ID"></a><a name="POD3" id="POD3"></a>get_Matrix_by_ID</td><td ><a href="#CODE4">code</a></td><td ><a href="#POD2">prev</a></td><td ><a href="#POD4">next</a></td><td align="right"><a href="#TOP">Top</a></td></tr></table>
-<table id="methDescArea" width="100%"><tr><td><pre id="podParagraph"> Title   : get_Matrix_by_ID
- Usage   : my $pfm = $db->get_Matrix_by_ID('M00034', 'PFM');
- Function: fetches matrix data under the given ID from the
-           database and returns a TFBS::Matrix::* object
- Returns : a TFBS::Matrix::* object; the exact type of the
-	   object depending on what form the matrix is stored
-	   in the database (PFM is default)
- Args    : (Matrix_ID)
-	   Matrix_ID is a string;</pre></td></tr></table>
+<table id="methDescTitle" width="100%"><tr><td WIDTH="200"><a name="_pod_delete_Matrix_having_ID" id="_pod_delete_Matrix_having_ID"></a><a name="POD3" id="POD3"></a>delete_Matrix_having_ID</td><td ><a href="#CODE12">code</a></td><td ><a href="#POD2">prev</a></td><td ><a href="#POD4">next</a></td><td align="right"><a href="#TOP">Top</a></td></tr></table>
+<table id="methDescArea" width="100%"><tr><td><pre id="podParagraph"> Title   : delete_Matrix_having_ID<br /> Usage   : $db-&gt;delete_Matrix_with_ID('M00045');<br /> Function: Deletes the matrix having the given ID from the database<br /> Returns : 0 on success; $@ contents on failure<br />	   (this is too C-like and may change in future versions)<br /> Args    : (ID)<br />	   A string<br /> Comment : Yeah, yeah, 'delete_Matrix_having_ID' is a stupid name<br />	   for a method, but at least it should be obviuos what it does.</pre></td></tr></table>
 <div id="sep"></div>
-<table id="methDescTitle" width="100%"><tr><td WIDTH="200"><a name="_pod_new" id="_pod_new"></a><a name="POD4" id="POD4"></a>new</td><td ><a href="#CODE5">code</a></td><td ><a href="#POD3">prev</a></td><td ><a href="#POD5">next</a></td><td align="right"><a href="#TOP">Top</a></td></tr></table>
-<table id="methDescArea" width="100%"><tr><td><pre id="podParagraph"> Title   : new
- Usage   : DEPRECATED - for backward compatibility only
-           Use connect() or create() instead</pre></td></tr></table>
+<table id="methDescTitle" width="100%"><tr><td WIDTH="200"><a name="_pod_get_MatrixSet" id="_pod_get_MatrixSet"></a><a name="POD4" id="POD4"></a>get_MatrixSet</td><td ><a href="#CODE13">code</a></td><td ><a href="#POD3">prev</a></td><td ><a href="#POD5">next</a></td><td align="right"><a href="#TOP">Top</a></td></tr></table>
+<table id="methDescArea" width="100%"><tr><td><pre id="podParagraph"> Title   : get_MatrixSet<br /> Usage   : my $matrixset = $db-&gt;get_MatrixSet(%args);<br /> Function: fetches matrix data under for all matrices in the database<br />	   matching criteria defined by the named arguments<br />	   and returns a TFBS::MatrixSet object<br /> Returns : a TFBS::MatrixSet object<br /> Args    : This method accepts named arguments, corresponding to arbitrary tags.<br />           Note that this is different from JASPAR2. As any tag is supported for<br />           database storage, any tag can be used for information retrieval.<br />           Additionally, arguments as 'name' and 'class' can be used (even though<br />           they are not tags.<br />           As with get_Matrix methods, it is important to realize taht any matrix<br />           format can be stored in the database: the TFBS::MatrixSet might therefore<br />           consist of PFMs, ICMs and PWMS, depending on how matrices are stored,<br />           <br />           Examples include<br />	   -ID        # a reference to an array of IDs (strings)<br />	   -name      # a reference to an array of<br />		       #  transcription factor names (string)<br />	   -class    # a reference to an array of<br />		       #  structural class names (strings)<br />	   -species    # a reference to an array of<br />		       #   Latin species names (strings)<br />	   -sysgroup  # a reference to an array of<br />		       #  higher taxonomic categories (strings)<br />
+	  
+	   -min_ic     # float, minimum total information content
+		       #   of the matrix. IMPORTANT:if retrieved matrices are in PWM
+		       format there is no way to measureinformation content.
+	-matrixtype    #string describing type of matrix to retrieve. If left out, the format
+                        will revert to the database format. Note that this option only works
+                      if the database format is pfm
+</pre>The arguments that expect list references are used in database<br />query formulation: elements within lists are combined with 'OR'<br />operators, and the lists of different types with 'AND'. For example,<br /><pre id="podParagraph">    my $matrixset = $db-&gt;(-class =&gt; ['TRP_CLUSTER', 'FORKHEAD'],<br />			  -species =&gt; ['Homo sapiens', 'Mus musculus'],<br />			  );<br /></pre>gives a set of TFBS::Matrix::PFM objects (given that the matrix models are stored as such)<br /> whose (structural clas is 'TRP_CLUSTER' OR'FORKHEAD') AND (the species they are derived<br /> from is 'Homo sapiens'OR 'Mus musculus').<br />The -min_ic filter is applied after the query in the sense that the<br />matrices profiles with total infromation content less than specified<br />are not included in the set.</td></tr></table>
 <div id="sep"></div>
-<table id="methDescTitle" width="100%"><tr><td WIDTH="200"><a name="_pod_store_Matrix" id="_pod_store_Matrix"></a><a name="POD5" id="POD5"></a>store_Matrix</td><td ><a href="#CODE6">code</a></td><td ><a href="#POD4">prev</a></td><td ><a href="#POD6">next</a></td><td align="right"><a href="#TOP">Top</a></td></tr></table>
-<table id="methDescArea" width="100%"><tr><td><pre id="podParagraph"> Title   : store_Matrix
- Usage   : $db->store_Matrix($matrixobject);
- Function: Stores the contents of a TFBS::Matrix::DB object in the database
- Returns : 0 on success; $@ contents on failure
-	   (this is too C-like and may change in future versions)
- Args    : (PFM_object)
-	   A TFBS::Matrix::PFM, FBS::Matrix::PWM or FBS::Matrix::ICM object.
-	   PFM object are recommended to use, as they are eaily converted to
-	   other formats
- Comment : this is an experimental method that is not 100% bulletproof;
-	   use at your own risk</pre></td></tr></table>
+<table id="methDescTitle" width="100%"><tr><td WIDTH="200"><a name="_pod_get_Matrix_by_ID" id="_pod_get_Matrix_by_ID"></a><a name="POD5" id="POD5"></a>get_Matrix_by_ID</td><td ><a href="#CODE14">code</a></td><td ><a href="#POD4">prev</a></td><td ><a href="#POD6">next</a></td><td align="right"><a href="#TOP">Top</a></td></tr></table>
+<table id="methDescArea" width="100%"><tr><td><pre id="podParagraph"> Title   : get_Matrix_by_ID<br /> Usage   : my $pfm = $db-&gt;get_Matrix_by_ID('M00034', 'PFM');<br /> Function: fetches matrix data under the given ID from the<br />           database and returns a TFBS::Matrix::* object<br /> Returns : a TFBS::Matrix::* object; the exact type of the<br />	   object depending on what form the matrix is stored<br />	   in the database (PFM is default)<br /> Args    : (Matrix_ID)<br />	   Matrix_ID is a string;</pre></td></tr></table>
+<div id="sep"></div>
+<table id="methDescTitle" width="100%"><tr><td WIDTH="200"><a name="_pod_get_Matrix_by_name" id="_pod_get_Matrix_by_name"></a><a name="POD6" id="POD6"></a>get_Matrix_by_name</td><td ><a href="#CODE15">code</a></td><td ><a href="#POD5">prev</a></td><td ><a href="#POD7">next</a></td><td align="right"><a href="#TOP">Top</a></td></tr></table>
+<table id="methDescArea" width="100%"><tr><td><pre id="podParagraph"> Title   : get_Matrix_by_name<br /> Usage   : my $pfm = $db-&gt;get_Matrix_by_name('HNF-1');<br /> Function: fetches matrix data under the given name from the<br />	   database and returns a TFBS::Matrix::* object<br /> Returns : a TFBS::Matrix::* object; the exact type of the object<br />	   depending on what form the matrix object was stored in<br />	   the database (default PFM))<br /> Args    : (Matrix_name)<br />	   <br /> Warning : According to the current JASPAR4 data model, name is<br />	   not necessarily a unique identifier. In the case where<br />	   there are several matrices with the same name in the<br />	   database, the function fetches the first one and prints<br />	   a warning on STDERR. You've been warned.</pre></td></tr></table>
+<div id="sep"></div>
+<table id="methDescTitle" width="100%"><tr><td WIDTH="200"><a name="_pod_new" id="_pod_new"></a><a name="POD7" id="POD7"></a>new</td><td ><a href="#CODE16">code</a></td><td ><a href="#POD6">prev</a></td><td ><a href="#POD8">next</a></td><td align="right"><a href="#TOP">Top</a></td></tr></table>
+<table id="methDescArea" width="100%"><tr><td><pre id="podParagraph"> Title   : new<br /> Usage   : DEPRECATED - for backward compatibility only<br />           Use connect() or create() instead</pre></td></tr></table>
+<div id="sep"></div>
+<table id="methDescTitle" width="100%"><tr><td WIDTH="200"><a name="_pod_store_Matrix" id="_pod_store_Matrix"></a><a name="POD8" id="POD8"></a>store_Matrix</td><td ><a href="#CODE17">code</a></td><td ><a href="#POD7">prev</a></td><td ><a href="#POD9">next</a></td><td align="right"><a href="#TOP">Top</a></td></tr></table>
+<table id="methDescArea" width="100%"><tr><td><pre id="podParagraph"> Title   : store_Matrix<br /> Usage   : $db-&gt;store_Matrix($matrixobject);<br /> Function: Stores the contents of a TFBS::Matrix::DB object in the database<br /> Returns : 0 on success; $@ contents on failure<br />	   (this is too C-like and may change in future versions)<br /> Args    : (PFM_object)<br />	   A TFBS::Matrix::PFM, FBS::Matrix::PWM or FBS::Matrix::ICM object.<br />	   PFM object are recommended to use, as they are eaily converted to<br />	   other formats<br /> Comment : this is an experimental method that is not 100% bulletproof;<br />	   use at your own risk</pre></td></tr></table>
 <div id="sep"></div>
 <a name="MethCode" id="MethCode"></a>
 <div id="mainTitle">Methods code</div>
 <div id="sep"></div>
-<table id="methCodeTitle" width="100%"><tr><td width="200"><a name="CODE1" id="CODE1"></a>connect</td><td ><a href="#POD1">description</a></td><td >prev</td><td ><a href="#CODE2">next</a></td><td align="right"><a href="#TOP">Top</a></td></tr></table>
+<table id="methCodeTitle" width="100%"><tr><td width="200"><a name="CODE1" id="CODE1"></a>DESTROY</td><td >description</td><td >prev</td><td ><a href="#CODE2">next</a></td><td align="right"><a href="#TOP">Top</a></td></tr></table>
+<div id="methCodeArea"><td ><span id="sub">sub</span> <span id="subName">DESTROY</span>
+{<pre>    <span id="var">$_</span><span id="braces">[</span>0<span id="braces">]</span>-&gt;<span id="method">dbh</span>-&gt;<span id="method">disconnect</span><span id="braces">(</span><span id="braces">)</span> <span id="perlKey">if</span> <span id="var">$_</span><span id="braces">[</span>0<span id="braces">]</span>-&gt;<span id="method">dbh</span>;</pre>}</td></div>
+<div id="sep"></div>
+<table id="methCodeTitle" width="100%"><tr><td width="200"><a name="CODE2" id="CODE2"></a>_create_tables</td><td >description</td><td ><a href="#CODE1">prev</a></td><td ><a href="#CODE3">next</a></td><td align="right"><a href="#TOP">Top</a></td></tr></table>
+<div id="methCodeArea"><td ><span id="sub">sub</span> <span id="privSubName">_create_tables</span>
+{<pre>    <span id="comment"># utility function</span><br />
+    <span id="comment"># If you want to change the databse schema,</span><br />    <span id="comment"># this is the right place to do it</span><br />
+    <span id="perlKey">my</span> <span id="var">$dbh</span> = <span id="perlFunc">shift</span>;
+
+    <span id="perlKey">my</span> <span id="var">@queries</span> = 
+	<span id="braces">(</span>
+       <span id="perlFunc">q</span><span id="sqStr">!!<br />        CREATE TABLE MATRIX_DATA(<br />	ID VARCHAR (16) DEFAULT '' NOT NULL,<br />	row VARCHAR(1) NOT NULL, <br />	col TINYINT(3) UNSIGNED NOT NULL, <br />	val FLOAT, <br />	PRIMARY KEY (ID, row, col)<br />	)<br />       !</span>,
+       <span id="perlFunc">q</span><span id="sqStr">!!<br />       CREATE TABLE MATRIX_INFO( <br />	ID VARCHAR (16) DEFAULT '' NOT NULL PRIMARY KEY , <br /> 	type ENUM ('PFM', 'ICM','PWM') DEFAULT 'PFM' NOT NULL <br />	)<br />       !</span>,
+       
+       <span id="perlFunc">q</span><span id="sqStr">!!<br />        CREATE TABLE MATRIX_ANNOTATION(<br />        ID VARCHAR (16) DEFAULT '' NOT NULL,<br />	tag VARCHAR(255) DEFAULT '' NOT NULL,<br />	val TEXT,<br />	PRIMARY KEY (ID, tag)<br />	)<br />        !</span>,
+        
+    <span id="braces">)</span>;
+    <span id="perlKey">foreach</span> <span id="perlKey">my</span> <span id="var">$query</span> <span id="braces">(</span><span id="var">@queries</span><span id="braces">)</span>  <span id="braces">{</span>
+	<span id="var">$dbh</span>-&gt;<span id="perlKey">do</span><span id="braces">(</span><span id="var">$query</span><span id="braces">)</span> 
+	    or <span id="perlFunc">die</span><span id="braces">(</span><span id="dqStr">"Error executing the query: $query\n"</span><span id="braces">)</span>;
+    <span id="braces">}</span></pre>}</td></div>
+<div id="sep"></div>
+<table id="methCodeTitle" width="100%"><tr><td width="200"><a name="CODE3" id="CODE3"></a>_get_IDlist_by_query</td><td >description</td><td ><a href="#CODE2">prev</a></td><td ><a href="#CODE4">next</a></td><td align="right"><a href="#TOP">Top</a></td></tr></table>
+<div id="methCodeArea"><td ><span id="sub">sub</span> <span id="privSubName">_get_IDlist_by_query</span>
+{<pre>
+    <span id="comment"># called by get_MatrixSet</span><br />    <span id="comment"># should be able to search for arbitrary tags...hmmm</span><br />    <span id="perlKey">my</span> <span id="braces">(</span><span id="var">$self</span>, <span id="var">%args</span><span id="braces">)</span> = <span id="var">@_</span>;
+    <span id="perlKey">my</span> <span id="braces">(</span><span id="var">$TABLES</span>, <span id="var">%arrayref</span><span id="braces">)</span>;
+    <span id="perlKey">my</span> <span id="braces">(</span><span id="var">%intersected_set</span><span id="braces">)</span>;
+    
+
+    <span id="perlKey">foreach</span> <span id="perlKey">my</span> <span id="var">$key</span><span id="braces">(</span><span id="perlFunc">keys</span> <span id="var">%args</span><span id="braces">)</span><span id="braces">{</span>
+       
+        <span id="perlKey">unless</span> <span id="braces">(</span> <span id="var">$key</span> <span id="perlKey">eq</span> <span id="dqStr">"-min_ic"</span> or <span id="var">$key</span> <span id="perlKey">eq</span>  <span id="dqStr">"-matrixtype"</span><span id="braces">)</span><span id="braces">{</span>
+                <span id="perlKey">my</span> <span id="var">$oldkey</span>=<span id="var">$key</span>;
+                <span id="var">$key</span>=~s<span id="regExp">/-/</span>/;<br />                <span id="var">$arrayref</span><span id="braces">{</span><span id="var">$key</span><span id="braces">}</span>= <span id="var">$args</span><span id="braces">{</span><span id="var">$oldkey</span><span id="braces">}</span>;
+        <span id="braces">}</span>
+    <span id="braces">}</span>
+    <span id="perlKey">my</span> <span id="var">@andconditions</span>;
+    
+      
+    <span id="var">$TABLES</span> = <span id="sqStr">'MATRIX_ANNOTATION '</span>;
+    
+    <span id="comment">#special case: get all matrices</span><br />    <span id="perlKey">unless</span> <span id="braces">(</span><span id="perlFunc">keys</span> <span id="var">%arrayref</span><span id="braces">)</span><span id="braces">{</span>
+       
+            
+        
+     <span id="perlKey">my</span> <span id="var">$query</span> = <span id="dqStr">"SELECT DISTINCT ID FROM <span id="var">$TABLES</span> "</span>;
+        
+     <span id="perlKey">my</span> <span id="var">$sth</span> = <span id="var">$self</span>-&gt;<span id="method">dbh</span>-&gt;<span id="method">prepare</span><span id="braces">(</span><span id="var">$query</span><span id="braces">)</span>;
+     <span id="var">$sth</span>-&gt;<span id="method">execute</span><span id="braces">(</span><span id="braces">)</span> or <span id="var">$self</span>-&gt;<span id="method">throw</span><span id="braces">(</span><span id="dqStr">"Query failed:\n$query\n"</span><span id="braces">)</span>;
+     <span id="perlKey">my</span> <span id="var">@ary</span>;
+     
+     <span id="perlKey">while</span> <span id="braces">(</span><span id="perlKey">my</span> <span id="braces">(</span><span id="var">$id</span><span id="braces">)</span> = <span id="var">$sth</span>-&gt;<span id="method">fetchrow_array</span><span id="braces">(</span><span id="braces">)</span><span id="braces">)</span>  <span id="braces">{</span>
+           <span id="perlFunc">push</span> <span id="braces">(</span><span id="var">@ary</span>, <span id="var">$id</span><span id="braces">)</span>;
+            
+        <span id="braces">}</span>   
+    
+        <span id="perlKey">return</span><span id="braces">(</span><span id="var">@ary</span><span id="braces">)</span>;
+    
+    <span id="braces">}</span>
+    
+    
+    
+    
+    
+    <span id="perlKey">foreach</span> <span id="perlKey">my</span> <span id="var">$key</span> <span id="braces">(</span><span id="perlFunc">keys</span> <span id="var">%arrayref</span><span id="braces">)</span>  <span id="braces">{</span>
+        <span id="comment">#print &quot;key: $key\n&quot;;</span><br />        <span id="perlKey">if</span> <span id="braces">(</span><span id="var">$key</span> <span id="perlKey">eq</span> <span id="sqStr">'ID'</span><span id="braces">)</span><span id="braces">{</span>
+         <span id="perlFunc">push</span> <span id="var">@andconditions</span>,
+	<span id="dqStr">"("</span>.
+	<span id="perlFunc">join</span><span id="braces">(</span><span id="dqStr">" OR "</span>,
+	     <span id="braces">(</span><span id="perlFunc">map</span> <span id="braces">{</span><span id="dqStr">"MATRIX_ANNOTATION.ID="</span>.
+		       <span id="var">$self</span>-&gt;<span id="method">dbh</span>-&gt;<span id="method">quote</span><span id="braces">(</span><span id="var">$_</span><span id="braces">)</span>
+		  <span id="braces">}</span> 
+	      @<span id="braces">{</span><span id="var">$arrayref</span><span id="braces">{</span><span id="var">$key</span><span id="braces">}</span><span id="braces">}</span>
+	     <span id="braces">)</span><span id="braces">)</span>.
+	<span id="dqStr">")"</span>;   
+            
+            
+            
+        <span id="braces">}</span>
+        <span id="perlKey">else</span><span id="braces">{</span>
+        <span id="perlFunc">push</span> <span id="var">@andconditions</span>,
+	<span id="dqStr">"("</span>.
+	<span id="perlFunc">join</span><span id="braces">(</span><span id="dqStr">" OR "</span>,
+	     <span id="braces">(</span><span id="perlFunc">map</span> <span id="braces">{</span><span id="dqStr">"MATRIX_ANNOTATION.tag="</span>. <span id="var">$self</span>-&gt;<span id="method">dbh</span>-&gt;<span id="method">quote</span><span id="braces">(</span><span id="var">$key</span><span id="braces">)</span>.<span id="dqStr">" AND val="</span>.
+		       <span id="var">$self</span>-&gt;<span id="method">dbh</span>-&gt;<span id="method">quote</span><span id="braces">(</span><span id="var">$_</span><span id="braces">)</span>
+		  <span id="braces">}</span> 
+	      @<span id="braces">{</span><span id="var">$arrayref</span><span id="braces">{</span><span id="var">$key</span><span id="braces">}</span><span id="braces">}</span>
+	     <span id="braces">)</span><span id="braces">)</span>.
+	<span id="dqStr">")"</span>;
+        <span id="braces">}</span>
+        <span id="perlFunc">push</span> <span id="braces">(</span><span id="var">@andconditions</span>, 1<span id="braces">)</span> <span id="perlKey">unless</span><span id="braces">(</span><span id="var">@andconditions</span><span id="braces">)</span>;
+        <span id="perlKey">my</span> <span id="var">$WHERE</span> = <span id="braces">(</span><span id="braces">(</span><span id="perlFunc">scalar</span> <span id="var">@andconditions</span><span id="braces">)</span> == 0<span id="braces">)</span> ? <span id="dqStr">""</span> : <span id="dqStr">" WHERE "</span>;
+
+     
+      
+    <span id="perlKey">my</span> <span id="var">$query</span> = 
+	    <span id="dqStr">"SELECT DISTINCT ID FROM <span id="var">$TABLES</span> <span id="var">$WHERE</span>"</span>.
+	    <span id="perlFunc">join</span><span id="braces">(</span><span id="dqStr">" AND "</span>, <span id="var">@andconditions</span><span id="braces">)</span>;
+   
+       <span id="comment"># warn  $query; </span><br />        <span id="perlFunc">undef</span> <span id="var">@andconditions</span>;
+        <span id="perlKey">my</span> <span id="var">$sth</span> = <span id="var">$self</span>-&gt;<span id="method">dbh</span>-&gt;<span id="method">prepare</span><span id="braces">(</span><span id="var">$query</span><span id="braces">)</span>;
+        <span id="var">$sth</span>-&gt;<span id="method">execute</span><span id="braces">(</span><span id="braces">)</span> or <span id="var">$self</span>-&gt;<span id="method">throw</span><span id="braces">(</span><span id="dqStr">"Query failed:\n$query\n"</span><span id="braces">)</span>;
+    
+        <span id="comment"># collect IDs and return</span><br />
+        <span id="perlKey">my</span> <span id="var">%current_query</span>;
+        <span id="perlKey">while</span> <span id="braces">(</span><span id="perlKey">my</span> <span id="braces">(</span><span id="var">$id</span><span id="braces">)</span> = <span id="var">$sth</span>-&gt;<span id="method">fetchrow_array</span><span id="braces">(</span><span id="braces">)</span><span id="braces">)</span>  <span id="braces">{</span>
+           <span id="var">$current_query</span><span id="braces">{</span><span id="var">$id</span><span id="braces">}</span>=1;
+            
+        <span id="braces">}</span>
+        <span id="perlKey">unless</span> <span id="braces">(</span><span id="var">%intersected_set</span><span id="braces">)</span><span id="braces">{</span>
+            <span id="var">%intersected_set</span>= <span id="var">%current_query</span>;
+            <span id="perlKey">next</span>;
+        <span id="braces">}</span>
+        <span id="comment"># do intersect</span><br />        <span id="perlKey">foreach</span> <span id="perlKey">my</span> <span id="var">$key</span> <span id="braces">(</span><span id="perlFunc">keys</span> <span id="var">%intersected_set</span><span id="braces">)</span><span id="braces">{</span>
+              <span id="perlFunc">delete</span> <span id="var">$intersected_set</span><span id="braces">{</span> <span id="var">$key</span><span id="braces">}</span>  <span id="perlKey">unless</span> <span id="var">$current_query</span><span id="braces">{</span><span id="var">$key</span><span id="braces">}</span>;
+            
+        <span id="braces">}</span>
+    <span id="braces">}</span> 
+    
+    <span id="perlKey">my</span> <span id="var">@ary</span>;
+    <span id="perlKey">foreach</span> <span id="perlKey">my</span> <span id="var">$key</span> <span id="braces">(</span><span id="perlFunc">keys</span> <span id="var">%intersected_set</span><span id="braces">)</span><span id="braces">{</span>
+        <span id="perlFunc">push</span> <span id="braces">(</span><span id="var">@ary</span>, <span id="var">$key</span><span id="braces">)</span>;
+       <span id="comment"># warn &quot;$key\n&quot;;</span><br />    <span id="braces">}</span>
+    <span id="perlKey">return</span> <span id="braces">(</span><span id="var">@ary</span><span id="braces">)</span>;</pre>}</td></div>
+<div id="sep"></div>
+<table id="methCodeTitle" width="100%"><tr><td width="200"><a name="CODE4" id="CODE4"></a>_get_matrixstring</td><td >description</td><td ><a href="#CODE3">prev</a></td><td ><a href="#CODE5">next</a></td><td align="right"><a href="#TOP">Top</a></td></tr></table>
+<div id="methCodeArea"><td ><span id="sub">sub</span> <span id="privSubName">_get_matrixstring</span>
+{<pre>    <span id="perlKey">my</span> <span id="braces">(</span><span id="var">$self</span>, <span id="var">$ID</span><span id="braces">)</span> = <span id="var">@_</span>;
+    <span id="comment">#my %dbname = (PWM =&gt; 'pwm', PFM =&gt; 'raw', ICM =&gt; 'info');</span><br />    <span id="comment">#unless (defined $dbname{$mt})  {</span><br />	<span id="comment">#$self-&gt;throw(&quot;Unsupported matrix type: &quot;.$mt);</span><br />    <span id="comment">#}</span><br />    <span id="perlKey">my</span> <span id="var">$sth</span>;
+    <span id="perlKey">my</span> <span id="var">$qID</span> = <span id="var">$self</span>-&gt;<span id="method">dbh</span>-&gt;<span id="method">quote</span><span id="braces">(</span><span id="var">$ID</span><span id="braces">)</span>;
+    <span id="perlKey">my</span> <span id="var">$matrixstring</span> = <span id="dqStr">""</span>;
+    <span id="perlKey">foreach</span> <span id="perlKey">my</span> <span id="var">$base</span> <span id="braces">(</span><span id="perlFunc">qw</span><span id="braces">(</span>A C G T<span id="braces">)</span><span id="braces">)</span> <span id="braces">{</span>
+	<span id="var">$sth</span>=<span id="var">$self</span>-&gt;<span id="method">dbh</span>-&gt;<span id="method">prepare</span>
+	    <span id="braces">(</span><span id="dqStr">"SELECT val FROM MATRIX_DATA 
+              WHERE ID=<span id="var">$qID</span> AND row='$base' ORDER BY col"</span><span id="braces">)</span>;
+	<span id="var">$sth</span>-&gt;<span id="method">execute</span>;
+	<span id="var">$matrixstring</span> .=
+	    <span id="perlFunc">join</span> <span id="braces">(</span><span id="dqStr">" "</span>, <span id="braces">(</span><span id="perlFunc">map</span> <span id="braces">{</span><span id="var">$_</span>-&gt;<span id="braces">[</span>0<span id="braces">]</span><span id="braces">}</span> @<span id="braces">{</span><span id="var">$sth</span>-&gt;<span id="method">fetchall_arrayref</span><span id="braces">(</span><span id="braces">)</span><span id="braces">}</span><span id="braces">)</span><span id="braces">)</span>.<span id="dqStr">"\n"</span>;
+    <span id="braces">}</span>
+    <span id="var">$sth</span>-&gt;<span id="method">finish</span>;
+    <span id="perlKey">return</span> <span id="perlFunc">undef</span> <span id="perlKey">if</span> <span id="var">$matrixstring</span> <span id="perlKey">eq</span> <span id="dqStr">"\n"</span>x4;
+
+    <span id="perlKey">return</span> <span id="var">$matrixstring</span>;</pre>}</td></div>
+<div id="sep"></div>
+<table id="methCodeTitle" width="100%"><tr><td width="200"><a name="CODE5" id="CODE5"></a>_new</td><td >description</td><td ><a href="#CODE4">prev</a></td><td ><a href="#CODE6">next</a></td><td align="right"><a href="#TOP">Top</a></td></tr></table>
+<div id="methCodeArea"><td ><span id="sub">sub</span> <span id="privSubName">_new</span>
+{<pre>    <span id="perlKey">my</span> <span id="braces">(</span><span id="var">$caller</span>, <span id="var">%args</span><span id="braces">)</span>  = <span id="var">@_</span>;
+    <span id="perlKey">my</span> <span id="var">$class</span> = <span id="perlFunc">ref</span> <span id="var">$caller</span> || <span id="var">$caller</span>;
+    <span id="perlKey">my</span> <span id="var">$self</span> = <span id="perlFunc">bless</span> <span id="braces">{</span><span id="braces">}</span>, <span id="var">$class</span>;
+
+    <span id="perlKey">my</span> <span id="braces">(</span><span id="var">$connectstring</span>, <span id="var">$user</span>, <span id="var">$password</span><span id="braces">)</span>;
+ 
+    <span id="perlKey">if</span> <span id="braces">(</span><span id="var">$args</span><span id="braces">{</span><span id="sqStr">'-connect'</span><span id="braces">}</span> and <span id="braces">(</span><span id="perlFunc">ref</span><span id="braces">(</span><span id="var">$args</span><span id="braces">{</span><span id="sqStr">'-connect'</span><span id="braces">}</span><span id="braces">)</span> <span id="perlKey">eq</span> <span id="dqStr">"ARRAY"</span><span id="braces">)</span><span id="braces">)</span>  <span id="braces">{</span>
+	<span id="braces">(</span><span id="var">$connectstring</span>, <span id="var">$user</span>, <span id="var">$password</span><span id="braces">)</span> = @<span id="braces">{</span><span id="var">$args</span><span id="braces">{</span><span id="sqStr">'-connect'</span><span id="braces">}</span><span id="braces">}</span>;
+    <span id="braces">}</span>
+    <span id="perlKey">elsif</span> <span id="braces">(</span><span id="var">$args</span><span id="braces">{</span><span id="sqStr">'-create'</span><span id="braces">}</span> and <span id="braces">(</span><span id="perlFunc">ref</span><span id="braces">(</span><span id="var">$args</span><span id="braces">{</span><span id="sqStr">'-create'</span><span id="braces">}</span><span id="braces">)</span> <span id="perlKey">eq</span> <span id="dqStr">"ARRAY"</span><span id="braces">)</span><span id="braces">)</span>  <span id="braces">{</span>
+	<span id="perlKey">return</span> <span id="var">$caller</span>-&gt;<span id="method">create</span><span id="braces">(</span>@<span id="braces">{</span>-args<span id="braces">{</span><span id="sqStr">'create'</span><span id="braces">}</span><span id="braces">}</span><span id="braces">)</span>;
+    <span id="braces">}</span>
+    <span id="perlKey">else</span>  <span id="braces">{</span>
+	<span id="braces">(</span><span id="var">$connectstring</span>, <span id="var">$user</span>, <span id="var">$password</span><span id="braces">)</span> = 
+	    <span id="braces">(</span>DEFAULT_CONNECTSTRING, DEFAULT_USER, DEFAULT_PASSWORD<span id="braces">)</span>;
+    <span id="braces">}</span>
+
+    <span id="var">$self</span>-&gt;<span id="method">dbh</span><span id="braces">(</span> <span id="method">DBI</span><span id="method">->connect</span><span id="braces">(</span><span id="var">$connectstring</span>, <span id="var">$user</span>, <span id="var">$password</span><span id="braces">)</span> <span id="braces">)</span>;
+    
+    <span id="perlKey">return</span> <span id="var">$self</span>;</pre>}</td></div>
+<div id="sep"></div>
+<table id="methCodeTitle" width="100%"><tr><td width="200"><a name="CODE6" id="CODE6"></a>_store_matrix_annotation</td><td >description</td><td ><a href="#CODE5">prev</a></td><td ><a href="#CODE7">next</a></td><td align="right"><a href="#TOP">Top</a></td></tr></table>
+<div id="methCodeArea"><td ><span id="sub">sub</span> <span id="privSubName">_store_matrix_annotation</span>
+{<pre>    <span id="perlKey">my</span> <span id="braces">(</span><span id="var">$self</span>, <span id="var">$pfm</span>, <span id="var">$ACTION</span><span id="braces">)</span> = <span id="var">@_</span>;
+    <span id="perlKey">my</span> <span id="var">$sth</span> = <span id="var">$self</span>-&gt;<span id="method">dbh</span>-&gt;<span id="method">prepare</span> 
+	<span id="braces">(</span><span id="perlFunc">q</span><span id="sqStr">!! INSERT INTO MATRIX_ANNOTATION<br />	    (ID, tag, val) <br />	    VALUES(?,?,?) !</span><span id="braces">)</span>;
+    
+    <span id="var">$sth</span>-&gt;<span id="method">execute</span><span id="braces">(</span><span id="var">$pfm</span>-&gt;<span id="method">ID</span>,
+                    <span id="sqStr">'name'</span>,
+                    <span id="braces">(</span><span id="var">$pfm</span>-&gt;<span id="method">name</span><span id="braces">(</span><span id="braces">)</span> or <span id="dqStr">""</span><span id="braces">)</span>,
+    <span id="braces">)</span>;
+    <span id="var">$sth</span>-&gt;<span id="method">execute</span><span id="braces">(</span><span id="var">$pfm</span>-&gt;<span id="method">ID</span>,
+                    <span id="sqStr">'class'</span>,
+                    <span id="braces">(</span><span id="var">$pfm</span>-&gt;<span id="method">class</span><span id="braces">(</span><span id="braces">)</span> or <span id="dqStr">""</span><span id="braces">)</span>,
+    <span id="braces">)</span>;
+    
+    <span id="comment"># get all tags	</span><br />	
+    <span id="perlKey">my</span> <span id="var">%tags</span>= <span id="var">$pfm</span>-&gt;<span id="method">all_tags</span><span id="braces">(</span><span id="braces">)</span>;
+    <span id="perlKey">foreach</span> <span id="perlKey">my</span> <span id="var">$tag</span><span id="braces">(</span> <span id="perlFunc">keys</span> <span id="var">%tags</span><span id="braces">)</span><span id="braces">{</span>
+    <span id="var">$sth</span>-&gt;<span id="method">execute</span><span id="braces">(</span><span id="var">$pfm</span>-&gt;<span id="method">ID</span>,
+                    <span id="var">$tag</span>, 
+                   <span id="braces">(</span><span id="var">$tags</span><span id="braces">{</span><span id="var">$tag</span><span id="braces">}</span> or <span id="dqStr">""</span><span id="braces">)</span>,
+                 <span id="braces">)</span>
+    
+	or <span id="var">$self</span>-&gt;<span id="method">throw</span><span id="braces">(</span><span id="dqStr">"Error executing query"</span><span id="braces">)</span>;
+    <span id="braces">}</span>	
+<span id="braces">}</span>
+
+
+
+
+
+
+
+<span id="comment">#when creating: try to support arbitrary tags</span><br /></pre>}</td></div>
+<div id="sep"></div>
+<table id="methCodeTitle" width="100%"><tr><td width="200"><a name="CODE7" id="CODE7"></a>_store_matrix_data</td><td >description</td><td ><a href="#CODE6">prev</a></td><td ><a href="#CODE8">next</a></td><td align="right"><a href="#TOP">Top</a></td></tr></table>
+<div id="methCodeArea"><td ><span id="sub">sub</span> <span id="privSubName">_store_matrix_data</span>
+{<pre>    <span id="perlKey">my</span> <span id="braces">(</span><span id="var">$self</span>, <span id="var">$pfm</span>, <span id="var">$ACTION</span><span id="braces">)</span> = <span id="var">@_</span>;
+    <span id="perlKey">my</span> <span id="var">@base</span> = <span id="perlFunc">qw</span><span id="braces">(</span>A C G T<span id="braces">)</span>;
+    <span id="perlKey">my</span> <span id="var">$matrix</span> = <span id="var">$pfm</span>-&gt;<span id="method">matrix</span><span id="braces">(</span><span id="braces">)</span>;
+    <span id="perlKey">my</span> <span id="var">$type</span>;
+    <span id="perlKey">my</span> <span id="var">$sth</span> = <span id="var">$self</span>-&gt;<span id="method">dbh</span>-&gt;<span id="method">prepare</span> 
+	<span id="braces">(</span><span id="perlFunc">q</span><span id="sqStr">!! INSERT INTO MATRIX_DATA VALUES(?,?,?,?) !</span><span id="braces">)</span>;
+				 
+    <span id="perlKey">for</span> <span id="perlKey">my</span> <span id="var">$i</span> <span id="braces">(</span>0..3<span id="braces">)</span>  <span id="braces">{</span>
+	<span id="perlKey">for</span> <span id="perlKey">my</span> <span id="var">$j</span> <span id="braces">(</span>0..<span id="braces">(</span><span id="var">$pfm</span>-&gt;<span id="perlFunc">length</span>-1<span id="braces">)</span><span id="braces">)</span> <span id="braces">{</span>
+	    <span id="var">$sth</span>-&gt;<span id="method">execute</span><span id="braces">(</span> <span id="var">$pfm</span>-&gt;<span id="method">ID</span>,
+			   
+			   <span id="var">$base</span><span id="braces">[</span><span id="var">$i</span><span id="braces">]</span>,
+			   <span id="var">$j</span>+1,
+			   <span id="var">$matrix</span>-&gt;<span id="braces">[</span><span id="var">$i</span><span id="braces">]</span><span id="braces">[</span><span id="var">$j</span><span id="braces">]</span>
+	    <span id="braces">)</span>
+	   or <span id="var">$self</span>-&gt;<span id="method">throw</span><span id="braces">(</span><span id="dqStr">"Error executing query."</span><span id="braces">)</span>;
+	<span id="braces">}</span>
+    <span id="braces">}</span></pre>}</td></div>
+<div id="sep"></div>
+<table id="methCodeTitle" width="100%"><tr><td width="200"><a name="CODE8" id="CODE8"></a>_store_matrix_info</td><td >description</td><td ><a href="#CODE7">prev</a></td><td ><a href="#CODE9">next</a></td><td align="right"><a href="#TOP">Top</a></td></tr></table>
+<div id="methCodeArea"><td ><span id="sub">sub</span> <span id="privSubName">_store_matrix_info</span>
+{<pre>
+    <span id="perlKey">my</span> <span id="braces">(</span><span id="var">$self</span>, <span id="var">$pfm</span>, <span id="var">$ACTION</span><span id="braces">)</span> = <span id="var">@_</span>;
+
+    <span id="perlKey">my</span> <span id="var">$type</span>;
+    <span id="var">$type</span>= <span id="sqStr">'PFM'</span> <span id="perlKey">if</span> <span id="var">$pfm</span>-&gt;<span id="method">isa</span><span id="braces">(</span><span id="dqStr">"TFBS::Matrix::PFM"</span><span id="braces">)</span>;
+    <span id="var">$type</span>= <span id="sqStr">'PWM'</span> <span id="perlKey">if</span> <span id="var">$pfm</span>-&gt;<span id="method">isa</span><span id="braces">(</span><span id="dqStr">"TFBS::Matrix::PWM"</span><span id="braces">)</span>;
+    <span id="var">$type</span>= <span id="sqStr">'ICM'</span> <span id="perlKey">if</span> <span id="var">$pfm</span>-&gt;<span id="method">isa</span><span id="braces">(</span><span id="dqStr">"TFBS::Matrix::ICM"</span><span id="braces">)</span>;
+
+
+    <span id="perlKey">my</span> <span id="var">$sth</span> = <span id="var">$self</span>-&gt;<span id="method">dbh</span>-&gt;<span id="method">prepare</span> 
+	<span id="braces">(</span><span id="perlFunc">q</span><span id="sqStr">!! INSERT INTO MATRIX_INFO<br />	    (ID, type) <br />	    VALUES(?,?) !</span><span id="braces">)</span>;
+    <span id="var">$sth</span>-&gt;<span id="method">execute</span><span id="braces">(</span><span id="var">$pfm</span>-&gt;<span id="method">ID</span>,
+		  <span id="var">$type</span>, 
+		  <span id="braces">)</span>
+	or <span id="var">$self</span>-&gt;<span id="method">throw</span><span id="braces">(</span><span id="dqStr">"Error executing query"</span><span id="braces">)</span>;</pre>}</td></div>
+<div id="sep"></div>
+<table id="methCodeTitle" width="100%"><tr><td width="200"><a name="CODE9" id="CODE9"></a>connect</td><td ><a href="#POD1">description</a></td><td ><a href="#CODE8">prev</a></td><td ><a href="#CODE10">next</a></td><td align="right"><a href="#TOP">Top</a></td></tr></table>
 <div id="methCodeArea"><td ><span id="sub">sub</span> <span id="subName">connect</span>
 {<pre>    <span id="comment"># a more intuitive syntax for the constructor</span><br />    <span id="perlKey">my</span> <span id="braces">(</span><span id="var">$caller</span>, <span id="var">@connection_args</span><span id="braces">)</span> = <span id="var">@_</span>;
     <span id="var">$caller</span>-&gt;<span id="perlKey">new</span><span id="braces">(</span>-<span id="perlFunc">connect</span> =&gt;\@ connection_args<span id="braces">)</span>;</pre>}</td></div>
 <div id="sep"></div>
-<table id="methCodeTitle" width="100%"><tr><td width="200"><a name="CODE2" id="CODE2"></a>create</td><td >description</td><td ><a href="#CODE1">prev</a></td><td ><a href="#CODE3">next</a></td><td align="right"><a href="#TOP">Top</a></td></tr></table>
+<table id="methCodeTitle" width="100%"><tr><td width="200"><a name="CODE10" id="CODE10"></a>create</td><td >description</td><td ><a href="#CODE9">prev</a></td><td ><a href="#CODE11">next</a></td><td align="right"><a href="#TOP">Top</a></td></tr></table>
 <div id="methCodeArea"><td ><span id="sub">sub</span> <span id="subName">create</span>
 {<pre>    <span id="perlKey">my</span> <span id="braces">(</span><span id="var">$caller</span>, <span id="var">$connectstring</span>, <span id="var">$user</span>, <span id="var">$password</span><span id="braces">)</span> = <span id="var">@_</span>;
     <span id="perlKey">if</span> <span id="braces">(</span><span id="var">$connectstring</span> 
@@ -145,13 +376,83 @@ JASPAR4 documentation.
 		     <span id="dqStr">"TFBS::DB::JASPAR2 connection."</span><span id="braces">)</span>; 
     <span id="braces">}</span></pre>}</td></div>
 <div id="sep"></div>
-<table id="methCodeTitle" width="100%"><tr><td width="200"><a name="CODE3" id="CODE3"></a>dbh</td><td ><a href="#POD2">description</a></td><td ><a href="#CODE2">prev</a></td><td ><a href="#CODE4">next</a></td><td align="right"><a href="#TOP">Top</a></td></tr></table>
+<table id="methCodeTitle" width="100%"><tr><td width="200"><a name="CODE11" id="CODE11"></a>dbh</td><td ><a href="#POD2">description</a></td><td ><a href="#CODE10">prev</a></td><td ><a href="#CODE12">next</a></td><td align="right"><a href="#TOP">Top</a></td></tr></table>
 <div id="methCodeArea"><td ><span id="sub">sub</span> <span id="subName">dbh</span>
 {<pre>    <span id="perlKey">my</span> <span id="braces">(</span><span id="var">$self</span>, <span id="var">$dbh</span><span id="braces">)</span> = <span id="var">@_</span>;
     <span id="var">$self</span>-&gt;<span id="braces">{</span><span id="sqStr">'dbh'</span><span id="braces">}</span> = <span id="var">$dbh</span> <span id="perlKey">if</span> <span id="var">$dbh</span>;
     <span id="perlKey">return</span> <span id="var">$self</span>-&gt;<span id="braces">{</span><span id="sqStr">'dbh'</span><span id="braces">}</span>;</pre>}</td></div>
 <div id="sep"></div>
-<table id="methCodeTitle" width="100%"><tr><td width="200"><a name="CODE4" id="CODE4"></a>get_Matrix_by_ID</td><td ><a href="#POD3">description</a></td><td ><a href="#CODE3">prev</a></td><td ><a href="#CODE5">next</a></td><td align="right"><a href="#TOP">Top</a></td></tr></table>
+<table id="methCodeTitle" width="100%"><tr><td width="200"><a name="CODE12" id="CODE12"></a>delete_Matrix_having_ID</td><td ><a href="#POD3">description</a></td><td ><a href="#CODE11">prev</a></td><td ><a href="#CODE13">next</a></td><td align="right"><a href="#TOP">Top</a></td></tr></table>
+<div id="methCodeArea"><td ><span id="sub">sub</span> <span id="subName">delete_Matrix_having_ID</span>
+{<pre>    <span id="perlKey">my</span> <span id="braces">(</span><span id="var">$self</span>, <span id="var">@IDs</span><span id="braces">)</span> = <span id="var">@_</span>;
+    <span id="perlKey">eval</span>  <span id="braces">{</span>
+	<span id="perlKey">foreach</span> <span id="perlKey">my</span> <span id="var">$ID</span> <span id="braces">(</span><span id="var">@IDs</span><span id="braces">)</span> <span id="braces">{</span>
+	    <span id="perlKey">my</span> <span id="var">$q_ID</span> = <span id="var">$self</span>-&gt;<span id="method">dbh</span>-&gt;<span id="method">quote</span><span id="braces">(</span><span id="var">$ID</span><span id="braces">)</span>;
+	    <span id="perlKey">foreach</span> <span id="perlKey">my</span> <span id="var">$table</span> <span id="braces">(</span><span id="perlFunc">qw</span>  <span id="braces">(</span>MATRIX_DATA
+				    MATRIX_INFO
+				    MATRIX_ANNOTATION
+				    <span id="braces">)</span>
+				<span id="braces">)</span>
+	    <span id="braces">{</span>
+		<span id="var">$self</span>-&gt;<span id="method">dbh</span>-&gt;<span id="perlKey">do</span><span id="braces">(</span><span id="dqStr">"DELETE from <span id="var">$table</span> where ID=<span id="var">$q_ID</span>"</span><span id="braces">)</span>;
+	    <span id="braces">}</span>
+	<span id="braces">}</span>
+    <span id="braces">}</span>;
+    <span id="perlKey">return</span> $@;
+    
+<span id="braces">}</span>
+
+
+
+<span id="comment">#########################################################################</span><br /><span id="comment"># PRIVATE METHODS</span><br /><span id="comment">#########################################################################</span><br /></pre>}</td></div>
+<div id="sep"></div>
+<table id="methCodeTitle" width="100%"><tr><td width="200"><a name="CODE13" id="CODE13"></a>get_MatrixSet</td><td ><a href="#POD4">description</a></td><td ><a href="#CODE12">prev</a></td><td ><a href="#CODE14">next</a></td><td align="right"><a href="#TOP">Top</a></td></tr></table>
+<div id="methCodeArea"><td ><span id="sub">sub</span> <span id="subName">get_MatrixSet</span>
+{<pre>    <span id="perlKey">my</span> <span id="braces">(</span><span id="var">$self</span>, <span id="var">%args</span><span id="braces">)</span> = <span id="var">@_</span>;
+    
+    
+    
+    <span id="perlKey">my</span> <span id="var">@IDlist</span> = <span id="var">$self</span>-&gt;<span id="method">_get_IDlist_by_query</span><span id="braces">(</span><span id="var">%args</span><span id="braces">)</span>;
+    <span id="perlKey">my</span> <span id="var">$type</span>;
+    <span id="perlKey">my</span> <span id="var">$matrixset</span> = <span id="module"><a href="../MatrixSet.html">TFBS::MatrixSet</a></span>-&gt;<span id="perlKey">new</span><span id="braces">(</span><span id="braces">)</span>;
+    
+    <span id="perlKey">foreach</span> <span id="braces">(</span><span id="var">@IDlist</span><span id="braces">)</span>  <span id="braces">{</span>
+       <span id="comment"># print &quot;$_\n&quot;;</span><br />    <span id="braces">}</span>
+    
+    <span id="perlKey">foreach</span> <span id="braces">(</span><span id="var">@IDlist</span><span id="braces">)</span>  <span id="braces">{</span>
+	<span id="comment">#next if (defined $args{'-min_ic'} </span><br />	<span id="comment">#	 and $_-&gt;_get_total_ic($_) &lt; $args{'-min_ic'});</span><br />            <span id="comment">#evaluate total information content: ivolves actually retrieving matrix</span><br />            <span id="comment"># is actually a problem if matrix is stored PWM: thro an error if so</span><br />	
+	<span id="perlKey">my</span> <span id="var">$matrix</span>=<span id="var">$self</span>-&gt;<span id="method">get_Matrix_by_ID</span><span id="braces">(</span><span id="var">$_</span><span id="braces">)</span>;
+	<span id="comment">#evaluate</span><br />	<span id="comment">#ugly code:</span><br />	<span id="perlKey">if</span> <span id="braces">(</span><span id="perlFunc">defined</span> <span id="var">$args</span><span id="braces">{</span><span id="sqStr">'-min_ic'</span><span id="braces">}</span> <span id="braces">)</span><span id="braces">{</span>
+            <span id="perlKey">if</span> <span id="braces">(</span><span id="var">$matrix</span>-&gt;<span id="method">isa</span><span id="braces">(</span><span id="dqStr">"TFBS::Matrix::PFM"</span><span id="braces">)</span><span id="braces">)</span><span id="braces">{</span>
+                <span id="perlKey">next</span> <span id="perlKey">if</span> <span id="braces">(</span> <span id="var">$matrix</span>-&gt;<span id="method">to_ICM</span>-&gt;<span id="method">total_ic</span><span id="braces">(</span><span id="braces">)</span> &lt; <span id="var">$args</span><span id="braces">{</span><span id="sqStr">'-min_ic'</span><span id="braces">}</span><span id="braces">)</span>;     
+            <span id="braces">}</span>
+            <span id="perlKey">if</span> <span id="braces">(</span><span id="var">$matrix</span>-&gt;<span id="method">isa</span><span id="braces">(</span><span id="dqStr">"TFBS::Matrix::ICM"</span><span id="braces">)</span><span id="braces">)</span><span id="braces">{</span>
+                <span id="perlKey">next</span> <span id="perlKey">if</span> <span id="braces">(</span><span id="var">$matrix</span>-&gt;<span id="method">total_ic</span><span id="braces">(</span><span id="braces">)</span> &lt; <span id="var">$args</span><span id="braces">{</span><span id="sqStr">'-min_ic'</span><span id="braces">}</span><span id="braces">)</span>;     
+            <span id="braces">}</span>
+            <span id="perlKey">if</span> <span id="braces">(</span><span id="var">$matrix</span>-&gt;<span id="method">isa</span><span id="braces">(</span><span id="dqStr">"TFBS::Matrix::PWM"</span><span id="braces">)</span><span id="braces">)</span><span id="braces">{</span>
+                <span id="var">$self</span>-&gt;<span id="method">throw</span><span id="braces">(</span><span id="dqStr">"Cannot evaluate information constent from PWM matrices"</span><span id="braces">)</span>;
+            <span id="braces">}</span>
+	
+	
+        
+        
+	<span id="braces">}</span>
+	<span id="comment">#ugly code:</span><br />
+        <span id="perlKey">if</span> <span id="braces">(</span><span id="var">$args</span><span id="braces">{</span><span id="sqStr">'-matrixtype'</span><span id="braces">}</span> &amp;&amp; <span id="var">$matrix</span>-&gt;<span id="method">isa</span><span id="braces">(</span><span id="dqStr">"TFBS::Matrix::PFM"</span><span id="braces">)</span><span id="braces">)</span><span id="braces">{</span>
+            <span id="perlKey">if</span> <span id="braces">(</span>      <span id="var">$args</span><span id="braces">{</span><span id="sqStr">'-matrixtype'</span><span id="braces">}</span> <span id="perlKey">eq</span> <span id="braces">(</span><span id="sqStr">'PWM'</span><span id="braces">)</span><span id="braces">)</span> <span id="braces">{</span>
+               <span id="comment"># warn &quot;change&quot;;</span><br />                <span id="var">$matrix</span>= <span id="var">$matrix</span>-&gt;<span id="method">to_PWM</span><span id="braces">(</span><span id="braces">)</span>;
+        <span id="braces">}</span>
+	<span id="perlKey">if</span> <span id="braces">(</span>      <span id="var">$args</span><span id="braces">{</span><span id="sqStr">'-matrixtype'</span><span id="braces">}</span> <span id="perlKey">eq</span> <span id="braces">(</span><span id="sqStr">'ICM'</span><span id="braces">)</span><span id="braces">)</span> <span id="braces">{</span>
+                <span id="comment">#warn &quot;change&quot;;</span><br />                <span id="var">$matrix</span>= <span id="var">$matrix</span>-&gt;<span id="method">to_PWM</span><span id="braces">(</span><span id="braces">)</span>;
+        <span id="braces">}</span>
+    <span id="braces">}</span>
+	
+	
+        <span id="var">$matrixset</span>-&gt;<span id="method">add_Matrix</span><span id="braces">(</span><span id="var">$matrix</span><span id="braces">)</span>;
+    <span id="braces">}</span>
+    <span id="perlKey">return</span> <span id="var">$matrixset</span>;</pre>}</td></div>
+<div id="sep"></div>
+<table id="methCodeTitle" width="100%"><tr><td width="200"><a name="CODE14" id="CODE14"></a>get_Matrix_by_ID</td><td ><a href="#POD5">description</a></td><td ><a href="#CODE13">prev</a></td><td ><a href="#CODE15">next</a></td><td align="right"><a href="#TOP">Top</a></td></tr></table>
 <div id="methCodeArea"><td ><span id="sub">sub</span> <span id="subName">get_Matrix_by_ID</span>
 {<pre>
     <span id="perlKey">my</span> <span id="braces">(</span><span id="var">$self</span>, <span id="var">$ID</span>, <span id="var">$mt</span><span id="braces">)</span> = <span id="var">@_</span>;
@@ -189,32 +490,27 @@ JASPAR4 documentation.
 
     <span id="braces">}</span>
 
-   <span id="comment"># print $matrixobj-&gt;ID();</span><br />  <span id="comment">#  print &quot;here\n&quot;;print $matrixobj-&gt;prettyprint();</span><br />    <span id="perlKey">return</span> <span id="braces">(</span><span id="var">$matrixobj</span><span id="braces">)</span>;
-<span id="braces">}</span>
-
-
-=head2 get_Matrix_by_name
-
- Title   : get_Matrix_by_name
- Usage   : <span id="perlKey">my</span> <span id="var">$pfm</span> = <span id="var">$db</span>-&gt;<span id="method">get_Matrix_by_name</span><span id="braces">(</span><span id="sqStr">'HNF-1'</span><span id="braces">)</span>;
- Function: fetches matrix data under the given name from the
-	   database and returns a <span id="module"><a href="../Matrix.html">TFBS::Matrix::</a></span>* object
- Returns : a <span id="module"><a href="../Matrix.html">TFBS::Matrix::</a></span>* object; the exact type of the object
-	   depending on what form the matrix object was stored in
-	   the database <span id="braces">(</span>default PFM<span id="braces">)</span><span id="braces">)</span>
- Args    : <span id="braces">(</span>Matrix_name<span id="braces">)</span>
-	   
- Warning : According to the current JASPAR4 data model, name is
-	   <span id="perlKey">not</span> necessarily a unique identifier. In the case where
-	   there are several matrices with the same name in the
-	   database, the function fetches the first one and prints
-	   a warning on STDERR. You<span id="sqStr">'ve been warned.<br /><br />=cut<br /><br /><br /><br />sub get_Matrix_by_name {<br />    my ($self, $name, $mt) = @_;<br />    unless(defined $name) { <br />	$self-&gt;throw(&quot;No name passed to get_Matrix_by_name.&quot;); }<br /><br />    my @IDlist = $self-&gt;_get_IDlist_by_query(-name=&gt;[$name]);<br />    my $ID= ($IDlist[0] <br />	    or $self-&gt;warn(&quot;No matrix with name $name found.&quot;));<br />    if ((my $L= scalar @IDlist) &gt; 1)  {<br />	$self-&gt;warn(&quot;There are $L matrices with name '</span><span id="var">$name</span><span id="sqStr">'&quot;);<br />    }<br />    return $self-&gt;get_Matrix_by_ID($ID);<br />}<br /><br /><br />=head2 get_MatrixSet<br /><br /> Title   : get_MatrixSet<br /> Usage   : my $matrixset = $db-&gt;get_MatrixSet(%args);<br /> Function: fetches matrix data under for all matrices in the database<br />	   matching criteria defined by the named arguments<br />	   and returns a TFBS::MatrixSet object<br /> Returns : a TFBS::MatrixSet object<br /> Args    : This method accepts named arguments, corresponding to arbitrary tags.<br />           Note that this is different from JASPAR2. As any tag is supported for<br />           database storage, any tag can be used for information retrieval.<br />           Additionally, arguments as '</span>name<span id="sqStr">' and '</span>class<span id="sqStr">' can be used (even though<br />           they are not tags.<br />           As with get_Matrix methods, it is important to realize taht any matrix<br />           format can be stored in the database: the TFBS::MatrixSet might therefore<br />           consist of PFMs, ICMs and PWMS, depending on how matrices are stored,<br />           <br />           Examples include<br />	   -ID        # a reference to an array of IDs (strings)<br />	   -name      # a reference to an array of<br />		       #  transcription factor names (string)<br />	   -class    # a reference to an array of<br />		       #  structural class names (strings)<br />	   -species    # a reference to an array of<br />		       #   Latin species names (strings)<br />	   -sysgroup  # a reference to an array of<br />		       #  higher taxonomic categories (strings)<br /><br />	  <br />	   -min_ic     # float, minimum total information content<br />		       #   of the matrix. IMPORTANT:if retrieved matrices are in PWM<br />		       format there is no way to measureinformation content.<br />	-matrixtype    #string describing type of matrix to retrieve. If left out, the format<br />                        will revert to the database format. Note that this option only works<br />                      if the database format is pfm<br /><br />The arguments that expect list references are used in database<br />query formulation: elements within lists are combined with '</span>OR<span id="sqStr">'<br />operators, and the lists of different types with '</span>AND<span id="sqStr">'. For example,<br /><br />    my $matrixset = $db-&gt;(-class =&gt; ['</span>TRP_CLUSTER<span id="sqStr">', '</span>FORKHEAD<span id="sqStr">'],<br />			  -species =&gt; ['</span>Homo sapiens<span id="sqStr">', '</span>Mus musculus<span id="sqStr">'],<br />			  );<br /><br />gives a set of TFBS::Matrix::PFM objects (given that the matrix models are stored as such)<br /> whose (structural clas is '</span>TRP_CLUSTER<span id="sqStr">' OR'</span>FORKHEAD<span id="sqStr">') AND (the species they are derived<br /> from is '</span>Homo sapiens<span id="sqStr">'OR '</span>Mus musculus<span id="sqStr">').<br /><br />The -min_ic filter is applied after the query in the sense that the<br />matrices profiles with total infromation content less than specified<br />are not included in the set.<br /><br />=cut<br /><br /><br />sub get_MatrixSet  {<br />    my ($self, %args) = @_;<br />    <br />    <br />    <br />    my @IDlist = $self-&gt;_get_IDlist_by_query(%args);<br />    my $type;<br />    my $matrixset = TFBS::MatrixSet-&gt;new();<br />    <br />    foreach (@IDlist)  {<br />       # print &quot;$_\n&quot;;<br />    }<br />    <br />    foreach (@IDlist)  {<br />	#next if (defined $args{'</span>-min_ic<span id="sqStr">'} <br />	#	 and $_-&gt;_get_total_ic($_) &lt; $args{'</span>-min_ic<span id="sqStr">'});<br />            #evaluate total information content: ivolves actually retrieving matrix<br />            # is actually a problem if matrix is stored PWM: thro an error if so<br />	<br />	my $matrix=$self-&gt;get_Matrix_by_ID($_);<br />	#evaluate<br />	#ugly code:<br />	if (defined $args{'</span>-min_ic<span id="sqStr">'} ){<br />            if ($matrix-&gt;isa(&quot;TFBS::Matrix::PFM&quot;)){<br />                next if ( $matrix-&gt;to_ICM-&gt;total_ic() &lt; $args{'</span>-min_ic<span id="sqStr">'});     <br />            }<br />            if ($matrix-&gt;isa(&quot;TFBS::Matrix::ICM&quot;)){<br />                next if ($matrix-&gt;total_ic() &lt; $args{'</span>-min_ic<span id="sqStr">'});     <br />            }<br />            if ($matrix-&gt;isa(&quot;TFBS::Matrix::PWM&quot;)){<br />                $self-&gt;throw(&quot;Cannot evaluate information constent from PWM matrices&quot;);<br />            }<br />	<br />	<br />        <br />        <br />	}<br />	#ugly code:<br /><br />        if ($args{'</span>-matrixtype<span id="sqStr">'} &amp;&amp; $matrix-&gt;isa(&quot;TFBS::Matrix::PFM&quot;)){<br />            if (      $args{'</span>-matrixtype<span id="sqStr">'} eq ('</span>PWM<span id="sqStr">')) {<br />               # warn &quot;change&quot;;<br />                $matrix= $matrix-&gt;to_PWM();<br />        }<br />	if (      $args{'</span>-matrixtype<span id="sqStr">'} eq ('</span>ICM<span id="sqStr">')) {<br />                #warn &quot;change&quot;;<br />                $matrix= $matrix-&gt;to_PWM();<br />        }<br />    }<br />	<br />	<br />        $matrixset-&gt;add_Matrix($matrix);<br />    }<br />    return $matrixset;<br />}<br /><br /><br /><br />sub store_MatrixSet {<br />    $_[0]-&gt;throw (&quot;Method store_MtrixSet not yet implemented.&quot;);<br />}<br /><br />=head2 delete_Matrix_having_ID<br /><br /> Title   : delete_Matrix_having_ID<br /> Usage   : $db-&gt;delete_Matrix_with_ID('</span>M00045<span id="sqStr">');<br /> Function: Deletes the matrix having the given ID from the database<br /> Returns : 0 on success; $@ contents on failure<br />	   (this is too C-like and may change in future versions)<br /> Args    : (ID)<br />	   A string<br /> Comment : Yeah, yeah, '</span>delete_Matrix_having_ID<span id="sqStr">' is a stupid name<br />	   for a method, but at least it should be obviuos what it does.<br /><br />=cut<br /><br /><br />sub delete_Matrix_having_ID  {<br />    my ($self, @IDs) = @_;<br />    eval  {<br />	foreach my $ID (@IDs) {<br />	    my $q_ID = $self-&gt;dbh-&gt;quote($ID);<br />	    foreach my $table (qw  (MATRIX_DATA<br />				    MATRIX_INFO<br />				    MATRIX_ANNOTATION<br />				    )<br />				)<br />	    {<br />		$self-&gt;dbh-&gt;do(&quot;DELETE from $table where ID=$q_ID&quot;);<br />	    }<br />	}<br />    };<br />    return $@;<br />    <br />}<br /><br /><br /><br />#########################################################################<br /># PRIVATE METHODS<br />#########################################################################<br /><br /><br />sub _new  {<br />    my ($caller, %args)  = @_;<br />    my $class = ref $caller || $caller;<br />    my $self = bless {}, $class;<br /><br />    my ($connectstring, $user, $password);<br /> <br />    if ($args{'</span>-<span id="perlFunc">connect</span><span id="sqStr">'} and (ref($args{'</span>-<span id="perlFunc">connect</span><span id="sqStr">'}) eq &quot;ARRAY&quot;))  {<br />	($connectstring, $user, $password) = @{$args{'</span>-<span id="perlFunc">connect</span><span id="sqStr">'}};<br />    }<br />    elsif ($args{'</span>-create<span id="sqStr">'} and (ref($args{'</span>-create<span id="sqStr">'}) eq &quot;ARRAY&quot;))  {<br />	return $caller-&gt;create(@{-args{'</span>create<span id="sqStr">'}});<br />    }<br />    else  {<br />	($connectstring, $user, $password) = <br />	    (DEFAULT_CONNECTSTRING, DEFAULT_USER, DEFAULT_PASSWORD);<br />    }<br /><br />    $self-&gt;dbh( DBI-&gt;connect($connectstring, $user, $password) );<br />    <br />    return $self;<br />}<br /><br /><br />sub _store_matrix_data  {<br />    my ($self, $pfm, $ACTION) = @_;<br />    my @base = qw(A C G T);<br />    my $matrix = $pfm-&gt;matrix();<br />    my $type;<br />    my $sth = $self-&gt;dbh-&gt;prepare <br />	(q! INSERT INTO MATRIX_DATA VALUES(?,?,?,?) !);<br />				 <br />    for my $i (0..3)  {<br />	for my $j (0..($pfm-&gt;length-1)) {<br />	    $sth-&gt;execute( $pfm-&gt;ID,<br />			   <br />			   $base[$i],<br />			   $j+1,<br />			   $matrix-&gt;[$i][$j]<br />	    )<br />	   or $self-&gt;throw(&quot;Error executing query.&quot;);<br />	}<br />    }<br />    <br />}<br /><br /><br />sub _store_matrix_info  {<br /><br />    my ($self, $pfm, $ACTION) = @_;<br /><br />    my $type;<br />    $type= '</span>PFM<span id="sqStr">' if $pfm-&gt;isa(&quot;TFBS::Matrix::PFM&quot;);<br />    $type= '</span>PWM<span id="sqStr">' if $pfm-&gt;isa(&quot;TFBS::Matrix::PWM&quot;);<br />    $type= '</span>ICM<span id="sqStr">' if $pfm-&gt;isa(&quot;TFBS::Matrix::ICM&quot;);<br /><br /><br />    my $sth = $self-&gt;dbh-&gt;prepare <br />	(q! INSERT INTO MATRIX_INFO<br />	    (ID, type) <br />	    VALUES(?,?) !);<br />    $sth-&gt;execute($pfm-&gt;ID,<br />		  $type, <br />		  )<br />	or $self-&gt;throw(&quot;Error executing query&quot;);<br />}<br /><br /><br /><br /><br /><br /><br />sub _store_matrix_annotation  {<br />    my ($self, $pfm, $ACTION) = @_;<br />    my $sth = $self-&gt;dbh-&gt;prepare <br />	(q! INSERT INTO MATRIX_ANNOTATION<br />	    (ID, tag, val) <br />	    VALUES(?,?,?) !);<br />    <br />    $sth-&gt;execute($pfm-&gt;ID,<br />                    '</span>name<span id="sqStr">',<br />                    ($pfm-&gt;name() or &quot;&quot;),<br />    );<br />    $sth-&gt;execute($pfm-&gt;ID,<br />                    '</span>class<span id="sqStr">',<br />                    ($pfm-&gt;class() or &quot;&quot;),<br />    );<br />    <br />    # get all tags	<br />	<br />    my %tags= $pfm-&gt;all_tags();<br />    foreach my $tag( keys %tags){<br />    $sth-&gt;execute($pfm-&gt;ID,<br />                    $tag, <br />                   ($tags{$tag} or &quot;&quot;),<br />                 )<br />    <br />	or $self-&gt;throw(&quot;Error executing query&quot;);<br />    }	<br />}<br /><br /><br /><br /><br /><br /><br /><br />#when creating: try to support arbitrary tags<br /><br />sub _create_tables {<br />    # utility function<br /><br />    # If you want to change the databse schema,<br />    # this is the right place to do it<br /><br />    my $dbh = shift;<br /><br />    my @queries = <br />	(<br />       q!<br />        CREATE TABLE MATRIX_DATA(<br />	ID VARCHAR (16) DEFAULT '</span><span id="sqStr">' NOT NULL,<br />	row VARCHAR(1) NOT NULL, <br />	col TINYINT(3) UNSIGNED NOT NULL, <br />	val FLOAT, <br />	PRIMARY KEY (ID, row, col)<br />	)<br />       !,<br />       q!<br />       CREATE TABLE MATRIX_INFO( <br />	ID VARCHAR (16) DEFAULT '</span><span id="sqStr">' NOT NULL PRIMARY KEY , <br /> 	type ENUM ('</span>PFM<span id="sqStr">', '</span>ICM<span id="sqStr">','</span>PWM<span id="sqStr">') DEFAULT '</span>PFM<span id="sqStr">' NOT NULL <br />	)<br />       !,<br />       <br />       q!<br />        CREATE TABLE MATRIX_ANNOTATION(<br />        ID VARCHAR (16) DEFAULT '</span><span id="sqStr">' NOT NULL,<br />	tag VARCHAR(255) DEFAULT '</span><span id="sqStr">' NOT NULL,<br />	val TEXT,<br />	PRIMARY KEY (ID, tag)<br />	)<br />        !,<br />        <br />    );<br />    foreach my $query (@queries)  {<br />	$dbh-&gt;do($query) <br />	    or die(&quot;Error executing the query: $query\n&quot;);<br />    }<br />}<br /><br /><br /><br />sub _get_matrixstring  {<br />    my ($self, $ID) = @_;<br />    #my %dbname = (PWM =&gt; '</span>pwm<span id="sqStr">', PFM =&gt; '</span>raw<span id="sqStr">', ICM =&gt; '</span>info<span id="sqStr">');<br />    #unless (defined $dbname{$mt})  {<br />	#$self-&gt;throw(&quot;Unsupported matrix type: &quot;.$mt);<br />    #}<br />    my $sth;<br />    my $qID = $self-&gt;dbh-&gt;quote($ID);<br />    my $matrixstring = &quot;&quot;;<br />    foreach my $base (qw(A C G T)) {<br />	$sth=$self-&gt;dbh-&gt;prepare<br />	    (&quot;SELECT val FROM MATRIX_DATA <br />              WHERE ID=$qID AND row='</span><span id="var">$base</span><span id="sqStr">' ORDER BY col&quot;);<br />	$sth-&gt;execute;<br />	$matrixstring .=<br />	    join (&quot; &quot;, (map {$_-&gt;[0]} @{$sth-&gt;fetchall_arrayref()})).&quot;\n&quot;;<br />    }<br />    $sth-&gt;finish;<br />    return undef if $matrixstring eq &quot;\n&quot;x4;<br /><br />    return $matrixstring;<br />}<br /><br /><br /><br /><br /><br />sub _get_IDlist_by_query  {<br /><br />    # called by get_MatrixSet<br />    # should be able to search for arbitrary tags...hmmm<br />    my ($self, %args) = @_;<br />    my ($TABLES, %arrayref);<br />    my (%intersected_set);<br />    <br /><br />    foreach my $key(keys %args){<br />       <br />        unless ( $key eq &quot;-min_ic&quot; or $key eq  &quot;-matrixtype&quot;){<br />                my $oldkey=$key;<br />                $key=~s/-//;<br />                $arrayref{$key}= $args{$oldkey};<br />        }<br />    }<br />    my @andconditions;<br />    <br />      <br />    $TABLES = '</span>MATRIX_ANNOTATION <span id="sqStr">';<br />    <br />    #special case: get all matrices<br />    unless (keys %arrayref){<br />       <br />            <br />        <br />     my $query = &quot;SELECT DISTINCT ID FROM $TABLES &quot;;<br />        <br />     my $sth = $self-&gt;dbh-&gt;prepare($query);<br />     $sth-&gt;execute() or $self-&gt;throw(&quot;Query failed:\n$query\n&quot;);<br />     my @ary;<br />     <br />     while (my ($id) = $sth-&gt;fetchrow_array())  {<br />           push (@ary, $id);<br />            <br />        }   <br />    <br />        return(@ary);<br />    <br />    }<br />    <br />    <br />    <br />    <br />    <br />    foreach my $key (keys %arrayref)  {<br />        #print &quot;key: $key\n&quot;;<br />        if ($key eq '</span>ID<span id="sqStr">'){<br />         push @andconditions,<br />	&quot;(&quot;.<br />	join(&quot; OR &quot;,<br />	     (map {&quot;MATRIX_ANNOTATION.ID=&quot;.<br />		       $self-&gt;dbh-&gt;quote($_)<br />		  } <br />	      @{$arrayref{$key}}<br />	     )).<br />	&quot;)&quot;;   <br />            <br />            <br />            <br />        }<br />        else{<br />        push @andconditions,<br />	&quot;(&quot;.<br />	join(&quot; OR &quot;,<br />	     (map {&quot;MATRIX_ANNOTATION.tag=&quot;. $self-&gt;dbh-&gt;quote($key).&quot; AND val=&quot;.<br />		       $self-&gt;dbh-&gt;quote($_)<br />		  } <br />	      @{$arrayref{$key}}<br />	     )).<br />	&quot;)&quot;;<br />        }<br />        push (@andconditions, 1) unless(@andconditions);<br />        my $WHERE = ((scalar @andconditions) == 0) ? &quot;&quot; : &quot; WHERE &quot;;<br /><br />     <br />      <br />    my $query = <br />	    &quot;SELECT DISTINCT ID FROM $TABLES $WHERE&quot;.<br />	    join(&quot; AND &quot;, @andconditions);<br />   <br />       # warn  $query; <br />        undef @andconditions;<br />        my $sth = $self-&gt;dbh-&gt;prepare($query);<br />        $sth-&gt;execute() or $self-&gt;throw(&quot;Query failed:\n$query\n&quot;);<br />    <br />        # collect IDs and return<br /><br />        my %current_query;<br />        while (my ($id) = $sth-&gt;fetchrow_array())  {<br />           $current_query{$id}=1;<br />            <br />        }<br />        unless (%intersected_set){<br />            %intersected_set= %current_query;<br />            next;<br />        }<br />        # do intersect<br />        foreach my $key (keys %intersected_set){<br />              delete $intersected_set{ $key}  unless $current_query{$key};<br />            <br />        }<br />    } <br />    <br />    my @ary;<br />    foreach my $key (keys %intersected_set){<br />        push (@ary, $key);<br />       # warn &quot;$key\n&quot;;<br />    }<br />    return (@ary);<br />    <br />    <br />}<br /><br />sub DESTROY  {<br />    $_[0]-&gt;dbh-&gt;disconnect() if $_[0]-&gt;dbh;</pre>}</td></div>
+   <span id="comment"># print $matrixobj-&gt;ID();</span><br />  <span id="comment">#  print &quot;here\n&quot;;print $matrixobj-&gt;prettyprint();</span><br />    <span id="perlKey">return</span> <span id="braces">(</span><span id="var">$matrixobj</span><span id="braces">)</span>;</pre>}</td></div>
 <div id="sep"></div>
-<table id="methCodeTitle" width="100%"><tr><td width="200"><a name="CODE5" id="CODE5"></a>new</td><td ><a href="#POD4">description</a></td><td ><a href="#CODE4">prev</a></td><td ><a href="#CODE6">next</a></td><td align="right"><a href="#TOP">Top</a></td></tr></table>
+<table id="methCodeTitle" width="100%"><tr><td width="200"><a name="CODE15" id="CODE15"></a>get_Matrix_by_name</td><td ><a href="#POD6">description</a></td><td ><a href="#CODE14">prev</a></td><td ><a href="#CODE16">next</a></td><td align="right"><a href="#TOP">Top</a></td></tr></table>
+<div id="methCodeArea"><td ><span id="sub">sub</span> <span id="subName">get_Matrix_by_name</span>
+{<pre>    <span id="perlKey">my</span> <span id="braces">(</span><span id="var">$self</span>, <span id="var">$name</span>, <span id="var">$mt</span><span id="braces">)</span> = <span id="var">@_</span>;
+    <span id="perlKey">unless</span><span id="braces">(</span><span id="perlFunc">defined</span> <span id="var">$name</span><span id="braces">)</span> <span id="braces">{</span> 
+	<span id="var">$self</span>-&gt;<span id="method">throw</span><span id="braces">(</span><span id="dqStr">"No name passed to get_Matrix_by_name."</span><span id="braces">)</span>; <span id="braces">}</span>
+
+    <span id="perlKey">my</span> <span id="var">@IDlist</span> = <span id="var">$self</span>-&gt;<span id="method">_get_IDlist_by_query</span><span id="braces">(</span>-name=&gt;<span id="braces">[</span><span id="var">$name</span><span id="braces">]</span><span id="braces">)</span>;
+    <span id="perlKey">my</span> <span id="var">$ID</span>= <span id="braces">(</span><span id="var">$IDlist</span><span id="braces">[</span>0<span id="braces">]</span> 
+	    or <span id="var">$self</span>-&gt;<span id="perlFunc">warn</span><span id="braces">(</span><span id="dqStr">"No matrix with name <span id="var">$name</span> found."</span><span id="braces">)</span><span id="braces">)</span>;
+    <span id="perlKey">if</span> <span id="braces">(</span><span id="braces">(</span><span id="perlKey">my</span> <span id="var">$L</span>= <span id="perlFunc">scalar</span> <span id="var">@IDlist</span><span id="braces">)</span> &gt; 1<span id="braces">)</span>  <span id="braces">{</span>
+	<span id="var">$self</span>-&gt;<span id="perlFunc">warn</span><span id="braces">(</span><span id="dqStr">"There are <span id="var">$L</span> matrices with name '$name'"</span><span id="braces">)</span>;
+    <span id="braces">}</span>
+    <span id="perlKey">return</span> <span id="var">$self</span>-&gt;<span id="method">get_Matrix_by_ID</span><span id="braces">(</span><span id="var">$ID</span><span id="braces">)</span>;</pre>}</td></div>
+<div id="sep"></div>
+<table id="methCodeTitle" width="100%"><tr><td width="200"><a name="CODE16" id="CODE16"></a>new</td><td ><a href="#POD7">description</a></td><td ><a href="#CODE15">prev</a></td><td ><a href="#CODE17">next</a></td><td align="right"><a href="#TOP">Top</a></td></tr></table>
 <div id="methCodeArea"><td ><span id="sub">sub</span> <span id="subName">new</span>
 {<pre>  _new <span id="braces">(</span><span id="var">@_</span><span id="braces">)</span>;</pre>}</td></div>
 <div id="sep"></div>
-<table id="methCodeTitle" width="100%"><tr><td width="200"><a name="CODE6" id="CODE6"></a>store_Matrix</td><td ><a href="#POD5">description</a></td><td ><a href="#CODE5">prev</a></td><td >next</td><td align="right"><a href="#TOP">Top</a></td></tr></table>
+<table id="methCodeTitle" width="100%"><tr><td width="200"><a name="CODE17" id="CODE17"></a>store_Matrix</td><td ><a href="#POD8">description</a></td><td ><a href="#CODE16">prev</a></td><td ><a href="#CODE18">next</a></td><td align="right"><a href="#TOP">Top</a></td></tr></table>
 <div id="methCodeArea"><td ><span id="sub">sub</span> <span id="subName">store_Matrix</span>
 {<pre>    <span id="perlKey">my</span> <span id="braces">(</span><span id="var">$self</span>, <span id="var">@PFMs</span><span id="braces">)</span> = <span id="var">@_</span>;
     <span id="perlKey">my</span> <span id="var">$err</span>;
@@ -227,12 +523,15 @@ JASPAR4 documentation.
     <span id="braces">}</span>
     <span id="perlKey">return</span> $@;</pre>}</td></div>
 <div id="sep"></div>
+<table id="methCodeTitle" width="100%"><tr><td width="200"><a name="CODE18" id="CODE18"></a>store_MatrixSet</td><td >description</td><td ><a href="#CODE17">prev</a></td><td >next</td><td align="right"><a href="#TOP">Top</a></td></tr></table>
+<div id="methCodeArea"><td ><span id="sub">sub</span> <span id="subName">store_MatrixSet</span>
+{<pre>    <span id="var">$_</span><span id="braces">[</span>0<span id="braces">]</span>-&gt;<span id="method">throw</span> <span id="braces">(</span><span id="dqStr">"Method store_MtrixSet not yet implemented."</span><span id="braces">)</span>;</pre>}</td></div>
+<div id="sep"></div>
 <a name="General" id="General"></a>
 <div id="mainTitle">General documentation</div>
 <div id="sep"></div>
 <table id="genInfoTitle" width="100%"><tr><td><a name="_pod_JASPAR2 DATA MODEL" id="_pod_JASPAR2 DATA MODEL"></a>JASPAR2 DATA MODEL</td><td align="right"><a href="#TOP">Top</a></td></tr></table>
-<div id="genInfoArea">JASPAR4 is working name for a relational database model used<br />for storing transcriptional factor pattern matrices in a MySQL database.<br />It was initially designed (JASPAR2) to store matrices for the JASPAR database of<br />high quality eukaryotic transcription factor specificity profiles by<br />Albin Sandelin and Wyeth W. Wasserman. Besides the profile matrix itself,<br />this data model stores profile ID (unique), name, structural class,<br />basic taxonomic and bibliographic information<br />as well as some additional opseqdbtional tags.<br />Tags that are commonly used in the actual JASPAR database include<br />    'medline'  # PubMed ID<br />    'species'  # Species name<br />    'superclass' #Species supergroup, eg 'vertebrate', 'plant' etc<br />    'total_ic' # total information content - redundant, present <br />               # for historical<br />    'type'    #experimental nethod<br />    'acc'    #accession number for TF protein sequence<br />    'seqdb'    #corresponding database name<br />    <br />but any tag is storable and searchable.<br />    <br />    <br />-----------------------  ADVANCED  ---------------------------------<br />For the developers and the curious, here is the JASPAR4 data model:<br /><pre id="podParagraph">  
-</pre>It is our best intention to hide the details of this data model, which we <br />are using on a daily basis in our work, from most TFBS users.<br />Most users should only know the methods to store the data and <br />which tags are supported.<br />-------------------------------------------------------------------------</div>
+<div id="genInfoArea">JASPAR4 is working name for a relational database model used<br />for storing transcriptional factor pattern matrices in a MySQL database.<br />It was initially designed (JASPAR2) to store matrices for the JASPAR database of<br />high quality eukaryotic transcription factor specificity profiles by<br />Albin Sandelin and Wyeth W. Wasserman. Besides the profile matrix itself,<br />this data model stores profile ID (unique), name, structural class,<br />basic taxonomic and bibliographic information<br />as well as some additional opseqdbtional tags.<br />Tags that are commonly used in the actual JASPAR database include<br />    'medline'  # PubMed ID<br />    'species'  # Species name<br />    'superclass' #Species supergroup, eg 'vertebrate', 'plant' etc<br />    'total_ic' # total information content - redundant, present <br />               # for historical<br />    'type'    #experimental nethod<br />    'acc'    #accession number for TF protein sequence<br />    'seqdb'    #corresponding database name<br />    <br />but any tag is storable and searchable.<br />    <br />    <br />-----------------------  ADVANCED  ---------------------------------<br />For the developers and the curious, here is the JASPAR4 data model:<br /><pre id="podParagraph">  <br /></pre>It is our best intention to hide the details of this data model, which we <br />are using on a daily basis in our work, from most TFBS users.<br />Most users should only know the methods to store the data and <br />which tags are supported.<br />-------------------------------------------------------------------------</div>
 <div id="sep"></div>
 <table id="genInfoTitle" width="100%"><tr><td><a name="_pod_FEEDBACK" id="_pod_FEEDBACK"></a>FEEDBACK</td><td align="right"><a href="#TOP">Top</a></td></tr></table>
 <div id="genInfoArea">Please send bug reports and other comments to the author.</div>

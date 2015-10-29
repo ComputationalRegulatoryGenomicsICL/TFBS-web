@@ -33,13 +33,7 @@ Gibbs documentation.
 <div id="sep"></div>
 <a name="SYNOPSIS" id="SYNOPSIS"></a>
 <div id="descTitle">Synopsis</div>
-<div id="descArea"><pre id="podParagraph">    my $patterngen =
-            <B>TFBS::PatternGen::Gibbs</B>->new(-seq_file=>'sequences.fa',
-                                         -binary => '/Programs/Gibbs-1.0/bin/Gibbs'
-                                         -nr_hits => 24,
-                                         -motif_length => [8, 9, 10],
-                                         -additional_params => '-x -r -e');
-
+<div id="descArea"><pre id="podParagraph">    my $patterngen =<br />            <B>TFBS::PatternGen::Gibbs</B>-&gt;new(-seq_file=&gt;'sequences.fa',<br />                                         -binary =&gt; '/Programs/Gibbs-1.0/bin/Gibbs'<br />                                         -nr_hits =&gt; 24,<br />                                         -motif_length =&gt; [8, 9, 10],<br />                                         -additional_params =&gt; '-x -r -e');<br />
     my $pfm = $patterngen->pattern(); # $pfm is now a TFBS::Matrix::PFM object</pre>
 </div>
 <div id="sep"></div>
@@ -62,33 +56,7 @@ Gibbs documentation.
 <div id="mainTitle">Methods description</div>
 <div id="sep"></div>
 <table id="methDescTitle" width="100%"><tr><td WIDTH="200"><a name="_pod_new" id="_pod_new"></a><a name="POD1" id="POD1"></a>new</td><td ><a href="#CODE6">code</a></td><td >&nbsp;&nbsp;&nbsp;&nbsp;</td><td ><a href="#POD2">next</a></td><td align="right"><a href="#TOP">Top</a></td></tr></table>
-<table id="methDescArea" width="100%"><tr><td><pre id="podParagraph"> Title   : new
- Usage   : my $db = <B>TFBS::PatternGen::Gibbs</B>->new(%args);
- Function: the constructor for the <B>TFBS::PatternGen::Gibbs</B> object
- Returns : a <B>TFBS::PatternGen::Gibbs</B> object
- Args    : This method takes named arguments;
-            you must specify one of the following three
-            -seq_list     # a reference to an array of strings
-                          #   and/or Bio::Seq objects
-              # or
-            -seq_stream   # A Bio::SeqIO object
-              # or
-            -seq_file     # the name of the fasta file containing
-                          #   all the sequences
-           Other arguments are:
-            -binary       # a fully qualified path to Gibbs executable
-                          #  OPTIONAL: default 'Gibbs'
-            -nr_hits      # a presumed number of pattern occurences in the
-                          #   sequence set: it can be a single integer, e.g.
-                          #   -nr_hits => 24 , or a reference to an array of
-                          #   integers, e.g -nr_hits => [12, 24, 36]
-            -motif_length # an expected length of motif in nucleotides:
-                          #   it can be a single integer, e.g.
-                          #   -motif_length => 8 , or a reference to an
-                          #   array ofintegers, e.g -motif_length => [8..12]
-            -additional_params  # a string containing additional
-                                #   command-line switches for the
-                                #   Gibbs program</pre></td></tr></table>
+<table id="methDescArea" width="100%"><tr><td><pre id="podParagraph"> Title   : new<br /> Usage   : my $db = <B>TFBS::PatternGen::Gibbs</B>-&gt;new(%args);<br /> Function: the constructor for the <B>TFBS::PatternGen::Gibbs</B> object<br /> Returns : a <B>TFBS::PatternGen::Gibbs</B> object<br /> Args    : This method takes named arguments;<br />            you must specify one of the following three<br />            -seq_list     # a reference to an array of strings<br />                          #   and/or Bio::Seq objects<br />              # or<br />            -seq_stream   # A Bio::SeqIO object<br />              # or<br />            -seq_file     # the name of the fasta file containing<br />                          #   all the sequences<br />           Other arguments are:<br />            -binary       # a fully qualified path to Gibbs executable<br />                          #  OPTIONAL: default 'Gibbs'<br />            -nr_hits      # a presumed number of pattern occurences in the<br />                          #   sequence set: it can be a single integer, e.g.<br />                          #   -nr_hits =&gt; 24 , or a reference to an array of<br />                          #   integers, e.g -nr_hits =&gt; [12, 24, 36]<br />            -motif_length # an expected length of motif in nucleotides:<br />                          #   it can be a single integer, e.g.<br />                          #   -motif_length =&gt; 8 , or a reference to an<br />                          #   array ofintegers, e.g -motif_length =&gt; [8..12]<br />            -additional_params  # a string containing additional<br />                                #   command-line switches for the<br />                                #   Gibbs program</pre></td></tr></table>
 <div id="sep"></div>
 <a name="MethCode" id="MethCode"></a>
 <div id="mainTitle">Methods code</div>
@@ -119,7 +87,12 @@ Gibbs documentation.
         <span id="perlFunc">push</span> <span id="var">@G</span>, <span id="var">$g</span>;
         <span id="perlFunc">push</span> <span id="var">@T</span>, <span id="var">$t</span>;
     <span id="braces">}</span>
-    <span id="comment"># print STDERR join(&quot; &quot;,@A, &quot;\n&quot;, @C, &quot;\n&quot;, @G, &quot;\n&quot;, @T, &quot;\n&quot;);</span><br />    <span id="perlKey">return</span> <span id="braces">[</span>\<span id="var">@A</span>,\@ C,\@ G,\@ T<span id="braces">]</span>;</pre>}</td></div>
+    <span id="comment"># print STDERR join(&quot; &quot;,@A, &quot;\n&quot;, @C, &quot;\n&quot;, @G, &quot;\n&quot;, @T, &quot;\n&quot;);</span><br />    <span id="perlKey">return</span> <span id="braces">[</span>\<span id="var">@A</span>,\@ C,\@ G,\@ T<span id="braces">]</span>;
+
+<span id="braces">}</span>
+
+
+1;</pre>}</td></div>
 <div id="sep"></div>
 <table id="methCodeTitle" width="100%"><tr><td width="200"><a name="CODE3" id="CODE3"></a>_parse_raw_motif</td><td >description</td><td ><a href="#CODE2">prev</a></td><td ><a href="#CODE4">next</a></td><td align="right"><a href="#TOP">Top</a></td></tr></table>
 <div id="methCodeArea"><td ><span id="sub">sub</span> <span id="privSubName">_parse_raw_motif</span>

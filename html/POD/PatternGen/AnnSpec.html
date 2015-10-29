@@ -33,10 +33,7 @@ AnnSpec documentation.
 <div id="sep"></div>
 <a name="SYNOPSIS" id="SYNOPSIS"></a>
 <div id="descTitle">Synopsis</div>
-<div id="descArea"><pre id="podParagraph">    my $patterngen =
-            <B>TFBS::PatternGen::AnnSpec</B>->new(-seq_file=>'sequences.fa',
-                                            -binary => 'ann-spec '
-
+<div id="descArea"><pre id="podParagraph">    my $patterngen =<br />            <B>TFBS::PatternGen::AnnSpec</B>-&gt;new(-seq_file=&gt;'sequences.fa',<br />                                            -binary =&gt; 'ann-spec '<br />
     my $pfm = $patterngen->pattern(); # $pfm is now a TFBS::Matrix::PFM object</pre>
 </div>
 <div id="sep"></div>
@@ -58,25 +55,7 @@ AnnSpec documentation.
 <div id="mainTitle">Methods description</div>
 <div id="sep"></div>
 <table id="methDescTitle" width="100%"><tr><td WIDTH="200"><a name="_pod_new" id="_pod_new"></a><a name="POD1" id="POD1"></a>new</td><td ><a href="#CODE5">code</a></td><td >&nbsp;&nbsp;&nbsp;&nbsp;</td><td ><a href="#POD2">next</a></td><td align="right"><a href="#TOP">Top</a></td></tr></table>
-<table id="methDescArea" width="100%"><tr><td><pre id="podParagraph"> Title   : new
- Usage   : my $pattrengen = <B>TFBS::PatternGen::AnnSpec</B>->new(%args);
- Function: the constructor for the <B>TFBS::PatternGen::AnnSpec</B> object
- Returns : a <B>TFBS::PatternGen::AnnSpec</B> object
- Args    : This method takes named arguments;
-            you must specify one of the following three
-            -seq_list     # a reference to an array of strings
-                          #   and/or Bio::Seq objects
-              # or
-            -seq_stream   # A Bio::SeqIO object
-              # or
-            -seq_file     # the name of the fasta file containing
-                          #   all the sequences
-           Other arguments are:
-            -binary       # a fully qualified path to the 'meme' executable
-                          #  OPTIONAL: default 'ann-spec'
-            -additional_params  # a string containing additional
-                                #   command-line switches for the
-                                #   ann-spec program</pre></td></tr></table>
+<table id="methDescArea" width="100%"><tr><td><pre id="podParagraph"> Title   : new<br /> Usage   : my $pattrengen = <B>TFBS::PatternGen::AnnSpec</B>-&gt;new(%args);<br /> Function: the constructor for the <B>TFBS::PatternGen::AnnSpec</B> object<br /> Returns : a <B>TFBS::PatternGen::AnnSpec</B> object<br /> Args    : This method takes named arguments;<br />            you must specify one of the following three<br />            -seq_list     # a reference to an array of strings<br />                          #   and/or Bio::Seq objects<br />              # or<br />            -seq_stream   # A Bio::SeqIO object<br />              # or<br />            -seq_file     # the name of the fasta file containing<br />                          #   all the sequences<br />           Other arguments are:<br />            -binary       # a fully qualified path to the 'meme' executable<br />                          #  OPTIONAL: default 'ann-spec'<br />            -additional_params  # a string containing additional<br />                                #   command-line switches for the<br />                                #   ann-spec program</pre></td></tr></table>
 <div id="sep"></div>
 <a name="MethCode" id="MethCode"></a>
 <div id="mainTitle">Methods code</div>
@@ -126,7 +105,12 @@ AnnSpec documentation.
 	<span id="braces">}</span>
     <span id="braces">}</span>
     
-    <span id="perlKey">return</span>\@ consensus,\@ pfms;</pre>}</td></div>
+    <span id="perlKey">return</span>\@ consensus,\@ pfms;
+    
+<span id="braces">}</span>
+
+
+1;</pre>}</td></div>
 <div id="sep"></div>
 <table id="methCodeTitle" width="100%"><tr><td width="200"><a name="CODE3" id="CODE3"></a>_parse_sites</td><td >description</td><td ><a href="#CODE2">prev</a></td><td ><a href="#CODE4">next</a></td><td align="right"><a href="#TOP">Top</a></td></tr></table>
 <div id="methCodeArea"><td ><span id="sub">sub</span> <span id="privSubName">_parse_sites</span>

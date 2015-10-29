@@ -53,60 +53,23 @@ Alignment documentation.
 <div id="mainTitle">Methods description</div>
 <div id="sep"></div>
 <table id="methDescTitle" width="100%"><tr><td WIDTH="200"><a name="_pod_alignment" id="_pod_alignment"></a><a name="POD1" id="POD1"></a>alignment</td><td ><a href="#CODE1">code</a></td><td >&nbsp;&nbsp;&nbsp;&nbsp;</td><td ><a href="#POD2">next</a></td><td align="right"><a href="#TOP">Top</a></td></tr></table>
-<table id="methDescArea" width="100%"><tr><td><pre id="podParagraph"> Title   : alignment
- Usage   : my $alignment_string = $alignmentobject->alignment();
- Function: access a string describing the alignment
- Returns : an string, where each number refers to a position in repective PFM.
- Position numbering is according to orientation: ie if the second profile is
- reversed, position 1 corresponds to the last position in the input profile.
- Gaps are denoted as - .
-
+<table id="methDescArea" width="100%"><tr><td><pre id="podParagraph"> Title   : alignment<br /> Usage   : my $alignment_string = $alignmentobject-&gt;alignment();<br /> Function: access a string describing the alignment<br /> Returns : an string, where each number refers to a position in repective PFM.<br /> Position numbering is according to orientation: ie if the second profile is<br /> reversed, position 1 corresponds to the last position in the input profile.<br /> Gaps are denoted as - .<br />
  RXR-VDR           -       1       2       3       -     4      5     -
  PPARgamma-RXRal   1       2       3       4       5     6      7     8
 
  Args    : none</pre></td></tr></table>
 <div id="sep"></div>
 <table id="methDescTitle" width="100%"><tr><td WIDTH="200"><a name="_pod_length" id="_pod_length"></a><a name="POD2" id="POD2"></a>length</td><td ><a href="#CODE3">code</a></td><td ><a href="#POD1">prev</a></td><td ><a href="#POD3">next</a></td><td align="right"><a href="#TOP">Top</a></td></tr></table>
-<table id="methDescArea" width="100%"><tr><td><pre id="podParagraph"> Title   : length
- Usage   : my $length = $alignmentobject->length();
- Function: access the length of an alignment (ie thenumber of aligned positions)
- Returns : an integer
- Args    : none</pre></td></tr></table>
+<table id="methDescArea" width="100%"><tr><td><pre id="podParagraph"> Title   : length<br /> Usage   : my $length = $alignmentobject-&gt;length();<br /> Function: access the length of an alignment (ie thenumber of aligned positions)<br /> Returns : an integer<br /> Args    : none</pre></td></tr></table>
 <div id="sep"></div>
 <table id="methDescTitle" width="100%"><tr><td WIDTH="200"><a name="_pod_new" id="_pod_new"></a><a name="POD3" id="POD3"></a>new</td><td ><a href="#CODE4">code</a></td><td ><a href="#POD2">prev</a></td><td ><a href="#POD4">next</a></td><td align="right"><a href="#TOP">Top</a></td></tr></table>
-<table id="methDescArea" width="100%"><tr><td><pre id="podParagraph"> Title   : new
- Usage   : my $alignment = <B>TFBS::Matrix::Alignment</B>->new(%args)
- Function: constructor for the <B>TFBS::Matrix::Alignment</B> object
- Returns : a new <B>TFBS::Matrix::Alignment</B> object
- Args    : # you must specify:
- 
-	   -pfm1,      # a TFBS::Matrix::PFM object
-	   -pfm2,      # another TFBS::Matrix::PFM object
-            -binary,  # a valid path to the comparison algorithm (matrixalign)
-	   
-	   
-	   #######
- 
-           -ext_penalty            #OPTIONAL gap extension penalty in Needleman-Wunsch
-                                    algorithmstring. Default 0.01
-           -open_penalty,          #OPTIONAL gap opening penalty in Needleman-Wunsch
-                                    algorithmstring. Default 3.0</pre></td></tr></table>
+<table id="methDescArea" width="100%"><tr><td><pre id="podParagraph"> Title   : new<br /> Usage   : my $alignment = <B>TFBS::Matrix::Alignment</B>-&gt;new(%args)<br /> Function: constructor for the <B>TFBS::Matrix::Alignment</B> object<br /> Returns : a new <B>TFBS::Matrix::Alignment</B> object<br /> Args    : # you must specify:<br /> <br />	   -pfm1,      # a TFBS::Matrix::PFM object<br />	   -pfm2,      # another TFBS::Matrix::PFM object<br />            -binary,  # a valid path to the comparison algorithm (matrixalign)<br />	   <br />	   <br />	   #######<br /> <br />           -ext_penalty            #OPTIONAL gap extension penalty in Needleman-Wunsch<br />                                    algorithmstring. Default 0.01<br />           -open_penalty,          #OPTIONAL gap opening penalty in Needleman-Wunsch<br />                                    algorithmstring. Default 3.0</pre></td></tr></table>
 <div id="sep"></div>
 <table id="methDescTitle" width="100%"><tr><td WIDTH="200"><a name="_pod_score(2)" id="_pod_score(2)"></a><a name="POD4" id="POD4"></a>score(2)</td><td ><a href="#CODE5">code</a></td><td ><a href="#POD3">prev</a></td><td ><a href="#POD5">next</a></td><td align="right"><a href="#TOP">Top</a></td></tr></table>
-<table id="methDescArea" width="100%"><tr><td><pre id="podParagraph"> Title   : gaps
- Usage   : my $nr_of_gaps = $alignmentobject->gaps();
- Function: access the number of gaps in an alignment
- Returns : an integer
- Args    : none</pre></td></tr></table>
+<table id="methDescArea" width="100%"><tr><td><pre id="podParagraph"> Title   : gaps<br /> Usage   : my $nr_of_gaps = $alignmentobject-&gt;gaps();<br /> Function: access the number of gaps in an alignment<br /> Returns : an integer<br /> Args    : none</pre></td></tr></table>
 <div id="sep"></div>
 <table id="methDescTitle" width="100%"><tr><td WIDTH="200"><a name="_pod_strand" id="_pod_strand"></a><a name="POD5" id="POD5"></a>strand</td><td ><a href="#CODE6">code</a></td><td ><a href="#POD4">prev</a></td><td ><a href="#POD6">next</a></td><td align="right"><a href="#TOP">Top</a></td></tr></table>
-<table id="methDescArea" width="100%"><tr><td><pre id="podParagraph"> Title   : strand
- Usage   : my $strand = $alignmentobject->strand();
- Function: access the oriantation of the aligned patterns:
-           ++= oriented as input
-           +-= second pattern is reverse-complemented    
- Returns : a string
- Args    : none</pre></td></tr></table>
+<table id="methDescArea" width="100%"><tr><td><pre id="podParagraph"> Title   : strand<br /> Usage   : my $strand = $alignmentobject-&gt;strand();<br /> Function: access the oriantation of the aligned patterns:<br />           ++= oriented as input<br />           +-= second pattern is reverse-complemented    <br /> Returns : a string<br /> Args    : none</pre></td></tr></table>
 <div id="sep"></div>
 <a name="MethCode" id="MethCode"></a>
 <div id="mainTitle">Methods code</div>
@@ -204,7 +167,10 @@ Alignment documentation.
      <span id="braces">}</span>
      <span id="var">$self</span>-&gt;<span id="braces">{</span><span id="sqStr">'_align_string'</span><span id="braces">}</span>= <span id="var">$string</span> .<span id="dqStr">"\n"</span>. <span id="var">$string2</span>;
    
-  <span id="perlKey">return</span> <span id="var">$self</span>;</pre>}</td></div>
+  <span id="perlKey">return</span> <span id="var">$self</span>; 
+<span id="braces">}</span>
+
+<span id="comment"># access functions</span><br /></pre>}</td></div>
 <div id="sep"></div>
 <table id="methCodeTitle" width="100%"><tr><td width="200"><a name="CODE5" id="CODE5"></a>score</td><td ><a href="#POD4">description</a></td><td ><a href="#CODE4">prev</a></td><td ><a href="#CODE6">next</a></td><td align="right"><a href="#TOP">Top</a></td></tr></table>
 <div id="methCodeArea"><td ><span id="sub">sub</span> <span id="subName">score</span>
