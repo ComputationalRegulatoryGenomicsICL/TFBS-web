@@ -25,10 +25,9 @@ TFBS Perl OO modules implement classes for the representation of objects encount
 The modules within the TFBS set are fully integrated and compatible with [Bioperl](http://www.bioperl.org/wiki/Main_Page).
 
 # Download
-The current release of TFBS is 0.7.0 (October 29, 2015). 
-It has been tested on Linux 2.4 (i686 and alpha) and 2.6 (i686) with perl 5.6.1 
-and 5.8.5, and on Sun Solaris with perl 5.8.3. 
-The tarball is here: [TFBS-0.7.0.tar.gz](http://tfbs.genereg.net/TFBS-0.7.0.tar.gz).
+The current release of TFBS is 0.7.1 (Mar 7, 2017).
+It has been tested on Linux and MacOS with perl 5.20.2. 
+The tarball is here: [TFBS-0.7.1.tar.gz](http://tfbs.genereg.net/TFBS-0.7.1.tar.gz).
 
 # Citing TFBS
 If you use TFBS in your work, please cite :
@@ -41,6 +40,10 @@ To check out the latest development snapshot of TFBS, do
 git clone https://github.com/ComputationalRegulatoryGenomicsICL/TFBS.git
 
 #  Recent changes
+Changes in 0.7.1
+
+* Fix the grep statments in JASPAR.pm _get_Matrix_by_int_id to use $1 instead of \1. Removed the duplicate declaration of $tffm in get_TFFM_by_matrix_ID.
+
 Changes in 0.7.0
 
 * Update the DB interface for JASPAR 2016
@@ -111,9 +114,9 @@ Any questions? Write to b.lenhard at imperial.ac.uk.
 # Dependencies
 ## Absolutely required
 
-* Perl 5.6.1 or later 
+* Perl 5.10.0 or later 
 * bioperl 1.0 or newer
-* [PDL](http://pdl.perl.org/) 1.1 or later (Note for Linux users: PDL is available as a RPM package for most major Linux distributions. Since some TFBS testers were severely frustrated by problems they encountered compiling PDL, I recommend the use of binary RPMs where possible. Solaris users should upgrade to perl 5.8 and compile it without thread support for PDL or database connectivity to work. These issues are unrelated to TFBS code.) 
+* [PDL](http://pdl.perl.org/) 1.1 or later (Note for Linux users: PDL is available as a RPM package for most major Linux distributions. Since some TFBS testers were severely frustrated by problems they encountered compiling PDL, I recommend the use of binary RPMs where possible. Solaris users should upgrade to perl 5.10 and compile it without thread support for PDL or database connectivity to work. These issues are unrelated to TFBS code.) 
 
 Note for RedHat 9 users: RedHat 9 is badly broken in several important respects. (1) The PDL installed from a rpm package shipped with RedHat 9 issues "Possible precedence problem" warnings (probably harmless). (2) Some users have had trouble compiling PDL from CPAN. If you try to install PDL from CPAN shell and get the warning "I could not locate your pod2man program..." and the error "Makefile:93: *** missing separator.", you should unset your $LANG environmental variable before starting the CPAN shell:
 
@@ -151,6 +154,3 @@ And finally, a simple CGI script:
 From here you can access  POD  documentation for the modules. It is still far from perfect, but I think it is enough for start. (Internal modules and internal methods are not yet documented.)
 
 [COMPLETE MODULE DOCUMENTATION](http://tfbs.genereg.net/POD/)
-
-
-
